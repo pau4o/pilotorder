@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout 'welcome'
   skip_before_filter :verify_authenticity_token
   
   before_filter :find_user, 
@@ -6,16 +7,16 @@ class UsersController < ApplicationController
               :edit_password,   :update_password, 
               :edit_email,      :update_email ]
   
-  layout 'login'
+  layout 'welcome'
   
   def troubleshooting
     # Render troubleshooting.html.erb
-    render :layout => 'login'
+    render :layout => 'welcome'
   end
 
   def clueless
     # These users are beyond our automated help...
-    render :layout => 'login'
+    render :layout => 'welcome'
   end
 
   

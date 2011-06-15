@@ -1,5 +1,12 @@
 Rails3::Application.routes.draw do
 
+#   device_for :users
+#   devise_for :users, :path => "usuarios", 
+#     :path_names => { :sign_in => 'login', :sign_out => 'logout', 
+#                      :password => 'secret', :confirmation => 'verification', 
+#                      :unlock => 'unblock', :registration => 'register', 
+#                      :sign_up => 'cmon_let_me_in' }
+  
   devise_for :users, :controllers => { :sessions => "user_sessions" },
     :path_names => { :sign_in => 'login', :sign_out => 'logout',  :registration => 'register' }
 
@@ -33,6 +40,7 @@ Rails3::Application.routes.draw do
     match '/settings/update_settings' => 'settings#update_settings',  :requirements => { :method => :post }
     resources :announcements
     resources :commits
+    resources :quotes
     match '/users/search' => 'users#search',  :requirements => { :method => :get }
     resources :users do 
       member do 
@@ -53,6 +61,27 @@ Rails3::Application.routes.draw do
     end
   end
   
+  resources :page do
+      collection do
+        get :welcome
+        get :prices
+        get :about
+        get :policy
+        get :pilot_code
+        get :activity
+        get :price_table_1
+        get :price_table_2
+    end
+  end
+  resources :browser
+  match  '/upgrade_your_browser' => "browser#index", :requirements => { :method => :get }
+  match  '/welcome' => "page#welcome", :as => "welcome", :requirements => { :method => :get }
+  match  '/prices' => "page#prices", :as => "prices", :requirements => { :method => :get }
+  match  '/policy' => "page#policy", :as => "policy", :requirements => { :method => :get }
+  match  '/activity' => "page#activity", :as => "activity", :requirements => { :method => :get }
+  match  '/pilot_code' => "page#pilot_code", :as => "pilot_code", :requirements => { :method => :get }
+  match  '/price_table_1' => "page#price_table_1", :as => "price_table_1", :requirements => { :method => :get }
+  match  '/price_table_2' => "page#price_table_2", :as => "price_table_2", :requirements => { :method => :get }
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
@@ -100,7 +129,7 @@ Rails3::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
-  root :to => "dashboard#index"
+  root :to => "page#welcome"
   
   # See how all your routes lay out with "rake routes"
 

@@ -2,31 +2,36 @@
 Create a new <%= configatron.site_name %> account
 <% end -%>
 
-<%= form_for resource_name, resource, :url => registration_path(resource_name) do |f| -%>
-  <%= f.error_messages %>
+<h1>Регистрация</h1>
+
+<%= form_for resource, :as => resource_name , :url => registration_path(resource_name) do |f| -%>
+  <%= devise_error_messages! %>
 	<fieldset id="oldfashioned_form">	
-		<legend>Your Details</legend>
-		<p><label for="login">Login</label><br/>
-		<%= f.text_field :login %></p>
+    <div class="field session_username clearfix">
+      <label for="login">Потребителско име</label><br/>
+      <%= f.text_field :login, :class => "larger widest" %>
+    </div>
 
-		<p><label for="email">Email</label><br/>
-		<%= f.text_field :email %></p>
+    <div class="field session_username clearfix">
+      <label for="email">електронна поща</label><br/>
+      <%= f.text_field :email, :class => "larger widest" %>
+    </div>
 
-		<p><label for="password">Password</label><br/>
-		<%= f.password_field :password %></p>
+    <div class="field session_username clearfix">
+      <label for="password">парола</label><br/>
+      <%= f.password_field :password, :class => "larger widest" %>
+    </div>
 
-		<p><label for="password_confirmation">Confirm Password</label><br/>
-		<%= f.password_field :password_confirmation %></p>
+    <div class="field session_username clearfix">
+      <label for="password_confirmation">парола - потвръждение</label><br/>
+      <%= f.password_field :password_confirmation, :class => "larger widest" %>
+    </div>
 	</fieldset>
 
-	<ul>
-		<li><%= link_to "Already signed up? Login now!", new_user_session_path %></li>
-	</ul>
-	
 	<div id="submitbutton">
-		<p><%= submit_tag 'Sign up' %></p>
+		<p><%= submit_tag 'Регистрирай!' %></p>
 	</div>
 
 <% end -%>
 
-<%= render :partial => "devise/shared/links" %>
+<%# render :partial => "devise/shared/links" %>

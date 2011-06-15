@@ -22,6 +22,7 @@ gem "declarative_authorization"
 gem "aasm", "2.2.0"
 gem "gravatar_image_tag"
 gem "nifty-generators", :group => :development
+gem "useragent"
 # https://github.com/marten/has_details
 # gem "has_details" # , :git => 'git://github.com/marten/has_details.git'
 

@@ -1,12 +1,15 @@
-<h2>Forgot your password?</h2>
+<h1>Забравена парола?</h1>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
+  <div class="field session_username clearfix">
+  <%= f.label t :email %><br />
+  <%= f.text_field :email, :class => "widest larger" %>
+  </div>
 
-  <p><%= f.submit "Send me reset password instructions" %></p>
+
+  <p><%= f.submit "Изпрати ми инструкций за смяна" %></p>
 <% end %>
 
-<%= render :partial => "devise/shared/links" %>
+<%# render :partial => "devise/shared/links" %>

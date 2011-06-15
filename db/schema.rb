@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100831101816) do
+ActiveRecord::Schema.define(:version => 20110426053538) do
 
   create_table "announcements", :force => true do |t|
     t.text     "headline"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(:version => 20100831101816) do
     t.string   "real_name"
     t.string   "location"
     t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quotes", :force => true do |t|
+    t.text     "message"
+    t.string   "author"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

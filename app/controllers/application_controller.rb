@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   
   before_filter :prepare_for_mobile
+  before_filter :redirect_for_browser_upgrade
   
   helper :all # include all helpers, all the time
   
@@ -40,6 +41,19 @@ class ApplicationController < ActionController::Base
   def prepare_for_mobile
     session[:mobile_param] = params[:mobile] if params[:mobile]
     request.format = :mobile if mobile_device?
+  end
+
+  def is_user_agent_ok?
+    supportedBrowsers = [
+      Browser.new("Safari", "3.1.1"),
+      Browser.new("Firefox", "2.0.0.14"),
+      Browser.new("Internet Explorer", "7.0")
+    ]
+    user_agent = UserAgent.parse(request.user_agent)
+  end
+
+  def redirect_for_browser_upgrade
+    redirect_to upgrade_your_browser_path, :status => 505 unless is_user_agent_ok? && ! mobile_device?
   end
 
 end

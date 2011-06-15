@@ -10,12 +10,14 @@
 	<%= (stylesheet_link_merged :base).html_safe %>
 	<%= (javascript_include_merged :defaults ).html_safe %>
 	<%= stylesheet_link_tag 'mobile' if mobile_device? %>
-  	<%=  csrf_meta_tag %>
+	<%=  csrf_meta_tag %>
 </head>
 
 <body>
 
+  
   <div id="header">
+  <header>
     <div id="global_links">
       <%= render :partial => 'shared/global_links' %>
     </div>
@@ -24,6 +26,25 @@
     <div id="tabs">
       <%= render :partial => 'shared/tabs' %>
     </div>
+  <nav>
+  <ul>
+    <li>
+    <a href="/people">People</a>
+    </li>
+    <li>
+    <a href="/work">Work</a>
+    </li>
+    <li class="process"><a href="/process">Process</a></li>
+    <li>
+    <a href="/knowledge">Knowledge</a>
+    </li>
+  </ul>
+  </nav>
+  <address class="primary">
+  <a href="/contact-us">Contact Us</a>
+  <a href="/contact-us" class="phone">1-877-885-8846</a>
+  </address>
+  </header>
   </div>
 
   <div id="main">

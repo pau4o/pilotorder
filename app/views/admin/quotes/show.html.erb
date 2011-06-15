@@ -1,0 +1,16 @@
+<% title "Quote" %>
+
+<p>
+  <strong>Message:</strong>
+  <%= @quote.message %>
+</p>
+<p>
+  <strong>Author:</strong>
+  <%= @quote.author %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_quote_path(@quote) %> |
+  <%= link_to "Destroy", @quote, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", quotes_path %>
+</p>

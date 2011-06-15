@@ -1,37 +1,63 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title><%= configatron.site_name %></title>	
-	<%= (stylesheet_link_merged :dialog).html_safe %>
-	<%= (javascript_include_merged :defaults ).html_safe %>
-  	<%=  csrf_meta_tag %>
+	<title><%= configatron.site_name %></title>
+	<%= (stylesheet_link_merged :base).html_safe %>
+	<%# (javascript_include_merged :defaults ).html_safe %>
+	<%= stylesheet_link_tag 'mobile' if mobile_device? %>
+  <%=  csrf_meta_tag %>
 </head>
 
-<body>
-
-  <div id="main">
-
-	<div id="left">
-		
-	<h2 class="head"><%= yield_or_default yield(:header), "Use 'content_for :header do; end' in your view to set this title" %></h2>
-	
-     <%= flash_message.html_safe %>
-
-      <div id="screen">
-        <%= yield %>
-      </div>
-    </div>
-
+<body class="login">
+  <header>
+  <h1><%= link_to "PilorOder.BG", root_path %></h1>
+  <nav>
+  <ul>
+    <li><%= link_to "Дейност", activity_path %> </li>
+    <li><%= link_to "Политика", policy_path %> </li>
+    <li><%= link_to "Цени", prices_path %> </li>
+  </ul>
+  </nav>
+  <address class='primary'>
+<%- if controller_name != 'user_sessions' %>
+  <%= link_to "Влез", new_session_path(:user), :class => "rule" %>
+<% end -%>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to "Регистрирай се", new_registration_path(:user), :class => "plus" %>
+<% end -%>
+  <a href="#" class="email">Свържи се с нас</a>
+  </header>
+  <section id='content' style="padding: 0;">
+  <header>
+  <div id='main' class="login">
+    <%= yield %>
   </div>
-  <div id="footer">
-    <%= configatron.site_name %> by <%= configatron.company_name %><br />
-	Copyright © <%= configatron.company_name %>
+  </header>
+  </section>
+
+  <footer>
+  <div id='locations'>
+  <address>
+  <strong>Морска гара</strong>
+  <br>
+  Рейдова кула Варна 
+  <br>
+  Варна - 9001 п.к. 9
+  <br>
+  </address>
+  <address>
+  <strong>Диспечер</strong>
+  <br>
+  УКВ 14 Канал
+  <br>
+  <a href="tel:+359 52 602 448">(+359) 52 602 448</a>
+  <br>
+  <a href="tel:+359 52 602 448">факс: (+359) 52 602 445</a>
+  </address>
   </div>
-
-
+  </footer>
 </body>
 </html>

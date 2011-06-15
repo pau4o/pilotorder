@@ -1,0 +1,7 @@
+one:
+  message: MyText
+  author: MyString
+
+two:
+  message: MyText
+  author: MyString
