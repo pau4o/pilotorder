@@ -1,5 +1,12 @@
-<address class='primary'>
-<%= link_to "Влез", new_session_path(:user), :class => "rule" %>
-<%= link_to "Регистрирай се", new_registration_path(:user), :class => "plus" %>
-<a href="#" class="email">Свържи се с нас</a>
-</address>
+<% if logged_in? %>
+  <address class='primary'>
+    <%= link_to current_user.login, "#", :class => "plus" %>
+    <%= link_to "Log out", destroy_user_session_path, :class => "rule" %>
+  </address>
+<% else %>
+  <address class='primary'>
+    <%= link_to "Влез", new_session_path(:user), :class => "rule" %>
+    <%= link_to "Регистрирай се", new_registration_path(:user), :class => "plus" %>
+    <a href="#" class="email">Свържи се с нас</a>
+  </address>
+<% end %>

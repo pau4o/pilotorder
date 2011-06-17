@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :prepare_for_mobile
   before_filter :redirect_for_browser_upgrade
+  before_filter :log_user
   
   helper :all # include all helpers, all the time
   
@@ -54,6 +55,12 @@ class ApplicationController < ActionController::Base
 
   def redirect_for_browser_upgrade
     redirect_to upgrade_your_browser_path, :status => 505 unless is_user_agent_ok? && ! mobile_device?
+  end
+
+  def log_user
+    if logged_in?
+      logger.info("==>" + current_user.login)
+    end
   end
 
 end
