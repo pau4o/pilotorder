@@ -63,14 +63,15 @@ Rails3::Application.routes.draw do
   
   resources :page do
       collection do
-        get :welcome
-        get :prices
         get :about
-        get :policy
-        get :pilot_code
         get :activity
+        get :certificates
+        get :pilot_code
+        get :policy
         get :price_table_1
         get :price_table_2
+        get :prices
+        get :welcome
     end
   end
   resources :browser
