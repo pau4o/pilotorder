@@ -45,7 +45,6 @@ GEM
       yamler (>= 0.1.0)
     declarative_authorization (0.5)
       rails (>= 2.1.0)
-    devise (1.1.2)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 0.10.7)
     erubis (2.6.6)

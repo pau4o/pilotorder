@@ -6,14 +6,16 @@
 
 	<title><%= configatron.site_name %></title>
 
-	<%= (stylesheet_link_merged :base).html_safe %>
-	<%# (javascript_include_merged :defaults ).html_safe %>
+	<%= (stylesheet_link_merged :base, "jquery.jqzoom").html_safe %>
 	<%= stylesheet_link_tag 'mobile' if mobile_device? %>
   <%=  csrf_meta_tag %>
-  <!-- include jQuery library -->
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
-  <!-- include Cycle plugin -->
-  <script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.2.74.js"></script>
+	<%# (javascript_include_merged :rails ).html_safe %>
+  <%= javascript_include_tag "jquery-1.5.1.min" %>
+  <%= javascript_include_tag "jquery.cycle.all.2.74" %>
+  <%= javascript_include_tag "jquery.jqzoom-core-pack" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "rails" %>
+
 </head>
 
 <body>
@@ -23,6 +25,7 @@
   <ul>
   <li><%= tab_to "Дейност", [ {:controller => "page", :action => "activity" } ] %></li>
   <li><%= tab_to "Политика", [ {:controller => "page", :action => "policy" }, {:controller => "page", :action => "pilot_code" }] %></li>
+  <li><%= tab_to "Сертификати", [ {:controller => "page", :action => "certificates" } ] %></li>
   <li><%= tab_to "Цени", [ {:controller => "page", :action => "prices" }, {:controller => "page", :action => "price_table_1" }, {:controller => "page", :action => "price_table_2" } ] %></li>
   </ul>
   </nav>

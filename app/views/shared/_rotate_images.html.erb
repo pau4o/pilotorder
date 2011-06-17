@@ -15,8 +15,8 @@ $(document).ready(function() {
 });
 </script>
 <div class="image-slideshow">
-  <img src="images/rotate-1.jpg" width="900" height="350" />
-  <img src="images/rotate-2.jpg" width="900" height="350" />
-  <img src="images/rotate-3.jpg" width="900" height="350" />
+  <% (1..3).each do |idx| %>
+    <%= image_tag "rotate-#{idx}.jpg", :width=> 900, :height => 350 %>
+  <% end %>
 </div>
 
