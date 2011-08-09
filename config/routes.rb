@@ -75,10 +75,13 @@ Rails3::Application.routes.draw do
     end
   end
   resources :browser
+
+  # следващите дефиниции предоставят welcome_path, certificates_path, ...
   match  '/upgrade_your_browser' => "browser#index", :requirements => { :method => :get }
   match  '/welcome' => "page#welcome", :as => "welcome", :requirements => { :method => :get }
   match  '/prices' => "page#prices", :as => "prices", :requirements => { :method => :get }
   match  '/policy' => "page#policy", :as => "policy", :requirements => { :method => :get }
+  match  '/certificates' => "page#certificates", :as => "certificates", :requirements => { :method => :get }
   match  '/activity' => "page#activity", :as => "activity", :requirements => { :method => :get }
   match  '/pilot_code' => "page#pilot_code", :as => "pilot_code", :requirements => { :method => :get }
   match  '/price_table_1' => "page#price_table_1", :as => "price_table_1", :requirements => { :method => :get }

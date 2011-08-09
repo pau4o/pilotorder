@@ -32,39 +32,20 @@
   <%= render :partial => "shared/annotated" %>
   </header>
   <section id='content'>
-  <header>
-  <div class='box'>
-  <blockquote><p>&ldquo;<%= @quote.message %>&rdquo;</p></blockquote>
-  <p><%= @quote.author %></p>
-  </div>
-  </header>
+  <%- if @quote %>
+    <header>
+    <div class='box'>
+      <blockquote><p>&ldquo;<%= @quote.message %>&rdquo;</p></blockquote>
+      <p><%= @quote.author %></p>
+    </div>
+    </header>
+  <%- end %>
   <div id='main'>
     <%= yield %>
   </div>
   
   </section>
 
-  <footer>
-  <%= render :partial => "shared/annotated" %>
-  <div id='locations'>
-  <address>
-  <strong>Морска гара</strong>
-  <br>
-  Рейдова кула Варна 
-  <br>
-  Варна - 9001 п.к. 9
-  <br>
-  </address>
-  <address>
-  <strong>Диспечер</strong>
-  <br>
-  УКВ 14 Канал
-  <br>
-  <a href="tel:+359 52 602 448">(+359) 52 602 448</a>
-  <br>
-  <a href="tel:+359 52 602 448">факс: (+359) 52 602 445</a>
-  </address>
-  </div>
-  </footer>
+  <%= render :partial => "shared/footer" %>
 </body>
 </html>

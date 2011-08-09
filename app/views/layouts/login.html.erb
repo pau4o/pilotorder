@@ -18,17 +18,11 @@
   <ul>
     <li><%= link_to "Дейност", activity_path %> </li>
     <li><%= link_to "Политика", policy_path %> </li>
+    <li><%= link_to "Сертификати", certificates_path %> </li>
     <li><%= link_to "Цени", prices_path %> </li>
   </ul>
   </nav>
-  <address class='primary'>
-<%- if controller_name != 'user_sessions' %>
-  <%= link_to "Влез", new_session_path(:user), :class => "rule" %>
-<% end -%>
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Регистрирай се", new_registration_path(:user), :class => "plus" %>
-<% end -%>
-  <a href="#" class="email">Свържи се с нас</a>
+  <%= render :partial => "shared/annotated" %>
   </header>
   <section id='content' style="padding: 0;">
   <header>
@@ -38,26 +32,6 @@
   </header>
   </section>
 
-  <footer>
-  <div id='locations'>
-  <address>
-  <strong>Морска гара</strong>
-  <br>
-  Рейдова кула Варна 
-  <br>
-  Варна - 9001 п.к. 9
-  <br>
-  </address>
-  <address>
-  <strong>Диспечер</strong>
-  <br>
-  УКВ 14 Канал
-  <br>
-  <a href="tel:+359 52 602 448">(+359) 52 602 448</a>
-  <br>
-  <a href="tel:+359 52 602 448">факс: (+359) 52 602 445</a>
-  </address>
-  </div>
-  </footer>
+  <%= render :partial => "shared/footer" %>
 </body>
 </html>

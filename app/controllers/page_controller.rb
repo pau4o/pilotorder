@@ -5,7 +5,9 @@ class PageController < ApplicationController
   private
 
   def preload_shared_variables
-    @quote = Quote.random()
+    if current_page?(url_for(:controller => 'page', :action => 'welcome'))
+      @quote = Quote.random()
+    end
   end
 
 end
