@@ -1,18 +1,18 @@
 <% content_for :sidebar do -%>
-<h2>My account</h2>
+<h2>Моят акаунт</h2>
 
 <div id="gravatar">
 	<%= gravatar_image_tag( @user.email, :size => 128) %>
 </div>
 
 <ul>
-	<li><%= link_to "Update my profile", edit_profile_url(current_user) %></li>
+	<li><%= link_to "Промяна на профила", edit_profile_url(current_user) %></li>
 </ul>
 
 <% if @user.not_using_openid? %>
 <ul>
-	<li><%= link_to "Change my email address", edit_email_user_url(@user) %></li>
-	<li><%= link_to "Change my password", edit_password_user_url(@user) %></li>
+	<li><%= link_to "Смяна на емайл адрес", edit_email_user_url(@user) %></li>
+	<li><%= link_to "Смяна на парола", edit_password_user_url(@user) %></li>
 </ul>
 <% end %>
 
@@ -23,12 +23,12 @@
 <% end -%>
 
 <p>
-	<strong>How do I change my avatar?</strong>
+	<strong>Как мога да сменя моят аватар?</strong>
 </p>
 
 <p>
-	<%= configatron.site_name %> uses <%= link_to "Gravatar", "http://gravatar.com" %> to retrieve user avatars, based on their e-mail address.
+	<%= configatron.site_name %> използва <%= link_to "Gravatar", "http://gravatar.com" %> за да показва потребителските аватари, те са базирани на емайл адресите.
 	<br />
-	<%= link_to "Gravatar", "http://gravatar.com" %> is free to use. <%= link_to "Sign up now", "http://gravatar.com/signup" %> if you don't use <%= link_to "Gravatar", "http://gravatar.com" %> already.
+	<%= link_to "Gravatar", "http://gravatar.com" %> е безплатен за ползване. <%= link_to "Регистрирайте се", "http://gravatar.com/signup" %> ако все още нямате регистрация в <%= link_to "Gravatar", "http://gravatar.com" %>.
 </p>
 <% end -%>

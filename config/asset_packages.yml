@@ -1,11 +1,16 @@
+# rake asset:packager:build_all
 --- 
 javascripts: 
 - base:
   - rails
   - application
+  - autocomplete-rails
 stylesheets: 
 - base: 
   - default
+  - icons
+- page:
+  - page
 - admin:
   - default
   - admin

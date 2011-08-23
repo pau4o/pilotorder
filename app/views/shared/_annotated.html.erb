@@ -11,6 +11,6 @@
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
     <%= link_to "Регистрирай се", new_registration_path(:user), :class => "plus" %>
 <%- end  %>
-    <a href="#" class="email">Свържи се с нас</a>
+  <%= link_to "Свържи се с нас", contact_us_path, :class => "email" %>
   </address>
 <% end %>

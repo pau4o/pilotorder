@@ -6,9 +6,11 @@ Rails3::Application.routes.draw do
 #                      :password => 'secret', :confirmation => 'verification', 
 #                      :unlock => 'unblock', :registration => 'register', 
 #                      :sign_up => 'cmon_let_me_in' }
+#  devise_for :users, :controllers => { :sessions => "user_sessions" }
   
-  devise_for :users, :controllers => { :sessions => "user_sessions" },
-    :path_names => { :sign_in => 'login', :sign_out => 'logout',  :registration => 'register' }
+  devise_for :users, :controllers => { :sessions => "user_sessions" ,:registrations => "registrations" },	
+    :path_names => { :sign_in => 'login', :sign_out => 'logout',  :registration => 'register',
+                     :confirmation => 'confirmation' }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -66,26 +68,30 @@ Rails3::Application.routes.draw do
         get :about
         get :activity
         get :certificates
+        get :goodbye
         get :pilot_code
         get :policy
         get :price_table_1
         get :price_table_2
         get :prices
         get :welcome
+        get :contact_us
+        put :new_question
     end
   end
   resources :browser
 
   # следващите дефиниции предоставят welcome_path, certificates_path, ...
-  match  '/upgrade_your_browser' => "browser#index", :requirements => { :method => :get }
+  match  '/upgrade-your-browser' => "browser#index", :as => "upgrade_your_browser", :requirements => { :method => :get }
   match  '/welcome' => "page#welcome", :as => "welcome", :requirements => { :method => :get }
   match  '/prices' => "page#prices", :as => "prices", :requirements => { :method => :get }
   match  '/policy' => "page#policy", :as => "policy", :requirements => { :method => :get }
   match  '/certificates' => "page#certificates", :as => "certificates", :requirements => { :method => :get }
   match  '/activity' => "page#activity", :as => "activity", :requirements => { :method => :get }
-  match  '/pilot_code' => "page#pilot_code", :as => "pilot_code", :requirements => { :method => :get }
-  match  '/price_table_1' => "page#price_table_1", :as => "price_table_1", :requirements => { :method => :get }
-  match  '/price_table_2' => "page#price_table_2", :as => "price_table_2", :requirements => { :method => :get }
+  match  '/pilot-code' => "page#pilot_code", :as => "pilot_code", :requirements => { :method => :get }
+  match  '/prices-varna' => "page#price_table_1", :as => "price_table_1", :requirements => { :method => :get }
+  match  '/prices-burgas' => "page#price_table_2", :as => "price_table_2", :requirements => { :method => :get }
+  match  '/contact-us' => "page#contact_us", :as => "contact_us", :requirements => { :method => :get }
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

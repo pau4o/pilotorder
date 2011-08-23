@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
-  layout 'welcome'
   skip_before_filter :verify_authenticity_token
   
+
+  layout "admin"
+
   before_filter :find_user, 
     :only => [:profile, 
               :edit_password,   :update_password, 
               :edit_email,      :update_email ]
   
-  layout 'welcome'
   
   def troubleshooting
     # Render troubleshooting.html.erb
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
   
   def edit_password
     if ! @user.not_using_openid?
-      flash[:notice] = "You cannot update your password. You are using OpenID!"
+      flash[:notice] = "Не може да променяте електронния си адрес. Вие ползвате OpenID!"
       redirect_to :back
     end
     
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
   
   def update_password    
     if ! @user.not_using_openid?
-      flash[:notice] = "You cannot update your password. You are using OpenID!"
+      flash[:notice] = "Не може да променяте електронния си адрес. Вие ползвате OpenID!"
       redirect_to :back
     end
     
@@ -41,32 +42,32 @@ class UsersController < ApplicationController
       if @user.encrypt(current_password) == @user.crypted_password
         if new_password == new_password_confirmation
           if new_password.blank? || new_password_confirmation.blank?
-            flash[:error] = "You cannot set a blank password."
+            flash[:error] = "Не може да използвате празна парола."
             redirect_to edit_password_user_url(@user)
           else
             @user.password = new_password
             @user.password_confirmation = new_password_confirmation
             @user.save
-            flash[:notice] = "Your password has been updated."
+            flash[:notice] = "Паролата беше променена."
             redirect_to profile_url(@user)
           end
         else
-          flash[:error] = "Your new password and it's confirmation don't match."
+          flash[:error] = "Паролата и нейното потвърждение не съвпадат."
           redirect_to edit_password_user_url(@user)
         end
       else
-        flash[:error] = "Your current password is not correct. Your password has not been updated."
+        flash[:error] = "Текущата парола е грешна. Вашата парола не е променена."
         redirect_to edit_password_user_url(@user)
       end
     else
-      flash[:error] = "You cannot update another user's password!"
+      flash[:error] = "Не може да променяте пароли на други потребители!"
       redirect_to edit_password_user_url(@user)
     end
   end
   
   def edit_email
     if ! @user.not_using_openid?
-      flash[:notice] = "You cannot update your email address. You are using OpenID!"
+      flash[:notice] = "Не може да променяте електронния си адрес. Вие ползвате OpenID!"
       redirect_to :back
     end
     
@@ -75,20 +76,20 @@ class UsersController < ApplicationController
   
   def update_email
     if ! @user.not_using_openid?
-      flash[:notice] = "You cannot update your email address. You are using OpenID!"
+      flash[:notice] = "Не може да променяте електронния си адрес. Вие ползвате OpenID!"
       redirect_to :back
     end
     
     if current_user == @user
       if @user.update_attributes(:email => params[:email])
-        flash[:notice] = "Your email address has been updated."
+        flash[:notice] = "Вашият електронен адрес беше променен."
         redirect_to profile_url(@user)
       else
-        flash[:error] = "Your email address could not be updated."
+        flash[:error] = "Вашият електронен адрес не може да бъде променен."
         redirect_to edit_email_user_url(@user)
       end
     else
-      flash[:error] = "You cannot update another user's email address!"
+      flash[:error] = "Не може да променяте адреси на други потребители!"
       redirect_to edit_email_user_url(@user)
     end
   end  
@@ -100,7 +101,7 @@ class UsersController < ApplicationController
     
     logout_killing_session!
     
-    flash[:notice] = "Your account has been removed."
+    flash[:notice] = "Вашият акаунт беше премахнат."
     redirect_back_or_default(root_path)
   end  
   

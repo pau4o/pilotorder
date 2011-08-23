@@ -2,15 +2,15 @@
 # configatron.site_name
 
 development: &local
-    site_name: Пилотска Станция - Поръчай Пилот.БГ
-    site_namemobile: PilotOrder
+    site_name: ПоръчайПилот.БГ
+    site_namemobile: ПоръчайПилот.БГ
     site_url: baseapp2.local
     
     company_name: Pilot Station Varna
-    admin_email: dev@bstconsult.com
+    admin_email: dev@pilotorder.bg
     
     support_name: 
-    support_email: support@baseapp2.local
+    support_email: support@pilotorder.bg
     
     site_envnote: Local Server
 

@@ -1,2 +1,21 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+= създаване на Order
+
+Vessel
+    imonumber:string, :size => 16
+    name:string
+    callsign:string
+    flag:string
+    owner:string
+    gt:integer,
+    loa:decimal, :precision => 5, scale => 2
+    boa:decimal, :precision =>5, scale => 2
+    draftfwd, :precision => 5, :scale => 2
+    aft:decimal :precision => 5, :scale => 2
+    airdraft:decimal, :precision => 5, :scale => 2
+    editor_id:integer,
+    propelers:integer
+    proptype:boolean
+    thrusters:integer

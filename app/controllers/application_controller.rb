@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
   
+  before_filter :set_last_request # helper for devise
   before_filter :prepare_for_mobile
   before_filter :redirect_for_browser_upgrade
   before_filter :log_user
+  before_filter :mailer_set_url_options
   
   helper :all # include all helpers, all the time
   
@@ -20,6 +22,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   layout :layout_by_resource  
+
   def layout_by_resource
     if devise_controller? 
       "login"
@@ -27,8 +30,17 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
-    
+
   private
+
+  def set_last_request
+    if user_signed_in?
+#       current_uri = url_for( :controller => params[:controller], :action => params[:action], :only_path => true)
+       current_uri = request.env['PATH_INFO']
+       attr = { :last_request_at => Time.now, :last_request_url => current_uri }
+       current_user.update_attributes( attr )
+    end
+  end
 
   def mobile_device?
     if session[:mobile_param]
@@ -63,4 +75,28 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # workaround for mailer bug ?!?
+  def mailer_set_url_options
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
+#   def after_sign_up_path_for(resource)
+  def after_inactive_sign_up_path_for(resource)
+#   def after_sign_in_path_for(resource)
+    logger.info("="*80)
+    require 'pp'
+    puts "hhoho"
+    pp resource
+    "http://google.com"
+  end
+  
+  def after_sign_in_path_for(resource)
+    admin_root_path
+  end
+
+  def after_sign_out_path_for(resource)
+    require 'pp'
+    pp flash 
+    url_for(:controller => :page, :action => "goodbye")
+  end
 end

@@ -7,9 +7,9 @@
 <% else -%>	
 	<% content_for :header do -%>
 		<% if current_user == @user -%>
-			My Account
+      Вашият профил
 		<% else -%>
-			Profile for <%= @user.login %>
+			Профил на <%= @user.login %>
 		<% end -%>
 	<% end -%>
 	

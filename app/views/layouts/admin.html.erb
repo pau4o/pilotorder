@@ -6,12 +6,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 	<title><%= configatron.site_name %></title>
-	
-	<%= (stylesheet_link_merged :admin).html_safe %>
-	<%= javascript_include_tag "http://code.jquery.com/jquery-1.5.2.min.js"%>
+
+  <%= css3buttons_stylesheets %>
+	<%= (stylesheet_link_merged :base).html_safe %>
+	<%# javascript_include_tag "http://code.jquery.com/jquery-1.5.2.min.js"%>
+	<%= javascript_include_tag "jquery-1.5.1.min.js" %>
 	<%= (javascript_include_merged :base ).html_safe %>
 	
-  	<%= csrf_meta_tag %>
+  <%= csrf_meta_tag %>
 </head>
 
 <body>
@@ -20,7 +22,7 @@
     <div id="global_links">
       <%= render :partial => 'shared/global_links' %>
     </div>
-    <h1><%= link_to configatron.site_name, root_url %></h1>
+    <h1><%= link_to configatron.site_name, admin_root_url %></h1>
 
     <div id="tabs">
       <%= render :partial => 'admin/shared/tabs' %>
@@ -43,10 +45,7 @@
     </div>
   </div>
   <div id="footer">
-    <%= configatron.site_name %> by <%= configatron.company_name %><br />
 	Copyright © <%= configatron.company_name %>
   </div>
-
-
 </body>
 </html>

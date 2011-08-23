@@ -6,7 +6,7 @@
 
 	<title><%= configatron.site_name %></title>
 
-	<%= (stylesheet_link_merged :base, "jquery.jqzoom").html_safe %>
+	<%= (stylesheet_link_merged :page, "jquery.jqzoom").html_safe %>
 	<%= stylesheet_link_tag 'mobile' if mobile_device? %>
   <%=  csrf_meta_tag %>
 	<%# (javascript_include_merged :rails ).html_safe %>
@@ -23,14 +23,15 @@
   <h1><%= link_to "PilorOder.BG", root_path %></h1>
   <nav>
   <ul>
-  <li><%= tab_to "Дейност", [ {:controller => "page", :action => "activity" } ] %></li>
-  <li><%= tab_to "Политика", [ {:controller => "page", :action => "policy" }, {:controller => "page", :action => "pilot_code" }] %></li>
-  <li><%= tab_to "Сертификати", [ {:controller => "page", :action => "certificates" } ] %></li>
-  <li><%= tab_to "Цени", [ {:controller => "page", :action => "prices" }, {:controller => "page", :action => "price_table_1" }, {:controller => "page", :action => "price_table_2" } ] %></li>
+  <li><%= tab_to "Дейност", [ activity_path ] %></li>
+  <li><%= tab_to "Политика", [ policy_path, pilot_code_path ] %></li>
+  <li><%= tab_to "Сертификати", [ certificates_path ] %></li>
+  <li><%= tab_to "Цени", [ prices_path , price_table_1_path, price_table_2_path ] %></li>
   </ul>
   </nav>
   <%= render :partial => "shared/annotated" %>
   </header>
+	  <%= flash_message.html_safe %>
   <section id='content'>
   <%- if @quote %>
     <header>

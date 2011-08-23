@@ -1,5 +1,5 @@
 <% content_for :header do -%>
-Create a new <%= configatron.site_name %> account
+Създаване на нов потребител
 <% end -%>
 
 <% content_for :sidebar do -%>
@@ -8,13 +8,13 @@ Create a new <%= configatron.site_name %> account
 
 <% form_for :user, :url => admin_users_path do |f| -%>
 <table class="overview">
-<%= cell((f.label :login), (f.text_field :login))%>
+<%= cell((f.label :login, t(:login)), (f.text_field :login))%>
 <%= cell((f.label :email), (f.text_field :email))%>
-<%= cell((f.label :password), (f.password_field :password))%>
-<%= cell((f.label :password_confirmation), (f.password_field :password_confirmation))%>
+<%= cell((f.label :password, t(:password)), (f.password_field :password))%>
+<%= cell((f.label :password_confirmation, t(:password_confirmation)), (f.password_field :password_confirmation))%>
 
-<%= cell("", (submit_tag 'Create account'))%>
-<%= cell("", (link_to 'Back', admin_users_path))%>
+<%= cell("", (submit_tag t(:create_account)))%>
+<%= cell("", (link_to t(:back), admin_users_path))%>
 </table>
 
 <% end -%>

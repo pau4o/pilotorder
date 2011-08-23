@@ -41,3 +41,4 @@ module Rails3
     config.filter_parameters += [:password, :password_confirmation]
   end
 end
+

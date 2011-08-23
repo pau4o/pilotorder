@@ -1,0 +1,35 @@
+<section class="box box-contact-us" id="activity">
+<div id="slideshow"></div>
+<div class='copy' id='contact-us'>
+<hgroup>
+<h1>Свържете се с нас</h1>
+</hgroup>
+<p>
+Ако имате въпроси или предложения може да използвате тази форма за да ни пишете.
+</p>
+<p>
+<%= form_for :inquiry, :url => contact_us_path(resource_name) do |f| -%>
+	<fieldset id="oldfashioned_form">	
+    <div class="contact-us">
+      <label for="name">Вашето име</label><br/>
+      <%= f.text_field :author, :class => "larger widest" %>
+    </div>
+    <div class="contact-us">
+      <label for="reply_to">емайл или телефон за обратна връзка</label><br/>
+      <%= f.text_field :reply_to, :class => "larger widest" %>
+    </div>
+    <div class="contact-us">
+      <label for="body"></label><br/>
+      <%= f.text_area :body, :class => "larger widest" %>
+    </div>
+
+	</fieldset>
+
+	<div id="submitbutton">
+		<p><%= submit_tag 'Изпрати' %></p>
+	</div>
+
+<% end -%>
+</p>
+</div>
+</section>

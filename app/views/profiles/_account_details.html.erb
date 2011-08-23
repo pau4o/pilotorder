@@ -1,4 +1,4 @@
-<h3>Account details</h3>
+<h3>Информация за потребителя</h3>
 <table class="overview">
 	<%= cell "Login", h(@user.login) %>
 	
@@ -8,15 +8,15 @@
 	
 	<%= cell_separator %>
 	
-	<% change_email_text = @user.not_using_openid? ? " <small>#{link_to "change", edit_email_user_url(@user)}</small>" : "" %>
+	<% change_email_text = @user.not_using_openid? ? " <small>#{link_to "смени", edit_email_user_url(@user)}</small>" : "" %>
 	
 	<%= cell "Email", "#{h(@user.email)}#{change_email_text}" %>
 	<% if @user.not_using_openid? %>
-	<%= cell "Password", "#{"*"*8} <small>#{link_to "change", edit_password_user_url(@user)}</small>" %>
+	<%= cell t("Password"), "#{"*"*16} <small>#{link_to "смени", edit_password_user_url(@user)}</small>" %>
 	<% end %>
 	
 	<%= cell_separator %>
 	
-	<%= cell "Account created", @user.created_at.to_s(:long) %>
-	<%= cell "Last updated", @user.updated_at.to_s(:long) %>
+  <%= cell "Дата на създаване", "преди " + time_ago_in_words(@user.created_at) +" (" + @user.created_at.strftime("%Y/%m/%d %H:%M:%S") + ")" %>
+	<%= cell "Последна промяна", time_ago_in_words(@user.updated_at) +" (" + @user.updated_at.strftime("%Y/%m/%d %H:%M:%S") + ")"%>
 </table>

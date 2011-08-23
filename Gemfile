@@ -1,9 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+gem 'rails', '3.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+#
+gem 'css3buttons', '0.9.5'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
@@ -13,7 +15,7 @@ gem 'unicorn'
 # Deploy with Capistrano
 gem 'capistrano'
 gem 'capistrano-ext'
-gem 'devise'
+gem 'devise', :path => 'vendor/devise'
 gem "configatron"
 gem "post_commit"
 gem "will_paginate", "~> 3.0.pre2"
@@ -23,6 +25,8 @@ gem "aasm", "2.2.0"
 gem "gravatar_image_tag"
 gem "nifty-generators", :group => :development
 gem "useragent"
+gem 'rails3-jquery-autocomplete'
+
 # https://github.com/marten/has_details
 # gem "has_details" # , :git => 'git://github.com/marten/has_details.git'
 

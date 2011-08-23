@@ -1,19 +1,19 @@
 <% if @profile.nil? -%>
 	<% content_for :header do -%>
-		Profile not be found
+    Информацията не беше намерена
 	<% end -%>
 	
-	<p>The profile you requested does not exist.</p>
+	<p>Информацията за потребителя, която търсите, не съществува.</p>
 <% else -%>
 	<% content_for :header do -%>
-		Editing my profile
+    Редактиране на профила
 	<% end -%>
 
 	<%= render :partial => 'profiles/my_account' if current_user == @user %>
 
 	<% unless @profile.user.not_using_openid? %>
 	<p>
-		This is your <%= configatron.site_name %> profile. It's not related to your OpenID Identity.
+		Това е вашият <%= configatron.site_name %> профиле. Той не е свързан с OpenID Identity.
 	</p>
 	<% end %>
 	
@@ -25,7 +25,7 @@
 		</p>
 	<% end -%>
 	
-	<%= submit_tag "Save changes" %>
+	<%= submit_tag "Запази промените" %>
 	
 	<% end %>
 <% end -%>

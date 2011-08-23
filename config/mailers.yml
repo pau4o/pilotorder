@@ -1,0 +1,19 @@
+default: &default
+  address:              smtp.gmail.com
+  port:                 587  
+  domain:               bstconsult.com
+  user_name:            asciicasts
+  password:             secret
+  authentication:       plain
+  enable_starttls_auto: true
+development:
+  <<: *default
+  address: localhost
+  port: 25
+  enable_starttls_auto: false
+  user_name:
+  password:
+  authentication:
+
+production:
+  <<: *default

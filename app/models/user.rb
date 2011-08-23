@@ -2,7 +2,7 @@ require 'aasm_roles'
 class User < ActiveRecord::Base
   include AasmRoles
   
-  devise :database_authenticatable, :recoverable, :registerable, :rememberable, :validatable
+  devise :database_authenticatable, :recoverable, :registerable, :rememberable, :validatable, :trackable, :timeoutable
   validates_uniqueness_of :login, :email, :case_sensitive => false
   # Relations
   has_and_belongs_to_many :roles
@@ -12,12 +12,13 @@ class User < ActiveRecord::Base
   after_create :create_profile, :register!
   
   attr_accessible :login, :email, :name, :password, :password_confirmation, :identity_url
+  attr_accessible :last_request_at, :last_request_url
 
   before_validation(:set_default, :on => :create)
   
-  def self.search(search)  
+  def self.search(search, page)
     if search  
-       find(:all, :conditions => ['login LIKE ? OR email LIKE ?', "%#{search}%", "%#{search}%"])
+      paginate :per_page => 100, :page => page, :conditions => ['login LIKE ? OR email LIKE ?', "%#{search}%", "%#{search}%"]
     else  
       all
     end
@@ -53,11 +54,10 @@ class User < ActiveRecord::Base
     errors.add_to_base("Invalid OpenID URL")
   end
   
-  def self.find_for_authentication(conditions)
-    conditions = ["login = ? or email = ?", conditions[authentication_keys.first], conditions[authentication_keys.first]]
-    # raise StandardError, conditions.inspect
-    super
-  end  
+  def self.find_for_database_authentication(conditions={})
+    self.where("login = ?", conditions[:login]).limit(1).first ||
+      self.where("email = ?", conditions[:login]).limit(1).first
+  end
 
   protected
 
