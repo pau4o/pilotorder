@@ -1,0 +1,33 @@
+one:
+  eta_varna: 2011-08-23 08:44:27
+  vessel_id: 1
+  country_receiver: MyString
+  country_receiver_id: MyString
+  i18n_cruise: 1
+  starting_port: MyString
+  ending_port: MyString
+  maneuver_state: MyString
+  maneuver_from: MyString
+  maneuver_to: MyString
+  danger_cargo: false
+  danger_cargo_filename: MyString
+  tug_company: MyString
+  requirements: MyText
+  payer: MyString
+
+two:
+  eta_varna: 2011-08-23 08:44:27
+  vessel_id: 1
+  country_receiver: MyString
+  country_receiver_id: MyString
+  i18n_cruise: 1
+  starting_port: MyString
+  ending_port: MyString
+  maneuver_state: MyString
+  maneuver_from: MyString
+  maneuver_to: MyString
+  danger_cargo: false
+  danger_cargo_filename: MyString
+  tug_company: MyString
+  requirements: MyText
+  payer: MyString

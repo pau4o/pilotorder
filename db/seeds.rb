@@ -286,5 +286,13 @@ def parse_and_create_vessels
   end
 end
 
-create_flags
-parse_and_create_vessels
+def yaml2vessels
+  if Vessel.count == 0
+    y = YAML::load( File.open("db/vessels.yml") )
+    y.each { |e| Vessel.create(e.attributes) }
+  end
+end
+
+create_flags()
+# parse_and_create_vessels()  # deprecated
+yaml2vessels

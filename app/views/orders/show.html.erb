@@ -1,0 +1,68 @@
+<% title "Order" %>
+
+<p>
+  <strong>Eta Varna:</strong>
+  <%= @order.eta_varna %>
+</p>
+<p>
+  <strong>Vessel:</strong>
+  <%= @order.vessel_id %>
+</p>
+<p>
+  <strong>Country Receiver:</strong>
+  <%= @order.country_receiver %>
+</p>
+<p>
+  <strong>Country Receiver:</strong>
+  <%= @order.country_receiver_id %>
+</p>
+<p>
+  <strong>I18n Cruise:</strong>
+  <%= @order.i18n_cruise %>
+</p>
+<p>
+  <strong>Starting Port:</strong>
+  <%= @order.starting_port %>
+</p>
+<p>
+  <strong>Ending Port:</strong>
+  <%= @order.ending_port %>
+</p>
+<p>
+  <strong>Maneuver State:</strong>
+  <%= @order.maneuver_state %>
+</p>
+<p>
+  <strong>Maneuver From:</strong>
+  <%= @order.maneuver_from %>
+</p>
+<p>
+  <strong>Maneuver To:</strong>
+  <%= @order.maneuver_to %>
+</p>
+<p>
+  <strong>Danger Cargo:</strong>
+  <%= @order.danger_cargo %>
+</p>
+<p>
+  <strong>Danger Cargo Filename:</strong>
+  <%= @order.danger_cargo_filename %>
+</p>
+<p>
+  <strong>Tug Company:</strong>
+  <%= @order.tug_company %>
+</p>
+<p>
+  <strong>Requirements:</strong>
+  <%= @order.requirements %>
+</p>
+<p>
+  <strong>Payer:</strong>
+  <%= @order.payer %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_order_path(@order) %> |
+  <%= link_to "Destroy", @order, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", orders_path %>
+</p>

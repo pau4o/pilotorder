@@ -12,10 +12,11 @@ class CreateVessels < ActiveRecord::Migration
       t.decimal "draftfwd" ,  :precision => 5 ,  :scale => 2
       t.decimal "aft"      ,  :precision => 5 ,  :scale => 2
       t.decimal "airdraft" ,  :precision => 5 ,  :scale => 2
-      t.integer "editor_id"
       t.integer "propelers"
       t.boolean "proptype"
       t.integer "thrusters"
+      t.integer "order_id"
+      t.integer "editor_id"
 
       t.timestamps
     end

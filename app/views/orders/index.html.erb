@@ -1,0 +1,42 @@
+<% content_for :header do -%>
+	Списък на заявките
+<% end -%>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Кораб</th>
+    <th>IMO</th>
+    <th></th>
+    <th>Международен рейс</th>
+    <th>Рейс</th>
+    <th>Ending Port</th>
+    <th>Маневра</th>
+    <th>Опасен товар</th>
+    <th>Състояние</th>
+  </tr>
+  <% for order in @orders %>
+    <tr>
+      <td><%= order.eta_varna %></td>
+      <td><%= order.vessel_id %></td>
+      <td><%= order.country_receiver %></td>
+      <td><%= order.country_receiver_id %></td>
+      <td><%= order.i18n_cruise %></td>
+      <td><%= order.starting_port %></td>
+      <td><%= order.ending_port %></td>
+      <td><%= order.maneuver_state %></td>
+      <td><%= order.maneuver_from %></td>
+      <td><%= order.maneuver_to %></td>
+      <td><%= order.danger_cargo %></td>
+      <td><%= order.danger_cargo_filename %></td>
+      <td><%= order.tug_company %></td>
+      <td><%= order.requirements %></td>
+      <td><%= order.payer %></td>
+      <td><%= link_to "Show", order %></td>
+      <td><%= link_to "Edit", edit_order_path(order) %></td>
+      <td><%= link_to "Destroy", order, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Order", new_order_path %></p>

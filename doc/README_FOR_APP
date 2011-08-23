@@ -19,3 +19,44 @@ Vessel
     propelers:integer
     proptype:boolean
     thrusters:integer
+
+r g nifty:scaffold Order
+  eta_varna:datetime vessel_id:integer
+  country_receiver:string country_receiver_id:string
+  i18n_cruise_number:integer
+  starting_port:string
+  ending_port:string
+  maneuver_state:string
+  maneuver_from:string
+  maneuver_to:string
+  danger_cargo:boolean
+  danger_cargo_filename:string
+  tug_company:string
+  requirements:text
+  payer:string
+
+
+= премахване на дублираните записи
+dup = Hash.new
+all = Vessel.order('created_at desc').each { |v| 
+  puts "#{v.created_at} #{v.name} #{dup.has_key?(v.imonumber) ? '<<<===' : '' } " 
+  if dup.has_key?(v.imonumber)
+    v.destroy
+    puts "delete ship: #{v.name}, #{v.imonumber}"
+  end
+  dup[v.imonumber] ||= true
+}
+    
+= ModelObjects to YAML then to FILE and back to DB
+
+  # dumping to file
+  y = Vessel.all.to_yaml
+  File.open("db/vessels.yml", "w") do |f| f.write(y) end
+
+  # reading from file, create object to DB
+  Vessel # load model serialized in yml
+  y = YAML::load( File.open("db/vessels.yml") )
+  y.each { |e| Vessel.create(e.attributes) }
+
+= nested models
+  accepts_nested_attributes_for :children, :allow_destroy => true

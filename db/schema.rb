@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110822150340) do
+ActiveRecord::Schema.define(:version => 20110823054427) do
 
   create_table "announcements", :force => true do |t|
     t.text     "headline"
@@ -29,10 +29,43 @@ ActiveRecord::Schema.define(:version => 20110822150340) do
     t.datetime "updated_at"
   end
 
+  create_table "orders", :force => true do |t|
+    t.datetime "eta_varna"
+    t.integer  "vessel_id"
+    t.string   "country_receiver"
+    t.string   "country_receiver_id"
+    t.integer  "i18n_cruise_number"
+    t.string   "starting_port"
+    t.string   "ending_port"
+    t.string   "maneuver_state"
+    t.string   "maneuver_from"
+    t.string   "maneuver_to"
+    t.boolean  "danger_cargo"
+    t.string   "danger_cargo_filename"
+    t.string   "tug_company"
+    t.text     "requirements"
+    t.string   "payer"
+    t.boolean  "rejected"
+    t.boolean  "published"
+    t.boolean  "draft"
+    t.boolean  "deleted"
+    t.boolean  "accepted"
+    t.boolean  "finished"
+    t.integer  "author_id"
+    t.string   "accepted_by"
+    t.string   "rejected_by"
+    t.string   "finished_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
     t.string   "real_name"
+    t.string   "agent"
     t.string   "phones"
+    t.string   "fax"
+    t.string   "company_email"
     t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -115,10 +148,11 @@ ActiveRecord::Schema.define(:version => 20110822150340) do
     t.decimal  "draftfwd",   :precision => 5, :scale => 2
     t.decimal  "aft",        :precision => 5, :scale => 2
     t.decimal  "airdraft",   :precision => 5, :scale => 2
-    t.integer  "editor_id"
     t.integer  "propelers"
     t.boolean  "proptype"
     t.integer  "thrusters"
+    t.integer  "order_id"
+    t.integer  "editor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

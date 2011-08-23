@@ -6,7 +6,10 @@ class CreateProfileRoles < ActiveRecord::Migration
       t.references :user
 
       t.string :real_name
+      t.string :agent
       t.string :phones
+      t.string :fax
+      t.string :company_email
       t.string :website
       
       t.timestamps

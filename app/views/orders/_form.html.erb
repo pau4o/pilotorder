@@ -1,0 +1,64 @@
+<%= form_for @order do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :eta_varna %><br />
+    <%= f.datetime_select :eta_varna %>
+  </p>
+  <p>
+    <%= f.label :vessel_id %><br />
+    <%= f.text_field :vessel_id %>
+  </p>
+  <p>
+    <%= f.label :country_receiver %><br />
+    <%= f.text_field :country_receiver %>
+  </p>
+  <p>
+    <%= f.label :country_receiver_id %><br />
+    <%= f.text_field :country_receiver_id %>
+  </p>
+  <p>
+    <%= f.label :i18n_cruise_number %><br />
+    <%= f.text_field :i18n_cruise_number %>
+  </p>
+  <p>
+    <%= f.label :starting_port %><br />
+    <%= f.text_field :starting_port %>
+  </p>
+  <p>
+    <%= f.label :ending_port %><br />
+    <%= f.text_field :ending_port %>
+  </p>
+  <p>
+    <%= f.label :maneuver_state %><br />
+    <%= f.text_field :maneuver_state %>
+  </p>
+  <p>
+    <%= f.label :maneuver_from %><br />
+    <%= f.text_field :maneuver_from %>
+  </p>
+  <p>
+    <%= f.label :maneuver_to %><br />
+    <%= f.text_field :maneuver_to %>
+  </p>
+  <p>
+    <%= f.label :danger_cargo %><br />
+    <%= f.check_box :danger_cargo %>
+  </p>
+  <p>
+    <%= f.label :danger_cargo_filename %><br />
+    <%= f.text_field :danger_cargo_filename %>
+  </p>
+  <p>
+    <%= f.label :tug_company %><br />
+    <%= f.text_field :tug_company %>
+  </p>
+  <p>
+    <%= f.label :requirements %><br />
+    <%= f.text_area :requirements %>
+  </p>
+  <p>
+    <%= f.label :payer %><br />
+    <%= f.text_field :payer %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

@@ -1,5 +1,7 @@
 Rails3::Application.routes.draw do
 
+  resources :orders
+
 #   device_for :users
 #   devise_for :users, :path => "usuarios", 
 #     :path_names => { :sign_in => 'login', :sign_out => 'logout', 
