@@ -4,29 +4,19 @@
 development: &local
     site_name: ПоръчайПилот.БГ
     site_namemobile: ПоръчайПилот.БГ
-    site_url: baseapp2.local
+    site_url: pilotorder.bg
     
     company_name: Pilot Station Varna
-    admin_email: dev@pilotorder.bg
+    admin_email: office@pilotorder.bg
     
-    support_name: 
+    support_name: bstconsult.com
     support_email: support@pilotorder.bg
     
     site_envnote: Local Server
 
 production:
-    site_name: BaseApp2
-    site_namemobile: BaseApp2
-    site_url: www.baseapp2.com
-    
-    company_name: Development Company
-    admin_email: admin@baseapp2.com
-    
-    support_name: Development Company
-    support_email: support@baseapp2.com
-    
-    site_envnote: Production Server
-  
+  <<: *local
+
 staging:
   <<: *local
 
