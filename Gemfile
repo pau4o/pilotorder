@@ -7,7 +7,8 @@ gem 'rails', '3.0.10'
 #
 gem 'css3buttons', '0.9.5'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+#gem 'sqlite3-ruby', :require => 'sqlite3'
+gem "mysql"
 
 # Use unicorn as the web server
 gem 'unicorn'
@@ -15,7 +16,7 @@ gem 'unicorn'
 # Deploy with Capistrano
 gem 'capistrano'
 gem 'capistrano-ext'
-gem 'devise', :path => 'vendor/devise'
+gem 'devise' #, :path => 'vendor/devise'
 gem "configatron"
 gem "post_commit"
 gem "will_paginate", "~> 3.0.pre2"
