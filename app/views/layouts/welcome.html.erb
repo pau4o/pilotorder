@@ -10,11 +10,12 @@
 	<%= stylesheet_link_tag 'mobile' if mobile_device? %>
   <%=  csrf_meta_tag %>
 	<%# (javascript_include_merged :rails ).html_safe %>
-  <%= javascript_include_tag "jquery-1.5.1.min" %>
+  <%= (javascript_include_merged :base ).html_safe %>
+  <%# javascript_include_tag "jquery-1.5.1.min" %>
   <%= javascript_include_tag "jquery.cycle.all.2.74" %>
   <%= javascript_include_tag "jquery.jqzoom-core-pack" %>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "rails" %>
+  <%# javascript_include_tag "application" %>
+  <%# javascript_include_tag "rails" %>
 
 </head>
 

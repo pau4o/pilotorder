@@ -26,7 +26,10 @@ gem "aasm", "2.2.0"
 gem "gravatar_image_tag"
 gem "nifty-generators", :group => :development
 gem "useragent"
+gem 'jquery-rails'
 gem 'rails3-jquery-autocomplete'
+gem 'formtastic'
+gem 'haml-rails'
 
 # https://github.com/marten/has_details
 # gem "has_details" # , :git => 'git://github.com/marten/has_details.git'

@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
 
   def log_user
     if logged_in?
-      logger.info("==>" + current_user.login)
+      logger.info("==>" + current_user.login + ', role:' + current_user.role_symbols.join(", "))
     end
   end
 
@@ -91,6 +91,7 @@ class ApplicationController < ActionController::Base
   end
   
   def after_sign_in_path_for(resource)
+    logger.info("after_sign_in_path_for: #{current_user.email}")
     admin_root_path
   end
 

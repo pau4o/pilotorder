@@ -1,3 +1,121 @@
+h1, PilotOrder
+
+This section holds preparation tasks for PilotOrder application
+
+h2. Creating Models
+
+Create models based on Pilotage application
+
+- Agent
+  r g nifty:scaffold agent name:string contacts:text status:string editor_id
+
+    belongs_to :users
+
+    status: default => active
+
+- Area
+  r g nifty:scaffold area name:string data:text editable:boolean faraway:boolean mapname:string: scale_ppm:float iconname:string editor_id
+  editable: default => false
+  faraway:  default => false
+
+- AssesmentCard
+  r g nifty:scaffold AssesmentCard card_id driver:boolean editor_id comment:text
+
+  driver: default => false 
+
+- AuthLog
+  r g nifty:scaffold AuthLog username:string fullname:string entrytime:timestamp
+
+  entrytime can be replaced by created_at!
+
+- ControlTable - TODO: check for what is this table
+
+- CountryCodes
+  r g nifty:scaffold name:string alpha2:string alpha3:string num_code:integer
+
+  alpha2: limit => 2
+  alpha3: limit => 3
+
+- Criteria
+  r g nifty:scaffold criteria name:string alert:boolean number:integer editor_id
+
+  alert: default => false
+  entrytime => created_at
+
+
+- Instruction
+  r g nifty:scaffold instruction effective:timestamp subject:string body:text due:timestamp canceled:boolean cancelation:timestamp
+
+  has_many executives
+
+  effective: default => Now()
+  issued => created_at
+  TODO: check what to use cancelation and canceled attribute ?
+
+- Executive  - hold information about readed Instructions
+  r g nifty:scaffold executive instruction_id:integer user_id:integer pending:boolean accessed:timestamp
+
+  pending: default => true
+  accessed => updated_at ?
+
+  belongs_to users
+  belongs_to instructions
+
+  All new instructions must create record in Executives for each user with role DISPATCHER, pending => true
+
+- Ship
+  r g nifty:scaffold ship imonumber:string name:string callsign:string flag:string owner:string gt:integer loa:decimal boa:decimal draftfwd:decimal aft:decimal airdraft:decimal propelers:integer proptype:boolean trusters:integer editor_id:integer
+
+  callsign :limit => 20
+  name :limit => 64
+  flag :limit => 32
+  imonumber :limit => 16
+
+  TODO: get all decimal attributes from Vessel model
+
+- LogBook
+  r g nifty:scaffold log_book 
+
+  has_one :ship_data
+
+- ShipData
+  r g nifty:scaffold ship_data logbook_id:integer 
+
+  belongs_to :log_book
+  
+  ShipData have the same clumns as Ship with one extra field => logbook_id
+
+- Forthcoming Manoeuvres 
+  r g nifty:scaffold ForthMan 
+
+  have almost same information as Ship model and 13 extra attributes
+
+- Areas
+  r g nifty:scaffold area name:string data:string editable:boolean faraway:boolean mapname:string scale_ppm:float iconname:string editor_id:integer
+
+  has_many :places
+
+- Places
+  r g nifty:scaffold place name:string mooring:boolean data:string imonumber:string ship_id:integer log_book_id:integer arrival:timestamp leftanchor:boolean la_keys:integer rightanchor:boolean ra_keys:integer board:boolean x_center:integer y_center:integer bearing:integer editor_id:integer
+
+  imonumber :limit => 16
+  la_keys :default => 0
+  ra_keys :default => 0
+  belongs_to :ship
+  belongs_to :log_book
+  belongs_to :user, :foreign_key => :editor_id
+
+- Users
+  r g nifty:scaffold 
+
+  FIXME: use devise ?
+
+- Tugs
+  r g nifty:scaffold  tug name:string editor_id:integer
+
+  belongs_to :user, :foreign_key => :editor_id
+
+
 h1. BaseApp2
 
 h2. Requirements

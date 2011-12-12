@@ -2,12 +2,18 @@
 --- 
 javascripts: 
 - base:
+  - jquery
+  - jquery-ui
+  - jquery_ujs
   - rails
   - application
   - autocomplete-rails
 stylesheets: 
 - base: 
   - default
+  - icons
+- agent:
+  - agent
   - icons
 - page:
   - page

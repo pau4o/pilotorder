@@ -1,6 +1,6 @@
 Rails3::Application.routes.draw do
 
-  resources :orders
+#  resources :orders
 
 #   device_for :users
 #   devise_for :users, :path => "usuarios", 
@@ -62,6 +62,13 @@ Rails3::Application.routes.draw do
         get :suspended
         get :deleted
       end
+    end
+  end
+
+  namespace :agent do
+    root :to => "dashboard#index"
+    resources :orders do
+      get :autocomplete_flag_name, :on => :collection
     end
   end
   
