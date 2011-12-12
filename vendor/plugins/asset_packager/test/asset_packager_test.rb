@@ -1,13 +1,11 @@
-require File.dirname(__FILE__) + '/../../../../config/environment'
-require 'test/unit'
-require 'mocha'
+require 'test/test_helper'
 
-class AssetPackagerTest < Test::Unit::TestCase
+class AssetPackagerTest < ActionController::TestCase
   include Synthesis
   
   def setup
-    Synthesis::AssetPackage.asset_base_path    = "#{Rails.root}/vendor/plugins/asset_packager/test/assets"
-    Synthesis::AssetPackage.asset_packages_yml = YAML.load_file("#{Rails.root}/vendor/plugins/asset_packager/test/asset_packages.yml")
+    Synthesis::AssetPackage.asset_base_path    = "test/assets"
+    Synthesis::AssetPackage.asset_packages_yml = YAML.load_file("test/asset_packages.yml")
 
     Synthesis::AssetPackage.any_instance.stubs(:log)
     Synthesis::AssetPackage.build_all
@@ -87,5 +85,4 @@ class AssetPackagerTest < Test::Unit::TestCase
   def test_should_only_return_production_merge_environment_when_not_set
     assert_equal ["production"], Synthesis::AssetPackage.merge_environments
   end
-  
 end

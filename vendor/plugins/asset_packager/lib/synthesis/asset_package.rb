@@ -10,7 +10,12 @@ module Synthesis
                     :asset_packages_yml
 
       attr_writer   :merge_environments
-      
+
+      def asset_packages_options
+        options = asset_packages_yml['options']||{}
+        options[Rails.env] || options['default'] || options
+      end
+
       def merge_environments
         @merge_environments ||= ["production"]
       end
@@ -58,13 +63,13 @@ module Synthesis
       end
 
       def build_all
-        asset_packages_yml.keys.each do |asset_type|
+        (asset_packages_yml.keys - ['options']).each do |asset_type|
           asset_packages_yml[asset_type].each { |p| self.new(asset_type, p).build }
         end
       end
 
       def delete_all
-        asset_packages_yml.keys.each do |asset_type|
+        (asset_packages_yml.keys - ['options']).each do |asset_type|
           asset_packages_yml[asset_type].each { |p| self.new(asset_type, p).delete_previous_build }
         end
       end
@@ -137,30 +142,40 @@ module Synthesis
 
       def merged_file
         merged_file = ""
-        @sources.each {|s| 
-          File.open("#{@asset_path}/#{s}.#{@extension}", "r") { |f| 
-            merged_file += f.read + "\n" 
-          }
-        }
+        @sources.each do |source|
+          file = if source.to_s[0..0] == '/'
+            "#{self.class.asset_base_path}#{source}.#{@extension}" # /foo/bar -> /public/foo/bar.js
+          else
+            "#{@asset_path}/#{source}.#{@extension}" # foo/bar -> /public/javascripts/foo/bar.js
+          end
+          merged_file << File.read(file) << "\n"
+        end
         merged_file
       end
     
       def compressed_file
-        case @asset_type
-          when "javascripts" then compress_js(merged_file)
-          when "stylesheets" then compress_css(merged_file)
+        file_specific_options = self.class.asset_packages_options[@asset_type] || {}
+        file_specific_options = file_specific_options[@target] || {}
+
+        compressed = case @asset_type
+          when "javascripts" then self.class.compress_js(merged_file, file_specific_options)
+          when "stylesheets" then self.class.compress_css(merged_file, file_specific_options)
         end
+        if self.class.asset_packages_options['add_packaged_at']
+          compressed << "\n/* packaged at #{Time.now.utc.strftime('%Y-%m-%d %H:%M:%S')} UTC */"
+        end
+        compressed
       end
 
-      def compress_js(source)
-        jsmin_path = "#{Rails.root}/vendor/plugins/asset_packager/lib"
-        tmp_path = "#{Rails.root}/tmp/#{@target}_packaged"
+      def self.compress_js(source, options={})
+        jsmin_path = File.join(File.dirname(__FILE__), 'jsmin.rb')
+        tmp_path = "#{Rails.root}/tmp/js_packaged"
       
         # write out to a temp file
         File.open("#{tmp_path}_uncompressed.js", "w") {|f| f.write(source) }
       
         # compress file with JSMin library
-        `ruby #{jsmin_path}/jsmin.rb <#{tmp_path}_uncompressed.js >#{tmp_path}_compressed.js \n`
+        `ruby #{jsmin_path} <#{tmp_path}_uncompressed.js >#{tmp_path}_compressed.js \n`
 
         # read it back in and trim it
         result = ""
@@ -173,14 +188,65 @@ module Synthesis
         result
       end
   
-      def compress_css(source)
+      def self.compress_css(source, options={})
         source.gsub!(/\s+/, " ")           # collapse space
         source.gsub!(/\/\*(.*?)\*\//, "")  # remove comments - caution, might want to remove this if using css hacks
         source.gsub!(/\} /, "}\n")         # add line breaks
         source.gsub!(/\n$/, "")            # remove last break
         source.gsub!(/ \{ /, " {")         # trim inside brackets
         source.gsub!(/; \}/, "}")          # trim inside brackets
+
+        options = asset_packages_options.merge(options)
+        options['rewrite_local_asset_paths'] = '%{path}?%{timestamp}' if options['add_timestamps_to_css_urls']
+        rewrite_local_paths!(source, options['rewrite_local_asset_paths']) if options['rewrite_local_asset_paths']
+        add_asset_host_to_local_urls!(source, options['asset_host']) if options['asset_host']
+
         source
+      end
+
+      def self.add_asset_host_to_local_urls!(source, host)
+        gsub_urls!(source) do |file, path|
+          if file !~ /^http/
+            file = "/stylesheets/#{file}" unless file.starts_with?('/')
+            "#{host.sub(%r{/$},'')}#{file}"
+          end
+        end
+      end
+
+      def self.rewrite_local_paths!(source, rule)
+        gsub_urls!(source) do |file|
+          path = File.join(Rails.root, 'public')
+          path = if file.starts_with?('/')
+            File.join(path, file)
+          else
+            File.join(path, 'stylesheets', file)
+          end
+
+          next unless File.file?(path)
+
+          result = rule.dup
+
+          replace = {
+            :timestamp => (File.mtime(path).to_i if rule.include?('%{timestamp}')),
+            :MD5 => (Digest::MD5.file(path).hexdigest[0..6] if rule.include?('%{MD5}')),
+            :path => file
+          }
+
+          replace.each{|k,v| result.gsub!("%{#{k}}",v.to_s) }
+
+          result
+        end
+      end
+
+      def self.gsub_urls!(source)
+        source.gsub!(/url\(['"]?([^'"\)]+?(gif|png|jpe?g)(\?\d+)?)['"]?\)/i) do |match|
+          file = $1
+          if result = yield(file)
+            match.gsub(file, result)
+          else
+            match
+          end
+        end
       end
 
       def get_extension
