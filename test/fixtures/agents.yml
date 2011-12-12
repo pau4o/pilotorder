@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  contacts: MyText
+  status: MyString
+  editor_id: 1
+
+two:
+  name: MyString
+  contacts: MyText
+  status: MyString
+  editor_id: 1

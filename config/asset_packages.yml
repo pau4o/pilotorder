@@ -13,6 +13,7 @@ stylesheets:
 - base: 
   - default
   - icons
+  - admin
 - agent:
   - agent
   - icons

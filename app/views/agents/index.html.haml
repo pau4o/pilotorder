@@ -1,0 +1,19 @@
+%title "Agents"
+
+%table
+  %tr
+    %th Name
+    %th Contacts
+    %th Status
+    %th Editor
+  - for agent in @agents
+    %tr
+      %td= agent.name
+      %td= agent.contacts
+      %td= agent.status
+      %td= agent.editor_id
+      %td= link_to 'Show', agent
+      %td= link_to 'Edit', edit_agent_path(agent)
+      %td= link_to 'Destroy', agent, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Agent", new_agent_path

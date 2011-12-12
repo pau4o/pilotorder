@@ -1,5 +1,7 @@
 Rails3::Application.routes.draw do
 
+  resources :agents
+
 #  resources :orders
 
 #   device_for :users
