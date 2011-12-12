@@ -8,8 +8,8 @@
   <title><%= configatron.site_name %></title>
 
   <%= css3buttons_stylesheets %>
-  <%= (stylesheet_link_merged :base).html_safe %>
-  <%= (javascript_include_merged :base ).html_safe %>
+  <%= stylesheet_link_merged :base %>
+  <%= javascript_include_merged :base %>
   
   <%= csrf_meta_tag %>
 </head>

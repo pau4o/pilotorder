@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Admin::UsersHelper
   def url2name(url)
     names = {

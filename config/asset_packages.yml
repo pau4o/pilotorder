@@ -5,9 +5,10 @@ javascripts:
   - jquery
   - jquery-ui
   - jquery_ujs
-  - rails
-  - application
   - autocomplete-rails
+  - jquery.cycle.all.2.74
+  - jquery.jqzoom-core-pack 
+  - application
 stylesheets: 
 - base: 
   - default
@@ -17,6 +18,7 @@ stylesheets:
   - icons
 - page:
   - page
+  - jquery.jqzoom
 - admin:
   - default
   - admin

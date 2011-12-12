@@ -4,7 +4,8 @@ gem 'rails', '3.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-#
+
+# github style
 gem 'css3buttons', '0.9.5'
 
 #gem 'sqlite3-ruby', :require => 'sqlite3'
@@ -30,13 +31,17 @@ gem 'jquery-rails'
 gem 'rails3-jquery-autocomplete'
 gem 'formtastic'
 gem 'haml-rails'
+gem "breadcrumbs_on_rails"
+gem "gmaps4rails"
 
 # https://github.com/marten/has_details
 # gem "has_details" # , :git => 'git://github.com/marten/has_details.git'
 
 group :development do
   # To use debugger
-  gem 'ruby-debug'
+  # http://stackoverflow.com/questions/6432335/bundle-install-and-rbx-require-relative
+  # gem 'ruby-debug' # use this line for ruby 1.8.7
+  gem 'ruby-debug19' # for ruby ~> 1.9.2
   gem 'sqlite3-ruby', :require => "sqlite3"
 end
 

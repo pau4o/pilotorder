@@ -115,7 +115,6 @@ Create models based on Pilotage application
 
   belongs_to :user, :foreign_key => :editor_id
 
-
 h1. BaseApp2
 
 h2. Requirements
