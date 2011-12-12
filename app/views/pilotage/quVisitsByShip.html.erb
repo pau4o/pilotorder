@@ -1,0 +1,179 @@
+<h3><%#= messages.getString("quVisitsByShip") %></h3>
+<form method="POST" onSubmit="return submitCheck()">
+  <table cellpadding="0" cellspacing="0">
+    <tr> 
+      <td> 
+        Select by (part of) ship's name: 
+        <input type="text" name="partName"
+               <logic:present parameter="partName">value="<%#=request.getParameter("partName") %>" 
+               </logic:present> /> 
+        <input type="submit" value="Select" name="doSelect" />
+      </td>
+      <td rowspan="3">&nbsp;</td>
+    </tr>
+    <tr> 
+      <td>
+        <%#= messages.getString("IMONumber") %>: 
+        <input type="text" name="IMONumber" size="12"    
+               <logic:present parameter="IMONumber"> value="<%#= request.getParameter("IMONumber") %>" 
+               </logic:present> />
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <input name="fromYear" type="text" value="<%#= cal.get(Calendar.YEAR) %>" size="4" />
+        <select name="fromMonth">
+          <%# for (int i=0; i<12; i++) { out.print("<option "+((cal.get(Calendar.MONTH)==i)?"SELECTED":"")+" value=\""+(i+1)+"\">"+messages.getString("Month"+(i+1))); } %>
+              </select>
+        <select name="fromDay">
+          <%# for (int i=1; i<32; i++) { out.print("<option "+((cal.get(Calendar.DAY_OF_MONTH)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+        <select name="fromHour">
+          <%# for (int i=0; i<24; i++) { out.print("<option "+((cal.get(Calendar.HOUR_OF_DAY)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+        : 
+        <select name="fromMin">
+          <%# for (int i=0; i<60; i+=5) { out.print("<option "+((cal.get(Calendar.MINUTE)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <input name="toYear" type="text" value="<%#= cal.get(Calendar.YEAR) %>" size="4" />
+        <select name="toMonth">
+          <%# for (int i=0; i<12; i++) { out.print("<option "+((cal.get(Calendar.MONTH)==i)?"SELECTED":"")+" value=\""+(i+1)+"\">"+messages.getString("Month"+(i+1))); } %>
+              </select>
+        <select name="toDay">
+          <%# for (int i=1; i<32; i++) { out.print("<option "+((cal.get(Calendar.DAY_OF_MONTH)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+        <select name="toHour">
+          <%# for (int i=0; i<24; i++) { out.print("<option "+((cal.get(Calendar.HOUR_OF_DAY)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); }%>
+              </select>
+        : 
+        <select name="toMin">
+          <%# for (int i=0; i<60; i+=5) { out.print("<option "+((cal.get(Calendar.MINUTE)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+      </td>
+      <td> 
+        <input class="button" type="submit" name="go" value="Go" />
+      </td>
+    </tr>
+  </table>
+</form>
+<div class="search-results">
+  <logic:present parameter="IMONumber"> 
+    <logic:present parameter="fromYear"> <logic:notPresent parameter="doSelect" > 
+        <%# ArrayList logs=beanManager.getLogbookController().findByShip(request.getParameter("IMONumber"),
+            java.sql.Timestamp.valueOf(
+            request.getParameter("fromYear")+"-"+
+            request.getParameter("fromMonth")+"-"+
+            request.getParameter("fromDay")+" "+
+            request.getParameter("fromHour")+":"+
+            request.getParameter("fromMin")+":00.00"),
+            java.sql.Timestamp.valueOf(
+            request.getParameter("toYear")+"-"+
+            request.getParameter("toMonth")+"-"+
+            request.getParameter("toDay")+" "+
+            request.getParameter("toHour")+":"+
+            request.getParameter("toMin")+":00.00")
+            ); int counter=1; %>
+        <table cellpadding="0" cellspacing="0">
+          <thead>
+            <tr>
+              <th colspan="8">Manoeuvres for ship with IMO number: <a href="<%#= request.getContextPath()%>/shipControl?IMONumber=<%#= request.getParameter("IMONumber") %>"> 
+                  <%#= request.getParameter("IMONumber") %>
+                </a>
+                <%#=messages.getString("FromTime") %>&nbsp; 
+                <%#= request.getParameter("fromYear")+"-"+
+                     request.getParameter("fromMonth")+"-"+
+                     request.getParameter("fromDay")+" "+
+                     request.getParameter("fromHour")+":"+
+                     request.getParameter("fromMin") %>
+                <%#=messages.getString("ToTime") %>&nbsp; 
+                <%#= request.getParameter("toYear")+"-"+
+                     request.getParameter("toMonth")+"-"+
+                     request.getParameter("toDay")+" "+
+                     request.getParameter("toHour")+":"+
+                     request.getParameter("toMin") %>
+              </th>
+            </tr>
+            <tr>
+              <th>No.</th>
+              <th><%#= messages.getString("FromTime")%></th>
+              <th><%#= messages.getString("ToTime")%></th>
+              <th><%#= messages.getString("PilotNote")%></th>
+              <th><%#= messages.getString("ShipName")%></th>
+              <th><%#= messages.getString("FromArea")%></th>
+              <th><%#= messages.getString("ToArea")%></th>
+              <th><%#= messages.getString("Pilot")%></th>
+            </tr>
+          </thead>
+          <tbody>
+            <logic:iterate collection="<%#= logs %>" id="ld" type="com.varnapage.epilots.util.LogbookDetails"> 
+              <%# ShipDetails sd=beanManager.getLogbookController().getShipDetails(ld.getLogbookId()); %>
+              <tr>
+            <td><%#= counter++ %></td>
+            <td><%#= ld.getFromTime() %></td>
+            <td><%#= ld.getToTime() %></td>
+            <td><%#= (beanManager.getAcardController().isProblematic( beanManager.getAcardController().findByAcardID(ld.getLogbookId()) )>0)?"<img src=images/ball.red.gif>":"" %>
+                <a href="<%#= request.getContextPath()%>/viewMan?LogID=<%#= ld.getLogbookId() %>">
+                  <%#= ld.getLogbookId() %>
+                </a> 
+              &nbsp;<%#= ld.getSaved()?"":"Not saved"%>&nbsp;<%#= ld.getChecked()?"":"Not checked"%> 
+              &nbsp;<%#= (ld.getPlayerID()==ld.getEditorID())?"":"Changed!" %> 
+            </td>
+            <td><%#= sd.getShipName() %></td>
+            <td><%#= beanManager.getHandy().getPlaceName(ld.getFromAreaID()) %></td>
+            <td><%#= beanManager.getHandy().getPlaceName(ld.getToAreaID()) %></td>
+            <td><%#= beanManager.getHandy().getPlayerFullName(ld.getPlayerID()) %></td>
+          </tr>
+          </logic:iterate> 
+          </tbody>
+        </table>
+</logic:notPresent>
+</logic:present>
+</logic:present>
+<logic:present parameter="doSelect">
+<logic:equal parameter="doSelect"  value="Select">
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th><%#=messages.getString("ShipName")%> </th>
+        <th><%#=messages.getString("IMONumber")%> </th>
+        <th><%#=messages.getString("ShipFlag")%> </th>
+        <th><%#=messages.getString("ShipOwner")%> </th>
+        <th><%#=messages.getString("ShipGT")%> </th>
+        <th><%#=messages.getString("LastUpdate")%> </th>
+      </tr>
+    </thead>
+    <%# 
+       ArrayList ships = beanManager.getShipController().findByShipName(request.getParameter("partName").toUpperCase());
+       InitialContext ic=new InitialContext();
+       Integer maxrows=(Integer)(ic.lookup("java:comp/env/MaxShipListRows"));
+       if (ships.size() > maxrows.intValue() ) {
+          out.print("<ADDRESS>"+messages.getString("TooMuchRowsWarning")+"</ADDRESS>");
+       }
+    %>
+          <tbody>
+          <logic:iterate collection="<%#= ships %>" id="sd" type="com.varnapage.epilots.util.ShipDetails"> 
+            <tr> 
+              <td>
+                <a href="<%#=request.getContextPath()%>/quVisitsByShip?IMONumber=<%#= sd.getIMONumber() %>" > 
+                  <%#= sd.getShipName() %>
+                </a>
+              </td>
+              <td><%#= sd.getIMONumber() %></td>
+              <td><%#= sd.getFlag() %></td>
+              <td><%#= sd.getOwner() %></td>
+              <td><%#= sd.getGT() %></td>
+              <td><%#= sd.getEntryTime() %> 
+                by <%#=beanManager.getHandy().getPlayerFullName(sd.getEditorID()) %>
+              </td>
+            </tr>
+            </logic:iterate> 
+          </tbody>
+          </table>
+</logic:equal>
+</logic:present>
+</div><!-- //.search-results -->
+

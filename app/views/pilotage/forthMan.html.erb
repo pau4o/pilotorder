@@ -1,0 +1,274 @@
+<section class="narrow-box">
+  <h2 class="page-title"><span>Forthcomming Manoeuvres</span></h2>
+<h3>
+  <%#= messages.getString("ForthCommingMans") %>
+  &nbsp;
+  <%#= beanManager.getHandy().getPlayerFullName(request.getUserPrincipal().getName()) %>
+</h3>
+<%# int pID=beanManager.getHandy().getPlayerID( request.getUserPrincipal().getName() );
+    Collection forths = beanManager.getForthManController().getForthManList(); %>
+<form name="open_notes" method="get"  onSubmit="return submitCheck()" action="<%#=request.getContextPath() %>/newForthMan">
+<%# if (request.isUserInRole("DISPATCHER")) { %>
+<a href="<%#= request.getContextPath()%>/newForthMan"><%#= messages.getString("DoNewForth") %> </a>
+<%# } %>
+<logic:iterate collection="<%#= forths %>" id="f" type="com.varnapage.epilots.ejb.forthman.ForthMan">
+<%# ForthManDetails fd=f.getDetails(); %>
+<table cellpadding="0" cellspacing="0">
+  <tr>
+    <td>
+     <table cellpadding="0" cellspacing="0">
+        <tr> 
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>
+            <%# if (request.isUserInRole("DISPATCHER")){ %>
+            <a href="<%#= request.getContextPath() %>/editForthMan?ForthID=<%#= fd.getForthID() %>">
+              <%#= messages.getString("PilotNote") %>:<%#= fd.getLogID() %>
+            </a>
+            <%# } else if ( request.isUserInRole("PILOT") && (fd.getPilotID()==pID) && (fd.getLogID()!=0) ){ %>
+            <a href="<%#= request.getContextPath() %>/takeForthMan?ForthID=<%#= fd.getForthID() %>">
+              <%#= messages.getString("PilotNote") %>:<%#= fd.getLogID() %>
+            </a>
+            <%# } else { %>
+            <%#= messages.getString("PilotNote") %>:<%#= fd.getLogID() %>
+            <%# } %>
+          </td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <%#= counter++ %>
+          </td>
+          <td>
+            <%#  if ( (fd.getLogID()==0) && request.isUserInRole("DISPATCHER") ) { %>
+            <a href="<%#=request.getContextPath()%>/deleteForth?ForthID=<%#= fd.getForthID() %>">
+              <%#=messages.getString("Delete")%></a>
+            <%# } %>
+            &nbsp;
+          </td>
+          <%# if ( (fd.getLogID()==0) && request.isUserInRole("DISPATCHER") ) { %>
+          <td>
+            <a href="<%#=request.getContextPath()%>/getNumber?ForthID=<%#= fd.getForthID() %>">
+              <%#=messages.getString("GetNumber")%>
+            </a>
+          </td>
+          <%# } else { %>
+          <td>&nbsp;</td>
+          <%# } %>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td> 
+              <%#= messages.getString("ShipData") %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table cellpadding="1" cellspacing="0">
+                <tr> 
+                  <td nowrap align="right" bgcolor="#3366aa">
+                    <%#=messages.getString("ShipName")%> 
+                  </td>
+                  <td>
+                    <%#= fd.getShipName() %> 
+                  </td>
+                  <td>
+                    <%#=messages.getString("ShipGT")%> 
+                  </td>
+                  <td>
+                    <%#= fd.getGT() %> 
+                  </td>
+                  <td>
+                    <%#=messages.getString("ShipDRAFT")%> 
+                  </td>
+                  <td>
+                    <%#= fd.getDraftFWD() %> 
+                  </td>
+                </tr>
+	  	<tr>
+                  <td>
+	            <%#=messages.getString("ShipIMONumber")%> 
+                  </td>
+                  <td>
+	            <%#= fd.getIMONumber() %> 
+                  </td>
+                  <td>
+	            <%#=messages.getString("ShipLOA")%> 
+                  </td>
+                  <td>
+	            <%#= fd.getLOA() %> 
+                  </td>
+                  <td>
+	            <%#=messages.getString("ShipAFT")%> 
+                  </td>
+                  <td>
+	            <%#= fd.getAFT() %> 
+                  </td>
+                </tr>
+	  	<tr>
+                  <td>
+		    <%#=messages.getString("ShipFlag")%> 
+                  </td>
+                  <td>
+		    <%#= fd.getFlag() %>
+                  </td>
+                  <td>
+		    <%#=messages.getString("ShipBOA")%> 
+                  </td>
+                  <td>
+		    <%#= fd.getBOA() %> 
+                  </td>
+                  <td>
+		    <%#=messages.getString("ShipAirDraft")%> 
+                  </td>
+                  <td>
+		    <%#= fd.getAirDraft() %> 
+                  </td>
+                </tr>
+	  	<tr> 
+                  <td>
+		    <%#=messages.getString("ShipCallSign")%> 
+                  </td>
+                  <td>
+		    <%#= fd.getCallSign() %> 
+                  </td>
+                  <td>
+                    <%#= messages.getString("Bow") %> 
+                  </td>
+                  <td>
+                    <%#=fd.getThrusters() %> 
+                  </td>
+                  <td>
+                    <%#= messages.getString("Propelers") %> 
+                  </td>
+                  <td>
+                    <%#=fd.getPropelers() %>-<%#=fd.getPropType()?"PITCH":"FIXED" %> 
+                  </td>
+                </tr>
+	        <tr> 
+                  <td>
+		    <%#=messages.getString("ShipOwner")%> 
+                  </td>
+                  <td>
+		    <%#= fd.getOwner() %> 
+                  </td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+      <td>
+	<table cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+              <%#= messages.getString("Pilotage") %> 
+            </td>
+          </tr>
+	  <tr>
+	    <td>
+	      <table cellpadding="1" cellspacing="0">
+                <tr>
+                  <td>
+                    <%#=messages.getString("Pilot")%>
+                  </td>
+                  <td>
+		    <%# if (pID==fd.getPilotID()) { %> 
+		    <%# } else { %>
+		    <%# } %>
+                    <%#=beanManager.getHandy().getPlayerFullName(fd.getPilotID())%>
+                  </td>
+                  <td>
+                    Conf. by: Agent-<%#=(fd.getConfByAgent()>0)?messages.getString("Yes"):messages.getString("No")%>
+                    &nbsp;
+                    &nbsp;
+                    Port-<%#=(fd.getConfByPort()>0)?messages.getString("Yes"):messages.getString("No")%>
+                  </td>
+                </tr>
+                <tr> 
+                  <td>
+                    <%#= messages.getString("Time") %>        
+                  </td>        
+                  <%# cal.setTime(fd.getApproxTime()); cday=cal.get(Calendar.DAY_OF_YEAR); %>
+                  <td>
+                    <%#=(cday==day)?"<b>":""%>
+                    <%#= df.format(fd.getApproxTime()) %>
+		    <%#=(cday==day)?"</b>":""%>
+                  </td>        
+                  <td>
+                    <%#= messages.getString("EngineOp") %> 
+                    <%#=fd.getEngineOp()?messages.getString("Yes"):messages.getString("No") %>
+                  </td>
+                  <td>
+                    <%#= messages.getString("Agency") %> 
+                  </td>
+                  <td>
+                    <%#= beanManager.getHandy().getAgencyName(fd.getAgentID()) %> 
+                  </td>
+                </tr>
+	  	<tr> 
+                  <td>
+                    <%#= messages.getString("FromArea") %> 
+                  </td>
+                  <td>
+                    <%#= beanManager.getHandy().getPlaceName(fd.getFromAreaID()) %>                       
+                  </td>
+                  <td>
+                    <%#= messages.getString("ToArea") %> 
+		  </td>
+                  <td>
+                    <%#= beanManager.getHandy().getPlaceName(fd.getToAreaID()) %> 
+                  </td>
+		  <td>
+                    <%#= messages.getString("DangCargo") %>
+                    <input type="checkbox" name="dcargo" value="true" <%#= fd.getDCargo()?"checked":"" %> />
+                  </td>
+                  <td>
+                    <%#= messages.getString("Cargo") + ": " + fd.getCargoDescr() %>
+                  </td>
+                </tr>
+                <tr> 
+                  <td>
+                    Comment: 
+		  </td>
+                  <td>
+                    <%#=fd.getComment() %> 
+                  </td>            
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td> 
+              <%#=messages.getString("LastUpdate")%>:<%#= fd.getEntryTime() %>
+	      &nbsp;
+	      <%#= beanManager.getHandy().getPlayerFullName(fd.getEditorID()) %>
+	    </td>
+          </tr>
+        </table>
+      </td>
+  </tr>
+</table>
+</logic:iterate>
+<%# if (request.isUserInRole("DISPATCHER")) { %>
+<a href="<%#= request.getContextPath()%>/newForthMan"><%#= messages.getString("DoNewForth") %> </a>
+<%# } %>
+</form>
+</section><!-- //.narrow-box -->

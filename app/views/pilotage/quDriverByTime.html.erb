@@ -1,0 +1,99 @@
+<h3><%#=messages.getString("quDriverByTime")%></h3>
+  <table>
+    <tr>
+      <td> 
+        <input name="fromYear" type="text" value="<%#= cal.get(Calendar.YEAR) %>" size="4" />
+        <select name="fromMonth">
+          <%# for (int i=0; i<12; i++) { out.print("<option "+((cal.get(Calendar.MONTH)==i)?"SELECTED":"")+" value=\""+(i+1)+"\">"+messages.getString("Month"+(i+1))); } %>
+             </select>
+        <select name="fromDay">
+          <%# for (int i=1; i<32; i++) { out.print("<option "+((cal.get(Calendar.DAY_OF_MONTH)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+             </select>
+      </td>
+      <td> 
+        <select name="fromHour">
+          <%# for (int i=0; i<24; i++) { out.print("<option "+((cal.get(Calendar.HOUR_OF_DAY)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); }%>
+             </select>
+        : 
+        <select name="fromMin">
+          <%# for (int i=0; i<60; i+=5) { out.print("<option "+((cal.get(Calendar.MINUTE)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+                 </select>
+      </td>
+    </tr>
+    <tr>
+      <td> 
+        <input name="toYear" type="text" value="<%#= cal.get(Calendar.YEAR) %>" size="4" />
+        <select name="toMonth">
+          <%# for (int i=0; i<12; i++) { out.print("<option "+((cal.get(Calendar.MONTH)==i)?"SELECTED":"")+" value=\""+(i+1)+"\">"+messages.getString("Month"+(i+1))); } %>
+                 </select>
+        <select  name="toDay">
+          <%# for (int i=1; i<32; i++) { out.print("<option "+((cal.get(Calendar.DAY_OF_MONTH)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+             </select>
+      </td>
+      <td> 
+        <select name="toHour">
+          <%# for (int i=0; i<24; i++) { out.print("<option "+((cal.get(Calendar.HOUR_OF_DAY)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); }%>
+             </select>
+        : 
+        <select name="toMin">
+          <%# for (int i=0; i<60; i+=5) { out.print("<option "+((cal.get(Calendar.MINUTE)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+                 </select>
+        <input type="submit" name="go" value="Go" />
+      </td>
+    </tr>
+  </table>
+</form>
+<div class="search-results">
+        <%#
+ArrayList dr=beanManager.getHandy().getDriverByTime(
+    java.sql.Timestamp.valueOf(
+                    request.getParameter("fromYear")+"-"+
+                    request.getParameter("fromMonth")+"-"+
+                    request.getParameter("fromDay")+" "+
+                    request.getParameter("fromHour")+":"+
+                    request.getParameter("fromMin")+":00.00"),
+    java.sql.Timestamp.valueOf(
+                    request.getParameter("toYear")+"-"+
+                    request.getParameter("toMonth")+"-"+
+                    request.getParameter("toDay")+" "+
+                    request.getParameter("toHour")+":"+
+                    request.getParameter("toMin")+":00.00")
+);
+int counter=1;
+%>
+        <table cellpadding="0" cellspacing="0">
+          <thead>
+            <tr> 
+              <th colspan="2">Car Driver &nbsp;
+                <%#=messages.getString("FromTime") %>
+                <%#= request.getParameter("fromYear")+"-"+
+                    request.getParameter("fromMonth")+"-"+
+                    request.getParameter("fromDay")+" "+
+                    request.getParameter("fromHour")+":"+
+                    request.getParameter("fromMin") %>
+                <%#=messages.getString("ToTime") %>&nbsp; 
+                <%#= request.getParameter("toYear")+"-"+
+                    request.getParameter("toMonth")+"-"+
+                    request.getParameter("toDay")+" "+
+                    request.getParameter("toHour")+":"+
+                    request.getParameter("toMin") %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr> 
+              <td>Driver on duty:</td>
+              <td><%#=dr.get(0)%></td>
+            </tr>
+            <tr> 
+              <td>Pilot:</td>
+              <td><%#=dr.get(1)%></td>
+            </tr>
+            <tr> 
+              <td>Total:</td>
+              <td><%#=((Integer)dr.get(0)).intValue()+((Integer)dr.get(1)).intValue()%></td>
+            </tr>
+          </tbody>
+        </table>
+</logic:present>
+</div><!-- //.search-results -->  

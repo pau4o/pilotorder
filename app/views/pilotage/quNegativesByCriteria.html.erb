@@ -1,0 +1,138 @@
+<h3><%#= messages.getString("quNegativesByCriteria") %></h3>
+<form method="post" onSubmit="return submitCheck()">
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <%# mhash=beanManager.getHandy().getOptOfCriterias(); %>
+        <select name="CriteriaID">
+          <logic:iterate collection="<%#= mhash %>" id="mh" type="java.util.Map.Entry"> 
+            <option value="<bean:write name="mh" property="value" />" >
+              <bean:write name="mh" property="key" /> 
+            </option>
+          </logic:iterate> 
+        </select>
+      </td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td> 
+        <input name="fromYear" type="text" value="<%#= cal.get(Calendar.YEAR) %>" size="4" />
+        <select name="fromMonth">
+          <%# for (int i=0; i<12; i++) { out.print("<option "+((cal.get(Calendar.MONTH)==i)?"SELECTED":"")+" value=\""+(i+1)+"\">"+messages.getString("Month"+(i+1))); } %>
+              </select>
+        <select name="fromDay">
+          <%# for (int i=1; i<32; i++) { out.print("<option "+((cal.get(Calendar.DAY_OF_MONTH)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+      </td>
+      <td> 
+        <select name="fromHour">
+          <%# for (int i=0; i<24; i++) { out.print("<option "+((cal.get(Calendar.HOUR_OF_DAY)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); }%>
+              </select>
+        : 
+        <select name="fromMin">
+          <%# for (int i=0; i<60; i+=5) { out.print("<option "+((cal.get(Calendar.MINUTE)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td> 
+        <input name="toYear" type="text" value="<%#= cal.get(Calendar.YEAR) %>" size="4" />
+        <select name="toMonth">
+          <%# for (int i=0; i<12; i++) { out.print("<option "+((cal.get(Calendar.MONTH)==i)?"SELECTED":"")+" value=\""+(i+1)+"\">"+messages.getString("Month"+(i+1))); } %>
+              </select>
+        <select  name="toDay">
+          <%# for (int i=1; i<32; i++) { out.print("<option "+((cal.get(Calendar.DAY_OF_MONTH)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+      </td>
+      <td> 
+        <select name="toHour">
+          <%# for (int i=0; i<24; i++) { out.print("<option "+((cal.get(Calendar.HOUR_OF_DAY)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); }%>
+              </select>
+        : 
+        <select name="toMin">
+          <%# for (int i=0; i<60; i+=5) { out.print("<option "+((cal.get(Calendar.MINUTE)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+                  </select>
+      </td>
+      <td> 
+        <input type="submit" name="go" value="Go" />
+      </td>
+    </tr>
+  </table>
+</form>
+<div class="search-results">
+  <logic:present parameter="CriteriaID">
+  <%#
+ArrayList logs=beanManager.getLogbookController().findByNegativeCriteria(
+    Integer.parseInt(request.getParameter("CriteriaID")),
+    java.sql.Timestamp.valueOf(
+                    request.getParameter("fromYear")+"-"+
+                    request.getParameter("fromMonth")+"-"+
+                    request.getParameter("fromDay")+" "+
+                    request.getParameter("fromHour")+":"+
+                    request.getParameter("fromMin")+":00.00"),
+    java.sql.Timestamp.valueOf(
+                    request.getParameter("toYear")+"-"+
+                    request.getParameter("toMonth")+"-"+
+                    request.getParameter("toDay")+" "+
+                    request.getParameter("toHour")+":"+
+                    request.getParameter("toMin")+":00.00")
+);
+int counter=1;
+%>
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr> 
+        <th colspan="8">Manoeuvres with negative assesment for&nbsp; <%#= beanManager.getHandy().getCriteriaName(Integer.parseInt(request.getParameter("CriteriaID"))) %>
+         <%#=messages.getString("FromTime") %>&nbsp; 
+         <%#= request.getParameter("fromYear")+"-"+
+                    request.getParameter("fromMonth")+"-"+
+                    request.getParameter("fromDay")+" "+
+                    request.getParameter("fromHour")+":"+
+                    request.getParameter("fromMin") %>
+         <%#=messages.getString("ToTime") %>&nbsp; 
+         <%#= request.getParameter("toYear")+"-"+
+                    request.getParameter("toMonth")+"-"+
+                    request.getParameter("toDay")+" "+
+                    request.getParameter("toHour")+":"+
+                    request.getParameter("toMin") %>
+        </th>
+      </tr>
+      <tr>
+        <td>No.</td>
+        <th><%#= messages.getString("FromTime")%></th>
+        <th><%#= messages.getString("ToTime")%></th>
+        <th><%#= messages.getString("PilotNote")%></th>
+        <th><%#= messages.getString("ShipName")%></th>
+        <th><%#= messages.getString("FromArea")%></th>
+        <th><%#= messages.getString("ToArea")%></th>
+        <th><%#= messages.getString("Pilot")%></th>
+      </tr>
+      <logic:iterate collection="<%#= logs %>" id="ld" type="com.varnapage.epilots.util.LogbookDetails" > 
+        <%# ShipDetails sd=beanManager.getLogbookController().getShipDetails(ld.getLogbookId()); %>
+          <tr ALIGN=center  BGCOLOR="#3366CC" valign="middle"> 
+            <td><%#= counter++ %></td>
+            <td><%#= ld.getFromTime() %></td>
+            <td><%#= ld.getToTime() %></td>
+            <td>
+              <a href="<%#= request.getContextPath()%>/viewMan?LogID=<%#= ld.getLogbookId() %>"> 
+                <%#= ld.getLogbookId() %>
+                &nbsp;<%#= ld.getSaved()?"":"Not saved"%>
+                &nbsp;<%#= ld.getChecked()?"":"Not checked"%> 
+                &nbsp;<%#= (ld.getPlayerID()==ld.getEditorID())?"":"Changed!" %>
+              </a>
+            </td>
+            <td>
+              <a href="<%#= request.getContextPath()%>/shipControl?IMONumber=<%#= sd.getIMONumber() %>">
+                <%#= sd.getShipName() %>
+              </a> 
+            </td>
+            <td><%#= beanManager.getHandy().getPlaceName(ld.getFromAreaID()) %></td>
+            <td><%#= beanManager.getHandy().getPlaceName(ld.getToAreaID()) %></td>
+            <td><%#= beanManager.getHandy().getPlayerFullName(ld.getPlayerID()) %></td>
+          </tr>
+      </logic:iterate> 
+  </table>
+</logic:present>
+</div><!-- //.search-results -->  

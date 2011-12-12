@@ -1,0 +1,92 @@
+<section class="narrow-box">
+  <h2 class="page-title"><span>Ship Location</span></h2>
+<logic:present parameter="AreaID">
+<%# int area=Integer.parseInt(request.getParameter("AreaID")); %>
+  <table cellpadding="0" cellspacing="0">
+    <tr> 
+      <td>
+        <table cellspacing=0 cellpadding=0>
+          <tr>
+            <td>
+              <a href="<%#=request.getContextPath() %>/mapControl?AreaID=<%#=request.getParameter("AreaID")%>">
+                <%# String icon=beanManager.getHandy().getAreaIconName(area); if ((icon != null) && (! icon.equals("")) ) { %>
+                <img src="images/<%#= icon %>" alt="MAP" />  
+                <%# } else { out.print("Map"); } %>
+              </a>
+            </td>
+            <td>  
+              <%#=beanManager.getHandy().getAreaName(area)%>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <%#= messages.getString("Place") %> 
+            </th>
+            <th>
+              <%#= messages.getString("ShipName") %> 
+            </th>
+            <th>
+              <%#= messages.getString("Arrival") %> 
+            </th>
+            <th>
+              <%#= messages.getString("PilotNote") %> 
+            </th>
+            <th>
+              <%#= messages.getString("Pilot") %>/<%#= messages.getString("Dispatcher") %> 
+            </th>
+          </tr>
+          <%# ArrayList al=beanManager.getHandy().getPlacesInArea(area); String shipName=""; int rowcolor=0; %>
+          <logic:iterate collection="<%#= al %>" id="place" type="com.varnapage.epilots.util.PlaceDetails"> 
+          <%# try {
+                   if (place.getIMONumber().equals("")==false ) {
+                       try {
+                           ShipDetails sd=beanManager.getShipController().getDetails(place.getIMONumber());
+                           shipName=sd.getShipName();
+                       } catch (ShipNotFoundException e) {
+                           shipName="N/A";
+                       }
+                   } else {
+                       shipName="---";
+                   }
+               } catch (Exception e) {
+                   out.print(e.getMessage());
+               }
+               rowcolor = rowcolor ^ 1; %>
+          <tr>
+            <td> 
+              <%# if (place.getIsEditable()) { %>
+              <a href="<%#=request.getContextPath() %>/editPlace?PlaceID=<%#= place.getPlaceID() %>">
+                <%#= place.getPlaceName() %>
+              </a> 
+              <%# } else { out.print(place.getPlaceName()); } %>
+            </td>
+            <td> 
+              <%# if (! shipName.equals("---")) { %>
+              <a href="<%#=request.getContextPath() %>/shipControl?IMONumber=<%#=place.getIMONumber() %>">
+                <%#= shipName %>
+              </a> 
+              <%# } else { out.print(shipName); } %>
+            </td>
+            <td>
+              <%#= place.getArrival() %> 
+            </td>
+            <td> 
+              <%# if ((request.isUserInRole("BOSS")) && (place.getLogID()>0)) { %>
+              <a href="<%#= request.getContextPath()%>/viewMan?LogID=<%#= place.getLogID() %>"> 
+                <%#= place.getLogID() %>
+              </a> 
+              <%# } else { %>
+              <%#= (place.getLogID()>0)?String.valueOf(place.getLogID()):"&nbsp;" %> 
+              <%# } %>
+            </td>
+            <td>
+              <%#= beanManager.getHandy().getPlayerFullName(place.getEditorID()) %> 
+            </td>
+          </tr>
+          </logic:iterate> 
+        </table>
+      </td>
+    </tr>
+  </table>
+</logic:present>
+</section><!-- //.narrow-box -->

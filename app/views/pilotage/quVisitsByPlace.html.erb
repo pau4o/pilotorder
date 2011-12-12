@@ -1,0 +1,106 @@
+<h3><%#=messages.getString("quVisitsByPlace")%></h3>
+<%# String p=request.getParameter("print"); if ( (p==null) || (!p.equals("1")) ) { %>
+<form method="POST"  onSubmit="return submitCheck()">
+  <table>
+    <!-- insert rows for areaID choice phase 1 -->
+<%# mhash=beanManager.getHandy().getOptOfPlaces(); %>
+    <tr>
+      <td colspan="2">
+	Please, select the mooring places of interest !<br>
+	Use [Ctrl] for multiple selection.
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+	<input type="hidden" name="phase" value="2" />
+	<select name="placeID"  multiple="multiple" size="6"  >
+          <logic:iterate collection="<%#= mhash %>" id="mh" type="java.util.Map.Entry"> 
+            <option value="<bean:write name="mh" property="value" />" >
+              <bean:write name="mh" property="key" /> 
+            </option>
+          </logic:iterate> 
+	</select>
+      </td>
+    </tr>
+    <tr>
+      <td> 
+        <input name="fromYear" type="text" value="<%#= cal.get(Calendar.YEAR) %>" size="4" />
+        <select name="fromMonth">
+          <%# for (int i=0; i<12; i++) { out.print("<option "+((cal.get(Calendar.MONTH)==i)?"SELECTED":"")+" value=\""+(i+1)+"\">"+messages.getString("Month"+(i+1))); } %>
+              </select>
+        <select name="fromDay">
+          <%# for (int i=1; i<32; i++) { out.print("<option "+((cal.get(Calendar.DAY_OF_MONTH)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+                  </select>
+      </td>
+    </tr>
+    <tr>
+      <td> 
+        <input name="toYear" type="text" value="<%#= cal.get(Calendar.YEAR) %>" size="4" />
+        <select name="toMonth">
+          <%# for (int i=0; i<12; i++) { out.print("<option "+((cal.get(Calendar.MONTH)==i)?"SELECTED":"")+" value=\""+(i+1)+"\">"+messages.getString("Month"+(i+1))); } %>
+              </select>
+        <select  name="toDay">
+          <%# for (int i=1; i<32; i++) { out.print("<option "+((cal.get(Calendar.DAY_OF_MONTH)==i)?"SELECTED":"")+" value=\""+i+"\">"+i); } %>
+              </select>
+      </td>
+      <td> 
+        <input type="submit" name="go" value="Go" />
+	<input type="checkbox" name="print" value="1"/>
+	Print version
+      </td>
+    </tr>
+  </table>
+</form>
+<%# } // if print version %>
+<div class="search-results">
+    <%#	VisitsByPlace vbp=(VisitsByPlace)request.getAttribute("vbp");
+	int total=0;
+	int counter=0;
+        %>
+    <%# if (vbp !=null ) { %>
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th colspan="4">
+	    <%#=messages.getString("quVisitsByPlace")%>&nbsp;
+	    <%#=messages.getString("FromTime") %>&nbsp;<%#= vbp.getStartDate()%>
+	    <%#=messages.getString("ToTime") %>&nbsp;<%#= vbp.getEndDate() %>
+	  </th>
+        </tr>
+        <logic:iterate collection="<%#= vbp.getVisits() %>" id="visit" type="java.util.Hashtable">
+          <%# 	String place=(String)visit.get("place"); 
+	        Collection visits=(Collection)visit.get("visits");
+                %>
+          <tr>
+            <td colspan="4">
+	      <%#= place %>
+            </td>
+          </tr>
+          <tr>
+            <th>No.</th>
+	    <th>Pilot note</th>
+	    <th>Ship name</th>
+	    <th>Moor. time</th>
+          </tr>
+          <logic:iterate collection="<%#= visits %>" id="v" type="java.util.HashMap">
+          <tr>
+            <td><%#=++counter%></td>
+            <td><%#= (String)v.get("log") %></td>
+            <td><%#= (String)v.get("ship") %></td>
+            <td><%#= sdf.format((java.sql.Timestamp)v.get("time")) %></td>
+          </tr>
+          </logic:iterate>
+          <tr>
+            <td colspan="4">
+	      Subtotal:&nbsp;<%#= counter %>
+            </td>
+          </tr>
+          <%# total += counter; counter=0; %>
+        </logic:iterate>
+	<tr>
+          <td colspan="4">Total:&nbsp;<%#=total%></td>
+        </tr>
+        </table>
+<%# } %>
+</div><!-- //.search-results -->
+
