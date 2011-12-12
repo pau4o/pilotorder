@@ -1,0 +1,216 @@
+<%= form_for([:agent, @order]) do |f| %>
+  <%= f.error_messages %>
+      <fieldset>
+        <legend>Маневрена заявка</legend>
+        <fieldset>
+          <legend>Основни данни на кораба</legend>
+          <ol>
+            <li>
+              <label for="ship_name">Име на кораба</label>
+              <input type="text" name="ship_name" id="ship_name" tabindex="1" />
+            </li>
+            <li>
+              <label for="imo">IMO №</label>
+              <input type="text" name="imo" id="imo" tabindex="2" />
+            </li>
+            <%= f.autocomplete_field :flag_name, autocomplete_flag_name_agent_orders_path %>
+            <input type="text" data-autocomplete="/url/to/autocomplete" data-id-element="#id_field">
+            
+            <%# f.text_field :category_name, data: {autocomplete_source: categories_path} %>
+            
+            <li>
+              <label for="flag">Флаг</label>
+              <select name="flag" id="flag" tabindex="3">
+                <option value="moldova">Moldova</option>
+                <option value="ukraine">Ukraine</option>
+                <option value="greece">Greece</option>
+                <option value="turkey">Turkey</option>
+              </select>
+            </li>
+            <li>
+              <%= f.label :eta_varna %>
+              <%= f.datetime_select :eta_varna %>
+              <label for="port_name">Пристанище</label>
+              <select name="port_name" id="port_name" tabindex="5">
+                <option value="varna">Varna</option>
+                <option value="varna_west">Varna_West</option>
+                <option value="bourgas">Bourgas</option>
+              </select>
+            </li>
+            <li>
+              <label for="operator">Оператор</label>
+              <input type="text" name="operator" tabindex="6" />
+            </li>
+            <li>
+              <%= f.label :country_receiver %>
+              <%= f.text_field :country_receiver %>
+              <span class="comment">(държава на платеца (корабособственика/оператора) по фактура)</span>
+            </li>
+            <li>
+              <label for="ident_number">Идентификационен номер на получателя на услугата (платеца)</label>
+              <input type="text" name="ident_number" id="ident_number" tabindex="8" />
+              <span class="comment">(ако е от държава член на ЕС)</span>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>Данни за рейса на кораба</legend>
+          <ol>
+            <li>
+              <%= f.label :i18n_cruise_number %><br />
+              <%= f.text_field :i18n_cruise_number %>
+            </li>
+            <li>
+              <label for="start_date">Дата на началото на рейса</label>
+              <input type="date" name="start_date" id="start_date" tabindex="10" />
+            </li>
+            <li>
+              <%= f.label :starting_port %><br />
+              <%= f.text_field :starting_port %>
+            </li>
+            <li>
+              <%= f.label :ending_port %>
+              <%= f.text_field :ending_port %>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>Технически данни на кораба</legend>
+          <ol>
+            <li>
+              Дължина максимална
+              <label>LOA
+                <input type="number" name="loa" id="loa" tabindex="13" />
+              </label>
+            </li>
+            <li>
+              Ширина максимална
+              <label>BOA
+                <input type="number" name="boa" id="boa" tabindex="14" />
+              </label>
+            </li>
+            <li>
+              Бруто тонаж (ITC - 69)
+              <label>GT
+                <input type="text" name="gt" id="gt" tabindex="15" />
+              </label>
+            </li>
+            <li>
+              Газене при маневрата
+              <label>dFore
+                <input type="number" name="dfore" id="dfore" tabindex="16" />
+              </label>
+              <label>dAft
+                <input type="number" name="daft" id="daft" tabindex="17" />
+              </label>
+            </li>
+            <li>
+              Еър драфт при маневрата
+              <label>AirDr
+                <input type="number" name="airdr" id="airdr" tabindex="18" />
+              </label>
+            </li>
+            <li>
+              Рулево устройство
+              <label>Брой
+                <input type="number" name="rul" id="rul" tabindex="19" />
+              </label>
+            </li>
+            <li>
+              Задвижващо устройство
+              <label>Брой
+                <input type="number" name="engine" id="engine" tabindex="20"/>
+              </label>
+            </li>
+            <li>
+              Подрулващо устройство
+              <span class="form-row">
+                <label for="front">Носово</label>
+                <input type="checkbox" name="sub_rule" value="front" id="front" tabindex="21" />
+                Мощност
+                <input type="text" name="front_power" id="front_power" tabindex="22" />
+                Брой
+                <input type="number" name="front_qty" id="front_qty" tabindex="23" />
+              </span>
+              <span class="form-row">
+                <label for="back">Кърмово</label>
+                <input type="checkbox" name="sub_rule" value="back" id="back" tabindex="24" />
+                Мощност
+                <input type="text" name="back_power" id="back_power" tabindex="25" />
+                Брой
+                <input type="number" name="back_qty" id="back_qty" tabindex="26" />
+              </span>
+            </li>
+            <li>Състояние на маневрата<br />
+              <label classr="form-row">С пълен товар
+                <input type="radio" name="maneuver_state" value="full_load" id="full_load" tabindex="27" />
+              </label>
+              <label class="form-row">Натоварен/Баластиран/
+                <input type="radio" name="maneuver_state" value="loaded" id="loaded" tabindex="28" />
+              </label>
+              <label class="form-row">Частично натоварен
+                <input type="radio" name="maneuver_state" value="half_load" id="half_load" tabindex="29" />
+              </label>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>Данни за маневрата</legend>
+          <ol>
+            <li>Район
+              <input type="radio" name="region" value="custom_region" />
+              <%= f.label :maneuver_from %>
+              <%= f.text_field :maneuver_from %>
+
+              <%= f.label :maneuver_to %>
+              <%= f.text_field :maneuver_to %>
+              <label for="ruled_region">По указание на пристанището/завода</label>
+              <input type="radio" name="region" value="ruled_region" />
+            </li>
+            <li>Време<br />
+              <label for="with_end">С пристигане</label>
+              <input type="radio" name="maneuver_time" value="with_end"  id="with_end" />
+              <label for="stay_time">Заставане до/след</label>
+              <input type="radio" name="maneuver_time" value="stay_time_radio" />
+              <input type="text" name="stay_time" id="stay_time" />
+              <label for="rule_based">По указание на п-ще/завод</label>
+              <input type="radio" name="maneuver_time" value="rule_based" id="rule_based"/>
+            </li>
+            <li>Опасен товар на борда
+              <%= f.label :danger_cargo %>
+              <%= f.check_box :danger_cargo %>
+              <%= f.label :danger_cargo_filename %>
+              <%= f.file_field :danger_cargo_filename %>
+            </li>
+            <li>
+              <%= f.label :tug_company %>
+              <%= f.text_field :tug_company %>
+            </li>
+            <li>
+              <%= f.label :requirements %>
+              <%= f.text_area :requirements %>
+            </li>
+          </ol>
+        </fieldset>
+        <fieldset>
+          <legend>Други</legend>
+          <%= f.label :payer %>
+          <%= f.text_field :payer %>
+          <span class="form-row">За контакт:
+            <label for="agent">Агент</label>
+            <input type="text" name="agent" id="agent" />
+            <label for="phone">GSM/тел.</label>
+            <input type="text" name="phone" id="phone" />
+          </span>
+        </fieldset>
+        <%= f.submit %>
+      </fieldset>
+
+<!-- тези не разбрах на кои съответстват
+  <p>
+    <%= f.label :vessel_id %><br />
+    <%= f.text_field :vessel_id %>
+  </p>
+    <%= f.label :country_receiver_id %>
+    <%= f.text_field :country_receiver_id %>
+-->
+<% end %>
