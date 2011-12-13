@@ -64,6 +64,9 @@ header nav {
   float: right;
   clear: both;
 }
+header li {
+            list-style-type: none;
+            }
 header nav a {
   width: 42px;
   height: 32px;
