@@ -178,6 +178,11 @@ section {
   border-radius: 1em;
   min-height: 400px;
 }
+section nav {
+              width: 260px;
+              margin: 0 auto;
+              text-align: center;
+              }
 .narrow-box {
   width: 70%;
 }
