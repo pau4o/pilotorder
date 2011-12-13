@@ -1,6 +1,8 @@
 Rails3::Application.routes.draw do
 
-  resources :agents
+  resources :ships
+
+#  resources :agents
 
 #  resources :orders
 
@@ -20,16 +22,28 @@ Rails3::Application.routes.draw do
   # first created -> highest priority.
   resources :profiles
 
-  resources :users do
-     member do
-       get :edit_password 
-       get :update_password
-       get :edit_email
-       put :update_email
-       get :edit_avatar
-       put :update_avatar
-    end
-  end
+#   resources :users do
+#      member do
+#        get :edit_password 
+#        get :update_password
+#        get :edit_email
+#        put :update_email
+#        get :edit_avatar
+#        put :update_avatar
+#     end
+#   end
+
+#   scope 'pilotage', :controller => :pilotage do
+#     match '/login'        => :login
+#     match '/main'         => :main
+#     match '/shipControl'  => :shipControl
+#     match '/forthMan'     => :forthMan
+#     match '/shipLocation' => :shipLocation
+#     match '/hyperCube'    => :hyperCube
+#     match '/logoff'       => :logoff
+#     match '/accControl'   => :accControl
+#     match '/logControl'   => :logControl
+#   end
 
   resources :announcements
   
@@ -48,6 +62,13 @@ Rails3::Application.routes.draw do
     resources :commits
     resources :quotes
     match '/users/search' => 'users#search',  :requirements => { :method => :get }
+    resources :agents
+    resources :tugs
+    resources :places
+    resources :instructions
+    resources :criteria
+    resources :auth_logs
+    resources :areas
     resources :users do 
       member do 
         put :suspend
@@ -67,12 +88,21 @@ Rails3::Application.routes.draw do
     end
   end
 
-  namespace :agent do
-    root :to => "dashboard#index"
-    resources :orders do
-      get :autocomplete_flag_name, :on => :collection
+  namespace :pilotage do
+    root :to => 'dashboard#index'
+    resources :forth_man do
+      collection do
+          get :index
+      end
     end
   end
+
+#  namespace :agent do
+#    root :to => "dashboard#index"
+#    resources :orders do
+#      get :autocomplete_flag_name, :on => :collection
+#    end
+#  end
   
   resources :page do
       collection do

@@ -73,3 +73,22 @@ a {
 .error_messages ul {
   margin: 0;
 }
+
+.field_with_errors {
+  border-left: 5px solid red;
+}
+#error_explanation {
+  padding: 15px 10px 15px;
+  margin: 10px 0 20px;
+  border-left: 5px solid red;
+  color: #fed500;
+  font-size: 150%;
+}
+
+#error_explanation h2 {
+  display: none;
+}
+
+.retired {
+  text-decoration: line-through;
+}
