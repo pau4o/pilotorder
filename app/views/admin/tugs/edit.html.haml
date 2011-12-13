@@ -1,0 +1,8 @@
+- title "Edit Admin/Tug"
+
+= render 'form'
+
+%p
+  = link_to t("Show"), [:admin, @tug]
+  |
+  = link_to t("View All"), admin_tugs_path

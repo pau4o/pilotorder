@@ -1,4 +1,4 @@
-class AgentsController < ApplicationController
+class Admin::AgentsController < Admin::BaseController
   def index
     @agents = Agent.all
   end
@@ -14,7 +14,7 @@ class AgentsController < ApplicationController
   def create
     @agent = Agent.new(params[:agent])
     if @agent.save
-      redirect_to @agent, :notice => "Successfully created agent."
+      redirect_to admin_agent_url(@agent), :notice => "Successfully created agent."
     else
       render :action => 'new'
     end
@@ -27,7 +27,7 @@ class AgentsController < ApplicationController
   def update
     @agent = Agent.find(params[:id])
     if @agent.update_attributes(params[:agent])
-      redirect_to @agent, :notice  => "Successfully updated agent."
+      redirect_to admin_agent_url(@agent), :notice  => "Successfully updated agent."
     else
       render :action => 'edit'
     end
@@ -36,6 +36,6 @@ class AgentsController < ApplicationController
   def destroy
     @agent = Agent.find(params[:id])
     @agent.destroy
-    redirect_to agents_url, :notice => "Successfully destroyed agent."
+    redirect_to admin_agents_url, :notice => "Successfully destroyed agent."
   end
 end

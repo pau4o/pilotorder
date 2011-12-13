@@ -1,0 +1,15 @@
+- title "Admin/Tug"
+
+%p
+  %strong Name:
+  = @tug.name
+%p
+  %strong Editor:
+  = @tug.editor_id
+
+%p
+  = link_to "Edit", edit_admin_tug_path(@tug)
+  |
+  = link_to "Destroy", [:admin, @tug], :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_tugs_path

@@ -1,0 +1,16 @@
+- title "Admin/Places"
+
+%table
+  %tr
+    %th Код
+    %th Име
+  - for place in @places
+    %tr
+      %td= place.code
+      %td= link_to place.name, edit_admin_place_path(place)
+      %td
+        = button_group do
+          = button_link_to t('Show'), [:admin, place]
+          = danger_button_link_to t('Destroy'), [:admin, place], :confirm => t('Are you sure?'), :method => :delete
+
+%p= link_to "New Admin/Place", new_admin_place_path

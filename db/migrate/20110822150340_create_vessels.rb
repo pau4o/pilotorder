@@ -1,7 +1,7 @@
 class CreateVessels < ActiveRecord::Migration
   def self.up
     create_table :vessels do |t|
-      t.string "imonumber" ,  :size => 16
+      t.string "imonumber" ,  :limit => 16
       t.string "name"
       t.string "callsign"
       t.string "flag"

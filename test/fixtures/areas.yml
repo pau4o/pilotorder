@@ -1,0 +1,19 @@
+one:
+  name: MyString
+  data: MyText
+  editable: false
+  faraway: false
+  mapname: MyString
+  scale_ppm: 1.5
+  iconname: MyString
+  editor_id: 1
+
+two:
+  name: MyString
+  data: MyText
+  editable: false
+  faraway: false
+  mapname: MyString
+  scale_ppm: 1.5
+  iconname: MyString
+  editor_id: 1

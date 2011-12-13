@@ -4,8 +4,11 @@
 
 	
 	<li><%= tab_to "Dashboard", [{:controller => "admin/dashboard"}] %></li>
-	<li><%= tab_to "Заявки", [ orders_path ] %></li>
+	<li><%# tab_to "Заявки", [ orders_path ] %></li>
 	<li><%= tab_to "Потребители", [{:controller => "admin/users"}] %></li>
+	<li><%= tab_to t("Agents"), [{:controller => "admin/agents"}] %></li>
+  <li><%= tab_to t("Places") + "(#{Place.count})", [{:controller => "admin/places"}] %></li>
+  <li><%= tab_to t("Tugs") + "(#{Tug.count})", [{:controller => "admin/tugs"}] %></li>
   <!--
 	<li><%= tab_to "Announcements", [{:controller => "admin/announcements" }] %></li>
   <li><%= tab_to "Post-Commits", [{:controller => "admin/commits" }] %></li>

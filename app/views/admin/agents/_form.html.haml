@@ -1,0 +1,7 @@
+= form_for [:admin,@agent], :method => :put do |f|
+  = f.error_messages
+  %table
+    %tr
+    = cell((f.label :name, t(:name)), (f.text_field :name))
+    = cell((f.label :contacts, t(:contacts)), (f.text_area :contacts))
+    %td{:colspan => 2,}= f.submit :value => "Запис" 

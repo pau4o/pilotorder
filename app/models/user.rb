@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   
   def self.search(search, page)
     if search  
-      paginate :per_page => 100, :page => page, :conditions => ['login LIKE ? OR email LIKE ?', "%#{search}%", "%#{search}%"]
+      paginate :per_page => 100, :page => page, :conditions => ['login LIKE ? OR email LIKE ? OR name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"]
     else  
       all
     end
@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
   
   def role_symbols
     @role_symbols ||= roles.map {|r| r.name.underscore.to_sym }
+  end
+
+  def role_names
+    @role_names ||= roles.map { |r| r.name }.join(', ')
   end
 
   def openid_login?

@@ -1,0 +1,2 @@
+module Pilotage::ForthManHelper
+end

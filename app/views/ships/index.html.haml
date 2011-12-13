@@ -1,0 +1,41 @@
+- title "Ships"
+
+%table
+  %tr
+    %th Imonumber
+    %th Name
+    %th Callsign
+    %th Flag
+    %th Owner
+    %th Gt
+    %th Loa
+    %th Boa
+    %th Draftfwd
+    %th Aft
+    %th Airdraft
+    %th Propelers
+    %th Proptype
+    %th Trusters
+    %th Editor
+  - for ship in @ships
+    %tr
+      %td= ship.imonumber
+      %td= ship.name
+      %td= ship.callsign
+      %td= ship.flag
+      %td= ship.owner
+      %td= ship.gt
+      %td= ship.loa
+      %td= ship.boa
+      %td= ship.draftfwd
+      %td= ship.aft
+      %td= ship.airdraft
+      %td= ship.propelers
+      %td= ship.proptype
+      %td= ship.trusters
+      %td= ship.editor_id
+      %td= link_to 'Show', ship
+      %td= link_to 'Edit', edit_ship_path(ship)
+      %td= link_to 'Destroy', ship, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Ship", new_ship_path

@@ -1,0 +1,15 @@
+- title "Admin/Auth Log"
+
+%p
+  %strong Username:
+  = @auth_log.username
+%p
+  %strong Fullname:
+  = @auth_log.fullname
+
+%p
+  = link_to "Edit", edit_admin_auth_log_path(@auth_log)
+  |
+  = link_to "Destroy", [:admin, @auth_log], :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_auth_logs_path

@@ -1,0 +1,54 @@
+- title "Ship"
+
+%p
+  %strong Imonumber:
+  = @ship.imonumber
+%p
+  %strong Name:
+  = @ship.name
+%p
+  %strong Callsign:
+  = @ship.callsign
+%p
+  %strong Flag:
+  = @ship.flag
+%p
+  %strong Owner:
+  = @ship.owner
+%p
+  %strong Gt:
+  = @ship.gt
+%p
+  %strong Loa:
+  = @ship.loa
+%p
+  %strong Boa:
+  = @ship.boa
+%p
+  %strong Draftfwd:
+  = @ship.draftfwd
+%p
+  %strong Aft:
+  = @ship.aft
+%p
+  %strong Airdraft:
+  = @ship.airdraft
+%p
+  %strong Propelers:
+  = @ship.propelers
+%p
+  %strong Proptype:
+  = @ship.proptype
+%p
+  %strong Trusters:
+  = @ship.trusters
+%p
+  %strong Editor:
+  = @ship.editor_id
+
+%p
+  = link_to "Edit", edit_ship_path(@ship)
+  |
+  = link_to "Destroy", @ship, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", ships_path

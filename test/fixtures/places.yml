@@ -1,0 +1,35 @@
+one:
+  name: MyString
+  mooring: false
+  data: MyString
+  imonumber: MyString
+  ship_id: 1
+  log_book_id: 1
+  arrival: 2011-12-13 02:22:25
+  leftanchor: false
+  la_keys: 1
+  rightanchor: false
+  ra_keys: 1
+  board: false
+  x_center: 1
+  y_center: 1
+  bearing: 1
+  editor_id: 1
+
+two:
+  name: MyString
+  mooring: false
+  data: MyString
+  imonumber: MyString
+  ship_id: 1
+  log_book_id: 1
+  arrival: 2011-12-13 02:22:25
+  leftanchor: false
+  la_keys: 1
+  rightanchor: false
+  ra_keys: 1
+  board: false
+  x_center: 1
+  y_center: 1
+  bearing: 1
+  editor_id: 1

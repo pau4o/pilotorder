@@ -1,0 +1,57 @@
+- title "Admin/Place"
+
+%p
+  %strong Name:
+  = @place.name
+%p
+  %strong Mooring:
+  = @place.mooring
+%p
+  %strong Data:
+  = @place.data
+%p
+  %strong Imonumber:
+  = @place.imonumber
+%p
+  %strong Ship:
+  = @place.ship_id
+%p
+  %strong Log Book:
+  = @place.log_book_id
+%p
+  %strong Arrival:
+  = @place.arrival
+%p
+  %strong Leftanchor:
+  = @place.leftanchor
+%p
+  %strong La Keys:
+  = @place.la_keys
+%p
+  %strong Rightanchor:
+  = @place.rightanchor
+%p
+  %strong Ra Keys:
+  = @place.ra_keys
+%p
+  %strong Board:
+  = @place.board
+%p
+  %strong X Center:
+  = @place.x_center
+%p
+  %strong Y Center:
+  = @place.y_center
+%p
+  %strong Bearing:
+  = @place.bearing
+%p
+  %strong Editor:
+  = @place.editor_id
+
+%p
+  = link_to "Edit", edit_admin_place_path(@place)
+  |
+  = link_to "Destroy", [:admin, @place], :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_places_path

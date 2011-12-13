@@ -1,0 +1,12 @@
+= form_for [:admin, @auth_log] do |f|
+  = f.error_messages
+  %p
+    = f.label :username
+    %br
+    = f.text_field :username
+  %p
+    = f.label :fullname
+    %br
+    = f.text_field :fullname
+  %p
+    = f.submit

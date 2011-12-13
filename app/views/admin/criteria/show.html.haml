@@ -1,0 +1,21 @@
+- title "Admin/Criteria"
+
+%p
+  %strong Name:
+  = @criteria.name
+%p
+  %strong Alert:
+  = @criteria.alert
+%p
+  %strong Number:
+  = @criteria.number
+%p
+  %strong Editor:
+  = @criteria.editor_id
+
+%p
+  = link_to "Edit", edit_admin_criteria_path(@criteria)
+  |
+  = link_to "Destroy", [:admin, @criteria], :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_criteria_path

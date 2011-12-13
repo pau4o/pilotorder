@@ -1,0 +1,17 @@
+- title "Admin/Tugs"
+
+%table
+  %tr
+    %th #
+    %th Влекач
+  - @tugs.each_with_index do |tug, idx|
+    %tr
+      %td= idx+1
+      %td= tug.name
+      %td
+        = button_group do
+          = button_link_to t('Show'), [:admin, tug]
+          = button_link_to t('Edit'), edit_admin_tug_path(tug)
+          = danger_button_link_to t('Destroy'), [:admin, tug], :confirm => t('Are you sure?'), :method => :delete
+
+%p= add_primary_big_button_link_to "Добавяне на влекач", new_admin_tug_path

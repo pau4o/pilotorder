@@ -15,9 +15,9 @@
     <td><%=h announcement.message %></td>
     <td><%=h announcement.starts_at %></td>
     <td><%=h announcement.ends_at %></td>
-    <td><%= link_to 'Show', admin_announcement_path(announcement) %></td>
-    <td><%= link_to 'Edit', edit_admin_announcement_path(announcement) %></td>
-    <td><%= link_to 'Destroy', admin_announcement_path(announcement), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Покажи', admin_announcement_path(announcement) %></td>
+    <td><%= link_to 'Редактирай', edit_admin_announcement_path(announcement) %></td>
+    <td><%= link_to 'Изтрий', admin_announcement_path(announcement), :confirm => 'Сигурни ли сте?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

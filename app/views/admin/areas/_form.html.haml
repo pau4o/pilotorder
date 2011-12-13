@@ -1,0 +1,36 @@
+= form_for [:admin, @area] do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :data
+    %br
+    = f.text_area :data
+  %p
+    = f.label :editable
+    %br
+    = f.check_box :editable
+  %p
+    = f.label :faraway
+    %br
+    = f.check_box :faraway
+  %p
+    = f.label :mapname
+    %br
+    = f.text_field :mapname
+  %p
+    = f.label :scale_ppm
+    %br
+    = f.text_field :scale_ppm
+  %p
+    = f.label :iconname
+    %br
+    = f.text_field :iconname
+  %p
+    = f.label :editor_id
+    %br
+    = f.text_field :editor_id
+  %p
+    = f.submit

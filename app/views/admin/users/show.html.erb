@@ -31,7 +31,9 @@
 
 <table class="overview">
 	<%= cell "Потребителско име", "#{in_place_editor_field :user, 'login'}" %>
-	<%= cell "пореден номер", h(@user.id) %>
+	<%= cell "Име Фамилия", [@user.title, @user.name].join(" ") %>
+	<%= cell "Роли", @user.role_names %>
+	<%= cell "Състояние", @user.status %>
 
 	<%= cell_separator %>
 	
