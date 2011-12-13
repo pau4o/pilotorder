@@ -1,0 +1,15 @@
+- title "Admin/Auth Logs"
+
+%table
+  %tr
+    %th Username
+    %th Fullname
+  - for auth_log in @auth_logs
+    %tr
+      %td= auth_log.username
+      %td= auth_log.fullname
+      %td= link_to 'Show', [:admin, auth_log]
+      %td= link_to 'Edit', edit_admin_auth_log_path(auth_log)
+      %td= link_to 'Destroy', [:admin, auth_log], :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Admin/Auth Log", new_admin_auth_log_path

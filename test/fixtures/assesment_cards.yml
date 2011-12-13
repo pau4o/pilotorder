@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  card_id: 1
+  driver: false
+  comment: MyText
+  editor_id: 1
+
+two:
+  card_id: 1
+  driver: false
+  comment: MyText
+  editor_id: 1

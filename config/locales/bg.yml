@@ -9,22 +9,37 @@ bg:
     user_sessions:
       signed_in: 'Влязохте успешно.'
       signed_out: 'Излезохте успешно.'
-  active: "активиран"
-  deleted: "изтрит"
-  suspended: "блокиран"
-  remember_me: "Запомни ме"
-  email: "Емайл"
-  Password: "Парола"
-  password_confirmation: "Потвърдете паролата"
-  password: "Парола"
-  "Manage user accounts": "Управление на потребителите"
+  "Manage agents": "Агенти"
+  "Manage user accounts": "Потребители"
+  "Manage places": "Места"
+  "Management": "Управление"
+  "New agent": "Нов агент"
   "New user": "Нов потребител"
-  login: "Потребителско име"
-  create_account: "Създайте"
+  Agents: "Агенти"
+  Tugs: "Влекачи"
+  Places: "Места"
+  Password: "Парола"
+  active: "активиран"
   back: "Назад"
+  contacts: "Контакти"
+  create_account: "Създайте"
+  deleted: "изтрит"
+  email: "Емайл"
+  login: "Потребителско име"
+  name: "Име"
+  password: "Парола"
+  password_confirmation: "Потвърдете паролата"
+  remember_me: "Запомни ме"
+  suspended: "блокиран"
+
+  'Show': покажи
+  'Destroy': изтрий
+  'Edit': промени
+  'Are you sure?': 'Сигурни ли сте?'
+  'View All': 'списък'
 
   Suspend: Блокирай
-  Delete: Изтрии
+  Delete: Изтрий
   Purge: Забърши
 
   label:

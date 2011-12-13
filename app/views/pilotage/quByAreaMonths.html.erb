@@ -1,0 +1,197 @@
+<h3><%#= messages.getString("quByAreaMonths") %></h3>
+<form method="post" action="<%#= request.getContextPath() %>/quByAreaMonths#qtab"  onSubmit="return submitCheck()">
+  <table cellpadding="0" cellspacing="0">
+    <tr> 
+      <td>  
+        <table cellspacing="0" cellpadding="0">
+          <tr>
+            <td>Year:</td>
+            <td> 
+              <input type=text value="<%#= year %>" size=4 name="year" />
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <table cellpadding="0" cellspacing="0">
+          <tr> 
+            <td>&nbsp;</td>
+            <td>
+              <table>
+                <tr>
+                  <td>Areas</td>
+                  <td>Agents</td>
+                  <td>Payers</td>
+                </tr>
+                <tr> 
+                  <td> 
+                    <%# mhash=beanManager.getHandy().getOptOfAreas(); %>
+                    <select name="AreaID" multiple="multiple" size="5" >
+                      <option value="-1"> -- ALL -- </option>
+                      <logic:iterate collection="<%#= mhash %>" id="mh" type="java.util.Map.Entry"> 
+                        <option value="<bean:write name="mh" property="value" />">
+                          <bean:write name="mh" property="key" />
+                        </option>
+                      </logic:iterate> 
+                    </select>
+                  </td>
+                  <td> 
+                    <%# mhash=beanManager.getHandy().getOptOfAgents(); %>
+                    <select name="AgentID" size="5">
+                      <option value="0"> -- ALL -- </option>
+                      <logic:iterate collection="<%#= mhash %>" id="mh" type="java.util.Map.Entry"> 
+                        <option value="<bean:write name="mh" property="value" />">
+                          <bean:write name="mh" property="key" />
+                        </option>
+                      </logic:iterate> 
+                    </select>
+                  </td>
+                  <td> 
+                    <select name="PayerID" size="5">
+                      <option value="0"> -- ALL -- </option>
+                      <logic:iterate collection="<%#= mhash %>" id="mh" type="java.util.Map.Entry"> 
+                        <option value="<bean:write name="mh" property="value" />" >
+                          <bean:write name="mh" property="key" />
+                        </option>
+                      </logic:iterate> 
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table>
+                <tr>
+                  <td>
+                    Month(s) 
+                    <input type="radio" name="period" value="m" checked="checked" />
+                  </td>
+                  <td>
+                    Quarters(s) 
+                    <input type="radio" name="period" value="q" />
+                  </td>
+                </tr>
+                <tr> 
+                  <td>
+                    <select multiple="multiple" size="5" name="month">
+                      <option value="0"> -- ALL --</option>
+                      <%# String month; for (int i=1; i < 13; i++) { month=messages.getString("Month"+i); out.print("<option value=\""+i+"\">"+month); } %>
+                    </select>
+                  </td>
+                  <td>
+                    <select multiple="multiple" size="5" name="quoter">
+                      <option value="-1"> -- ALL -- </option>
+                      <%# String q; for (int i=1; i < 5; i++) { q="Q"+i; out.print("<option value=\""+i+"\">"+q); } %>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr> 
+            <td colspan="3"> 
+              <table>
+                <tr> 
+                  <td colspan="3"><%#=messages.getString("ShipData")%></td>
+                </tr>
+                <tr> 
+                  <td>Select by (part of) Ship name</td>
+                  <td> 
+                    <input type="text" size="15" name="shipname" value="" override />
+                  </td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr> 
+                  <td>Tonnage:</td>
+                  <td> 
+                    <input type="text" size="8" name="fromTonnage" value="0" override />
+                  </td>
+                  <td> 
+                    <input type="text" name="toTonnage"  size="8" value="200000" override />
+                  </td>
+                </tr>
+                <tr> 
+                  <td>Length:</td>
+                  <td> 
+                    <input type="text"  size="8" name="fromLength" value="0" override />
+                  </td>
+                  <td> 
+                    <input type="text" name="toLength"  size="8" value="200" override />
+                  </td>
+                </tr>
+                <tr> 
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td> 
+                    <input type="submit" name="go" value="Go" />
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr> 
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr> 
+      <td>
+        <%# if (qbam.getData().size()>0) { %>
+                      <a name="qtab"></a>
+        <table cellpadding="0" cellspacing="0">
+          <tr> 
+            <%# ArrayList qd=qbam.getData() ; int period=0; int total=0; int grandtotal=0; String prefix=request.getParameter("period").equals("m")?"M":"Q"; ArrayList totals=new ArrayList(); %>
+            <td>Period</td>
+            <logic:iterate collection="<%#= qbam.getAreas() %>" id="ar" type="Integer" > 
+            <td><%#= beanManager.getHandy().getAreaName(ar.intValue()) %></td>
+            <%# totals.add(new Integer(0)); %>
+            </logic:iterate> 
+            <td>Total</td>
+          </tr>
+          <logic:iterate collection="<%#= qd %>" id="per" type="java.util.ArrayList" > 
+          <%# total=0; int colcounter=0; %>
+          <tr> 
+            <td>
+              <%#= prefix.equals("M")?(prefix+qbam.getMonths().get(period++)):(prefix+qbam.getQuoters().get(period++)) %>
+            </td>
+            <logic:iterate collection="<%#= per %>" id="count" type="java.lang.Integer" > 
+            <td><%#= count %></td>
+            <%# totals.set(colcounter,new Integer(((Integer)totals.get(colcounter++)).intValue() + count.intValue())); total += count.intValue(); %>
+            </logic:iterate> 
+            <td> <%#= total %> </td>
+            <%# grandtotal += total ; %>
+          </tr>
+          </logic:iterate> 
+          <tr>
+            <th>Total:</th>
+            <logic:iterate collection="<%#= totals %>" id="tot" type="java.lang.Integer" > 
+            <th><%#= tot %></th>
+            </logic:iterate> 
+            <th><%#= grandtotal %></th>
+          </tr>
+        </table>
+        <applet name="Pie" code="Pie.class" codebase=" applets/" width="600" height="300">
+          <param name=title value="Manoeuvres By Areas">
+          <param name=subtitle value="For the 'total' period">
+          <%# for (int i=0; i< totals.size(); i++) { %>
+              <param name="arg<%#= i %>"
+                     value="<%#= totals.get(i) %>, <%#= beanManager.getHandy().getAreaName( ((Integer)( qbam.getAreas().get(i) )).intValue() )%>- <%# DecimalFormat df=new DecimalFormat("###.##%"); %> <%#= df.format( ((Integer)totals.get(i)).doubleValue()/grandtotal,new StringBuffer(), new FieldPosition(0)  ) %>">
+<%# } %>
+(sorry, Java is not enabled on your browser)
+</applet>
+<%# } %>
+</td>
+    </tr>
+  </table>
+</form>
+
+
+

@@ -23,5 +23,6 @@ stylesheets:
 - admin:
   - default
   - admin
+  - application
 - dialog:
   - dialog

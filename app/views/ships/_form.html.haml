@@ -1,0 +1,64 @@
+= form_for @ship do |f|
+  = f.error_messages
+  %p
+    = f.label :imonumber
+    %br
+    = f.text_field :imonumber
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :callsign
+    %br
+    = f.text_field :callsign
+  %p
+    = f.label :flag
+    %br
+    = f.text_field :flag
+  %p
+    = f.label :owner
+    %br
+    = f.text_field :owner
+  %p
+    = f.label :gt
+    %br
+    = f.text_field :gt
+  %p
+    = f.label :loa
+    %br
+    = f.text_field :loa
+  %p
+    = f.label :boa
+    %br
+    = f.text_field :boa
+  %p
+    = f.label :draftfwd
+    %br
+    = f.text_field :draftfwd
+  %p
+    = f.label :aft
+    %br
+    = f.text_field :aft
+  %p
+    = f.label :airdraft
+    %br
+    = f.text_field :airdraft
+  %p
+    = f.label :propelers
+    %br
+    = f.text_field :propelers
+  %p
+    = f.label :proptype
+    %br
+    = f.check_box :proptype
+  %p
+    = f.label :trusters
+    %br
+    = f.text_field :trusters
+  %p
+    = f.label :editor_id
+    %br
+    = f.text_field :editor_id
+  %p
+    = f.submit

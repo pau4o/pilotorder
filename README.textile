@@ -7,24 +7,17 @@ h2. Creating Models
 Create models based on Pilotage application
 
 - Agent
-  r g nifty:scaffold agent name:string contacts:text status:string editor_id
-
-    belongs_to :users
+  r g nifty:scaffold agent name:string contacts:text status:string editor_id:integer
 
     status: default => active
 
-- Area
-  r g nifty:scaffold area name:string data:text editable:boolean faraway:boolean mapname:string: scale_ppm:float iconname:string editor_id
-  editable: default => false
-  faraway:  default => false
-
 - AssesmentCard
-  r g nifty:scaffold AssesmentCard card_id driver:boolean editor_id comment:text
+  r g model AssesmentCard card_id:integer driver:boolean comment:text editor_id:integer
 
   driver: default => false 
 
 - AuthLog
-  r g nifty:scaffold AuthLog username:string fullname:string entrytime:timestamp
+  r g nifty:scaffold Admin::AuthLog username:string fullname:string --haml
 
   entrytime can be replaced by created_at!
 
@@ -36,15 +29,17 @@ Create models based on Pilotage application
   alpha2: limit => 2
   alpha3: limit => 3
 
+  FIXMME: this is replaced by flags
+
 - Criteria
-  r g nifty:scaffold criteria name:string alert:boolean number:integer editor_id
+  r g nifty:scaffold Admin::Criteria name:string alert:boolean number:integer editor_id:integer --haml
 
   alert: default => false
   entrytime => created_at
 
 
 - Instruction
-  r g nifty:scaffold instruction effective:timestamp subject:string body:text due:timestamp canceled:boolean cancelation:timestamp
+  r g nifty:scaffold Admin::Instruction effective:timestamp subject:string body:text due:timestamp canceled:boolean cancelation:timestamp --haml
 
   has_many executives
 
@@ -64,7 +59,7 @@ Create models based on Pilotage application
   All new instructions must create record in Executives for each user with role DISPATCHER, pending => true
 
 - Ship
-  r g nifty:scaffold ship imonumber:string name:string callsign:string flag:string owner:string gt:integer loa:decimal boa:decimal draftfwd:decimal aft:decimal airdraft:decimal propelers:integer proptype:boolean trusters:integer editor_id:integer
+  r g nifty:scaffold ship imonumber:string name:string callsign:string flag:string owner:string gt:integer loa:decimal boa:decimal draftfwd:decimal aft:decimal airdraft:decimal propelers:integer proptype:boolean trusters:integer editor_id:integer --haml
 
   callsign :limit => 20
   name :limit => 64
@@ -79,14 +74,14 @@ Create models based on Pilotage application
   has_one :ship_data
 
 - ShipData
-  r g nifty:scaffold ship_data logbook_id:integer 
+  r g model ship_data imonumber:string name:string callsign:string flag:string owner:string gt:integer loa:decimal boa:decimal draftfwd:decimal aft:decimal airdraft:decimal propelers:integer proptype:boolean trusters:integer editor_id:integer log_book_id:integer 
 
   belongs_to :log_book
   
   ShipData have the same clumns as Ship with one extra field => logbook_id
 
 - Forthcoming Manoeuvres 
-  r g nifty:scaffold ForthMan 
+  r g model ForthMan 
 
   have almost same information as Ship model and 13 extra attributes
 
@@ -96,7 +91,7 @@ Create models based on Pilotage application
   has_many :places
 
 - Places
-  r g nifty:scaffold place name:string mooring:boolean data:string imonumber:string ship_id:integer log_book_id:integer arrival:timestamp leftanchor:boolean la_keys:integer rightanchor:boolean ra_keys:integer board:boolean x_center:integer y_center:integer bearing:integer editor_id:integer
+  r g nifty:scaffold Admin::Place name:string mooring:boolean data:string imonumber:string ship_id:integer log_book_id:integer arrival:timestamp leftanchor:boolean la_keys:integer rightanchor:boolean ra_keys:integer board:boolean x_center:integer y_center:integer bearing:integer editor_id:integer --haml
 
   imonumber :limit => 16
   la_keys :default => 0
@@ -111,7 +106,7 @@ Create models based on Pilotage application
   FIXME: use devise ?
 
 - Tugs
-  r g nifty:scaffold  tug name:string editor_id:integer
+  r g nifty:scaffold Admin::Tug name:string editor_id:integer
 
   belongs_to :user, :foreign_key => :editor_id
 

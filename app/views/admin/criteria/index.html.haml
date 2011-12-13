@@ -1,0 +1,19 @@
+- title "Admin/Criteria"
+
+%table
+  %tr
+    %th Name
+    %th Alert
+    %th Number
+    %th Editor
+  - for criteria in @criteria
+    %tr
+      %td= criteria.name
+      %td= criteria.alert
+      %td= criteria.number
+      %td= criteria.editor_id
+      %td= link_to 'Show', [:admin, criteria]
+      %td= link_to 'Edit', edit_admin_criteria_path(criteria)
+      %td= link_to 'Destroy', [:admin, criteria], :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Admin/Criteria", new_admin_criteria_path

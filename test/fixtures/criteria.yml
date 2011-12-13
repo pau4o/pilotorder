@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  alert: false
+  number: 1
+  editor_id: 1
+
+two:
+  name: MyString
+  alert: false
+  number: 1
+  editor_id: 1

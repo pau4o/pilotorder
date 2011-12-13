@@ -1,0 +1,20 @@
+= form_for [:admin, @criteria] do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :alert
+    %br
+    = f.check_box :alert
+  %p
+    = f.label :number
+    %br
+    = f.text_field :number
+  %p
+    = f.label :editor_id
+    %br
+    = f.text_field :editor_id
+  %p
+    = f.submit

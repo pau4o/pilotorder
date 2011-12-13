@@ -1,0 +1,33 @@
+- title "Admin/Area"
+
+%p
+  %strong Name:
+  = @area.name
+%p
+  %strong Data:
+  = @area.data
+%p
+  %strong Editable:
+  = @area.editable
+%p
+  %strong Faraway:
+  = @area.faraway
+%p
+  %strong Mapname:
+  = @area.mapname
+%p
+  %strong Scale Ppm:
+  = @area.scale_ppm
+%p
+  %strong Iconname:
+  = @area.iconname
+%p
+  %strong Editor:
+  = @area.editor_id
+
+%p
+  = link_to "Edit", edit_admin_area_path(@area)
+  |
+  = link_to "Destroy", [:admin, @area], :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_areas_path

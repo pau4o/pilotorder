@@ -1,0 +1,2 @@
+module PilotageHelper
+end

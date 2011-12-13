@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   
-  %w(email login).each do |attr|
+  %w(email login name).each do |attr|
     in_place_edit_for :user, attr.to_sym
   end
   
@@ -30,7 +30,7 @@ class Admin::UsersController < Admin::BaseController
   end
   
   def active
-    @users = User.paginate :conditions => {:state => 'active'}, :page => params[:page]
+    @users = User.paginate :conditions => {:state => 'active', :status => 'onduty' }, :page => params[:page]
     render :action => 'index'
   end
   

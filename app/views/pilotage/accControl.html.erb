@@ -1,0 +1,344 @@
+<section class="narrow-box">
+  <h2 class="page-title"><span>Accountant Control</span></h2>
+  <table cellpadding=0 cellspacing=0>
+    <tr>
+      <td>
+        <table cellpadding=0 cellspacing=0 >
+          <tr>
+            <td>
+              <%#= messages.getString("UnCheckedNotes") %>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <%# commented before # ArrayList logs = beanManager.getLogbookController().findUnCheckedLogs(); %>
+  <form name="unchecked_notes" method="post">
+    <logic:iterate collection="<%#= logs %>" id="ld" type="com.varnapage.epilots.util.LogbookDetails"> 
+      <%# commented before # ShipDetails sd=beanManager.getLogbookController().getShipDetails(ld.getLogbookId()); %>
+      <table border=0 cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <table cellpadding="0" cellspacing="0">
+              <tr> 
+                <td>
+                  <a href="<%#= request.getContextPath() %>/editLog?LogID=<%#= ld.getLogbookId() %>"> 
+                    <%#= messages.getString("PilotNote") %>:<%#= ld.getLogbookId() %> 
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr> 
+          <td>
+            <table cellpadding="0" cellspacing="0">
+              <tr> 
+                <td> 
+                  <input type="checkbox" name="conte_box" value="<%#= ld.getLogbookId() %>" />
+                  <%#= messages.getString("CheckToConte") %>
+                </td>
+                <td><%#= beanManager.getHandy().getPlayerFullName(ld.getPlayerID()) %></td>
+                <td>
+                  <%#= (beanManager.getAcardController().isProblematic(
+                       beanManager.getAcardController().findByAcardID(ld.getLogbookId())
+                       )>0)?"<img src='images/warn.gif' />":"" %>
+                </td>
+                <td>
+                  <%#= messages.getString("Voyage") %>:<%#= ld.getVoyage() %> 
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr> 
+          <td> 
+            <table cellpadding="0" cellspacing="0">
+              <tr>
+                <td><%#= messages.getString("ShipData") %></td>
+              </tr>
+              <tr>
+                <td> 
+                  <table cellpadding="1" cellspacing="0">
+                    <tr> 
+                      <td>
+                        <%#=messages.getString("ShipName")%> 
+                      </td>
+                      <td>
+                        <%#= sd.getShipName() %>
+                      </td>
+                      <td> 
+                        <%#=messages.getString("ShipGT")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getGT() %>
+                      </td>
+                      <td>
+                        <%#=messages.getString("ShipDRAFT")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getDraftFWD() %>
+                      </td>
+                    </tr>
+                    <tr> 
+                      <td>
+                        <%#=messages.getString("ShipIMONumber")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getIMONumber() %>
+                      </td>
+                      <td> 
+                        <%#=messages.getString("ShipLOA")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getLOA() %>
+                      </td>
+                      <td> 
+                        <%#=messages.getString("ShipAFT")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getAFT() %>
+                      </td>
+                    </tr>
+                    <tr> 
+                      <td> 
+                        <%#=messages.getString("ShipFlag")%>
+                      </td>
+                      <td>
+                        <%#= sd.getFlag() %>
+                      </td>
+                      <td>
+                        <%#=messages.getString("ShipBOA")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getBOA() %>
+                      </td>
+                      <td> 
+                        <%#=messages.getString("ShipAirDraft")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getAirDraft() %>
+                      </td>
+                    </tr>
+                    <tr> 
+                      <td> 
+                        <%#=messages.getString("ShipCallSign")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getCallSign() %>
+                      </td>
+                      <td>
+                        <%#= messages.getString("Bow") %>
+                      </td>
+                      <td>
+                        <%#=sd.getThrusters() %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("Propelers") %> 
+                      </td>
+                      <td>
+                        <%#=sd.getPropelers() %>-<%#=sd.getPropType()?"PITCH":"FIXED" %> 
+                      </td>
+                    </tr>
+                    <tr> 
+                      <td> 
+                        <%#=messages.getString("ShipOwner")%>
+                      </td>
+                      <td> 
+                        <%#= sd.getOwner() %>
+                      </td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td> 
+                  <%#=messages.getString("LastUpdate")%>:<%#= sd.getEntryTime() %></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr> 
+          <td>
+            <table cellpadding="0" cellspacing="0">
+              <tr>
+                <td>
+                  <%#= messages.getString("Pilotage") %> 
+                </td>
+              </tr>
+              <tr> 
+                <td> 
+                  <table cellpadding="1" cellspacing="0">
+                    <tr> 
+                      <td>
+                        <%#= messages.getString("Agency") %> 
+                      </td>
+                      <td>
+                        <%#= beanManager.getHandy().getAgencyName(ld.getAgentID()) %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("MoorBoatEnv") %> 
+                      </td>
+                      <td>
+                        <%#= ld.getMoorBoat()?messages.getString("Yes"):messages.getString("No") %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("PilotBoat") %> 
+                      </td>
+                      <td>
+                        <%#= beanManager.getHandy().getPilotBoatName(ld.getPilotBoatID()) %> 
+                      </td>
+                    </tr>
+                    <tr> 
+                      <td>
+                        <%#= messages.getString("PayedBy") %> 
+                      </td>
+                      <td>
+                        <%#= beanManager.getHandy().getAgencyName(ld.getPayerID()) %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("MoorMenEnv") %> 
+                      </td>
+                      <td>
+                        <%#= beanManager.getHandy().getMoorMenName(ld.getMoorMenID()) %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("EngineOp") %> 
+                      </td>
+                      <td>
+                        <%#=ld.getCondOfEng()?messages.getString("Yes"):messages.getString("No") %> 
+                      </td>
+                    </tr>
+                    <tr> 
+                      <td>
+                        <%#= messages.getString("PilotOnBoard") %> 
+                      </td>
+                      <td>
+                        <%#= ld.getFromTime() %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("Time") %> 
+                      </td>
+                      <td>&nbsp;</td>
+                      <td>Board:</td>
+                      <td>
+                        <%#= messages.getString("Board"+ld.getBoard()) %> 
+                      </td>
+                    </tr>
+                    <tr> 
+                      <td>
+                        <%#= messages.getString("FromArea") %> 
+                      </td>
+                      <td>
+                        <%#= beanManager.getHandy().getPlaceName(ld.getFromAreaID()) %> 
+                      </td>
+                      <td>
+                        <%#= ld.getFromTime() %> 
+                      </td>
+                      <td>&nbsp;</td>
+                      <td>Left anchor</td>
+                      <td>Right anchor</td>
+                    </tr>
+                    <tr> 
+                      <td>
+                        <%#= messages.getString("ToArea") %> 
+                      </td>
+                      <td>
+                        <%#= beanManager.getHandy().getPlaceName(ld.getToAreaID()) %> 
+                      </td>
+                      <td>
+                        <%#= ld.getToTime() %> 
+                      </td>
+                      <td>&nbsp;</td>
+                      <td>
+                        <%#= ld.getLeftAnchor()?messages.getString("Yes"):messages.getString("No") %>
+                        &nbsp;&nbsp;
+                        <%#= ld.getLeftKeys() %>&nbsp;k 
+                      </td>
+                      <td>
+                        <%#= ld.getRightAnchor()?messages.getString("Yes"):messages.getString("No") %>
+                        &nbsp;&nbsp;
+                        <%#= ld.getRightKeys() %>&nbsp;k 
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr> 
+          <td>&nbsp;</td>
+        </tr>
+        <tr> 
+          <td>
+            <table cellpadding="0" cellspacing="0">
+              <tr>
+                <td>
+                  <%#= messages.getString("TugsUsed") %> 
+                </td>
+              </tr>
+              <tr> 
+                <td> 
+                  <table cellpadding="1" cellspacing="0">
+                    <tr> 
+                      <td>&nbsp;</td>
+                      <td>
+                        <%#= messages.getString("TugName") %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("FromTime") %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("ToTime") %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("Function") %> 
+                      </td>
+                      <td>
+                        <%#= messages.getString("Tugmaster") %> 
+                      </td>
+                    </tr>
+                    <%# Collection tusage = beanManager.getLogbookController().getTugsUsage(ld.getLogbookId()); %>
+                    <logic:iterate collection="<%#= tusage %>" type="com.varnapage.epilots.util.TugUsage" id="tu"> 
+                      <tr> 
+                        <td>.</td>
+                        <td>
+                          <%#= beanManager.getHandy().getTugName(tu.getTugID()) %> 
+                        </td>
+                        <td>
+                          <%#= tu.getFromTime() %> 
+                        </td>
+                        <td>
+                          <%#= tu.getToTime() %> 
+                        </td>
+                        <td>
+                          <%#= tu.getFunction()?messages.getString("Escort"):messages.getString("Manoeuvre") %> 
+                        </td>
+                        <td>
+                          <%#= tu.getTugMaster() %> 
+                        </td>
+                      </tr>
+                    </logic:iterate> 
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </logic:iterate> 
+    <input type="submit" name="doCheck" value="<%#= messages.getString("DoCheck") %>" />
+  </form>
+</section><!-- //.narrow-box -->

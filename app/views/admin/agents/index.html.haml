@@ -1,0 +1,20 @@
+%title "Agents"
+
+%table
+  %tr
+    %th Name
+    %th Contacts
+    %th Status
+    %th Editor
+  - for agent in @agents
+    %tr
+      %td= agent.name
+      %td= agent.contacts
+      %td= agent.status
+      %td= agent.editor_id
+      %td{:class => :action} 
+        = button_group do
+          = button_link_to 'покажи', admin_agent_url(agent)
+          = button_link_to 'редакция', edit_admin_agent_path(agent)
+          = negative_button_link_to 'изтриване', admin_agent_url(agent), :confirm => 'Сигурни ли сте?', :method => :delete
+%p= link_to "New Agent", new_admin_agent_path

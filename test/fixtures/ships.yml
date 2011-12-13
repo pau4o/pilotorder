@@ -1,0 +1,33 @@
+one:
+  imonumber: MyString
+  name: MyString
+  callsign: MyString
+  flag: MyString
+  owner: MyString
+  gt: 1
+  loa: 9.99
+  boa: 9.99
+  draftfwd: 9.99
+  aft: 9.99
+  airdraft: 9.99
+  propelers: 1
+  proptype: false
+  trusters: 1
+  editor_id: 1
+
+two:
+  imonumber: MyString
+  name: MyString
+  callsign: MyString
+  flag: MyString
+  owner: MyString
+  gt: 1
+  loa: 9.99
+  boa: 9.99
+  draftfwd: 9.99
+  aft: 9.99
+  airdraft: 9.99
+  propelers: 1
+  proptype: false
+  trusters: 1
+  editor_id: 1

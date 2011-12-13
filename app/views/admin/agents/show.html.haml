@@ -1,0 +1,21 @@
+- title "Agent"
+
+%p
+  %strong Name:
+  = @agent.name
+%p
+  %strong Contacts:
+  = @agent.contacts
+%p
+  %strong Status:
+  = @agent.status
+%p
+  %strong Editor:
+  = @agent.editor_id
+
+%p
+  = link_to "Edit", edit_admin_agent_path(@agent)
+  |
+  = link_to "Destroy", admin_agent_url(@agent), :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_agents_path

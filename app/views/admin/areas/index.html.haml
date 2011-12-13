@@ -1,0 +1,29 @@
+- title "Admin/Areas"
+
+%table
+  %tr
+    %th Name
+    %th Data
+    %th Editable
+    %th Faraway
+    %th Mapname
+    %th Scale ppm
+    %th Iconname
+    %th Editor
+  - for area in @areas
+    %tr
+      %td= area.name
+      %td= area.data
+      %td= area.editable
+      %td= area.faraway
+      %td= area.mapname
+      %td= area.scale_ppm
+      %td= area.iconname
+      %td= area.editor_id
+      %td
+        = button_group do
+          = button_link_to 'Show', [:admin, area]
+          = button_link_to 'Edit', edit_admin_area_path(area)
+          = danger_button_link_to 'Destroy', [:admin, area], :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Admin/Area", new_admin_area_path

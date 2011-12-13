@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111212202930) do
+ActiveRecord::Schema.define(:version => 20111213002525) do
 
   create_table "agents", :force => true do |t|
     t.string   "name"
@@ -31,10 +31,92 @@ ActiveRecord::Schema.define(:version => 20111212202930) do
     t.datetime "updated_at"
   end
 
+  create_table "areas", :force => true do |t|
+    t.string   "name"
+    t.text     "data"
+    t.boolean  "editable",   :default => false
+    t.boolean  "faraway",    :default => false
+    t.string   "mapname"
+    t.float    "scale_ppm"
+    t.string   "iconname"
+    t.integer  "editor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assesment_cards", :force => true do |t|
+    t.integer  "card_id"
+    t.boolean  "driver",     :default => false
+    t.text     "comment"
+    t.integer  "editor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "auth_logs", :force => true do |t|
+    t.string   "username"
+    t.string   "fullname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "criterias", :force => true do |t|
+    t.string   "name"
+    t.boolean  "alert",      :default => false
+    t.integer  "number"
+    t.integer  "editor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "flags", :force => true do |t|
     t.string   "name"
     t.string   "alpha2"
     t.string   "tld"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forth_man", :force => true do |t|
+    t.string   "imonumber",     :limit => 16
+    t.string   "name",          :limit => 64
+    t.string   "callsign",      :limit => 20
+    t.string   "flag",          :limit => 64
+    t.string   "owner"
+    t.integer  "gt"
+    t.decimal  "loa",                         :precision => 5, :scale => 2
+    t.decimal  "boa",                         :precision => 5, :scale => 2
+    t.decimal  "draftfwd",                    :precision => 5, :scale => 2
+    t.decimal  "aft",                         :precision => 5, :scale => 2
+    t.decimal  "airdraft",                    :precision => 5, :scale => 2
+    t.integer  "propelers"
+    t.boolean  "proptype"
+    t.integer  "trusters"
+    t.integer  "editor_id"
+    t.boolean  "engineop",                                                  :default => true
+    t.datetime "approxtime",                                                                   :null => false
+    t.integer  "from_area_id",                                              :default => 0
+    t.integer  "to_area_id",                                                :default => 0
+    t.integer  "conf_by_port",                                              :default => 0
+    t.integer  "conf_by_agent",                                             :default => 0
+    t.integer  "agent_id",                                                  :default => 0
+    t.integer  "log_book_id",                                               :default => 0
+    t.integer  "pilot_id"
+    t.boolean  "accepted",                                                  :default => false
+    t.text     "comment"
+    t.boolean  "dcargo",                                                    :default => false
+    t.string   "cargo_descr"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "instructions", :force => true do |t|
+    t.datetime "effective",   :null => false
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "due"
+    t.boolean  "canceled"
+    t.datetime "cancelation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -65,6 +147,29 @@ ActiveRecord::Schema.define(:version => 20111212202930) do
     t.string   "accepted_by"
     t.string   "rejected_by"
     t.string   "finished_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "places", :force => true do |t|
+    t.string   "name"
+    t.boolean  "mooring"
+    t.string   "data"
+    t.string   "imonumber",   :limit => 16
+    t.integer  "ship_id"
+    t.integer  "log_book_id"
+    t.datetime "arrival"
+    t.boolean  "leftanchor"
+    t.integer  "la_keys",                   :default => 0
+    t.boolean  "rightanchor"
+    t.integer  "ra_keys",                   :default => 0
+    t.boolean  "board"
+    t.integer  "x_center",                  :default => 0
+    t.integer  "y_center",                  :default => 0
+    t.integer  "bearing"
+    t.integer  "editor_id"
+    t.string   "code"
+    t.string   "psn"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -115,9 +220,57 @@ ActiveRecord::Schema.define(:version => 20111212202930) do
     t.datetime "updated_at"
   end
 
+  create_table "ship_data", :force => true do |t|
+    t.string   "imonumber",   :limit => 16
+    t.string   "name",        :limit => 64
+    t.string   "callsign",    :limit => 20
+    t.string   "flag",        :limit => 64
+    t.string   "owner"
+    t.integer  "gt"
+    t.decimal  "loa",                       :precision => 5, :scale => 2
+    t.decimal  "boa",                       :precision => 5, :scale => 2
+    t.decimal  "draftfwd",                  :precision => 5, :scale => 2
+    t.decimal  "aft",                       :precision => 5, :scale => 2
+    t.decimal  "airdraft",                  :precision => 5, :scale => 2
+    t.integer  "propelers"
+    t.boolean  "proptype"
+    t.integer  "trusters"
+    t.integer  "editor_id"
+    t.integer  "log_book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ships", :force => true do |t|
+    t.string   "imonumber",  :limit => 16
+    t.string   "name",       :limit => 64
+    t.string   "callsign",   :limit => 20
+    t.string   "flag",       :limit => 64
+    t.string   "owner"
+    t.integer  "gt"
+    t.decimal  "loa",                      :precision => 5, :scale => 2
+    t.decimal  "boa",                      :precision => 5, :scale => 2
+    t.decimal  "draftfwd",                 :precision => 5, :scale => 2
+    t.decimal  "aft",                      :precision => 5, :scale => 2
+    t.decimal  "airdraft",                 :precision => 5, :scale => 2
+    t.integer  "propelers"
+    t.boolean  "proptype"
+    t.integer  "trusters"
+    t.integer  "editor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tugs", :force => true do |t|
+    t.string   "name"
+    t.integer  "editor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                :limit => 100
-    t.string   "encrypted_password",   :limit => 128, :default => "",        :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "",         :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -140,6 +293,9 @@ ActiveRecord::Schema.define(:version => 20111212202930) do
     t.datetime "updated_at"
     t.datetime "last_request_at"
     t.string   "last_request_url"
+    t.string   "title"
+    t.string   "status",                              :default => "disabled"
+    t.string   "phone"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
@@ -147,17 +303,17 @@ ActiveRecord::Schema.define(:version => 20111212202930) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "vessels", :force => true do |t|
-    t.string   "imonumber"
+    t.string   "imonumber",  :limit => 16
     t.string   "name"
     t.string   "callsign"
     t.string   "flag"
     t.string   "owner"
     t.integer  "gt"
-    t.decimal  "loa",        :precision => 5, :scale => 2
-    t.decimal  "boa",        :precision => 5, :scale => 2
-    t.decimal  "draftfwd",   :precision => 5, :scale => 2
-    t.decimal  "aft",        :precision => 5, :scale => 2
-    t.decimal  "airdraft",   :precision => 5, :scale => 2
+    t.decimal  "loa",                      :precision => 5, :scale => 2
+    t.decimal  "boa",                      :precision => 5, :scale => 2
+    t.decimal  "draftfwd",                 :precision => 5, :scale => 2
+    t.decimal  "aft",                      :precision => 5, :scale => 2
+    t.decimal  "airdraft",                 :precision => 5, :scale => 2
     t.integer  "propelers"
     t.boolean  "proptype"
     t.integer  "thrusters"

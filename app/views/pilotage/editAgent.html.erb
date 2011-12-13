@@ -1,0 +1,28 @@
+<h3>Edit Agent</h3>
+<form name="eAgent" method="POST" ONSUBMIT="return confirmDelete();">
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <td> 
+        <input type="text" name="agentName" size="16" maxlength="64" />
+      </td>
+      <td>
+        <input type="submit" name="addAgent" value="Add agent" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%# mhash=beanManager.getHandy().getOptOfAgents(); %>
+        <select name="AgentID" multiple="multiple" size="5">
+          <logic:iterate collection="<%#= mhash %>" id="mh" type="java.util.Map.Entry"> 
+            <option value="<bean:write name="mh" property="value" />" >
+              <bean:write name="mh" property="key" /> 
+            </option>
+          </logic:iterate> 
+        </select>
+      </td>
+      <td align="left" valign="bottom"> 
+        <input type="submit" name="delAgent" value="Delete agent" onClick="document.eAgent.button.value=1">
+      </td>
+    </tr>
+  </table>
+</form>

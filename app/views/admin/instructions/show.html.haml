@@ -1,0 +1,27 @@
+- title "Admin/Instruction"
+
+%p
+  %strong Effective:
+  = @instruction.effective
+%p
+  %strong Subject:
+  = @instruction.subject
+%p
+  %strong Body:
+  = @instruction.body
+%p
+  %strong Due:
+  = @instruction.due
+%p
+  %strong Canceled:
+  = @instruction.canceled
+%p
+  %strong Cancelation:
+  = @instruction.cancelation
+
+%p
+  = link_to "Edit", edit_admin_instruction_path(@instruction)
+  |
+  = link_to "Destroy", [:admin, @instruction], :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", admin_instructions_path

@@ -26,9 +26,9 @@
   <tr>
 	<th>ID</th>
 	<th>Прякор</th>
-	<th>Email</th>
+	<th>Име</th>
 	<th>Състояние</th>
-	<th>Админ</th>
+	<th>Роли</th>
 	<th>Регистриран</th>
   </tr>
   
@@ -36,13 +36,16 @@
 
 <% for user in @users %>
 
-	
-  <tr>
+  <tr class="<%= user.status -%>">
 	<td><%= user.id %></td>
 	<td><%= link_to h(user.login), admin_user_url(user) %></td>
-	<td><%= user.email %></td>
+	<td><%= user.name %></td>
+	<td><%= user.status %></td>
+  <td><%= user.role_names %></td>
+  <!--
   <td <%= class_by_state(user.state) -%> ><%= t( user.state ) %></td>
   <td><%= raw '<div class="icon icon-checked">&nbsp;</div>' unless !user.admin? %></td>
+  -->
   <td><%= f_ta user.created_at %></td>
     <td class="actions">
 		<% if user.pending? %>

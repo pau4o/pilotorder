@@ -1,0 +1,57 @@
+<h3><%#= (String)request.getAttribute("userMessage") %></h3>
+<table cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Instr. No.</th>
+      <th>Issued</th>
+      <th>Effective</th>
+      <th>Subject</th>
+      <th>Due</th>
+      <th>Canc.</th>
+      <th>Pend.</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td colspan="7">
+        <%# for (int k=1;k<=pages;k++) { 
+    out.print("&nbsp");
+    if (k==currPage) {
+	out.print("<font color=#0000DD>["+k+"]</font>");
+                                      } else {
+	StringBuffer sb=new StringBuffer();
+	sb.append("<A href=\"");
+	sb.append(request.getContextPath()+"/listInstr?");
+	sb.append("offset="+(k-1)*records);
+	sb.append("&records="+records+"\">");
+	sb.append(k+"</A>");
+	out.print(sb.toString());
+}
+} %>
+     </td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <logic:iterate collection="<%#= instrs %>" type="com.varnapage.epilots.util.InstructionDetails" id="ild">
+      <tr>
+        <td>
+          <a href="<%#= request.getContextPath()%>/viewInstr?instrid=<%#= ild.getInstrId() %>" >
+            <%#= ild.getInstrId() %>
+          </a>
+          <%#= (ild.getPending()>0) ? "<img src="+request.getContextPath()+"/images/smallredball.gif>":"" %>
+          &nbsp;&nbsp;
+        </td>
+        <td><%#= df.format(ild.getIssued()) %></td>
+        <td><%#= df.format(ild.getEffective()) %></td>
+        <td>
+          <a href="<%#= request.getContextPath()%>/viewInstr?instrid=<%#= ild.getInstrId() %>" >
+            <%#= ild.getSubject() %>
+          </a>
+        </td>
+        <td><%#= (ild.getDue()!=null)?df.format(ild.getDue()):"&nbsp;" %></td>
+        <td><%#= ild.isCanceled()?"Y":"&nbsp;" %></td>
+        <td><%#= ild.getPending() %></td>
+      </tr>
+    </logic:iterate>
+  </tbody>
+</table>

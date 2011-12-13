@@ -1,0 +1,23 @@
+- title "Admin/Instructions"
+
+%table
+  %tr
+    %th Effective
+    %th Subject
+    %th Body
+    %th Due
+    %th Canceled
+    %th Cancelation
+  - for instruction in @instructions
+    %tr
+      %td= instruction.effective
+      %td= instruction.subject
+      %td= instruction.body
+      %td= instruction.due
+      %td= instruction.canceled
+      %td= instruction.cancelation
+      %td= link_to 'Show', [:admin, instruction]
+      %td= link_to 'Edit', edit_admin_instruction_path(instruction)
+      %td= link_to 'Destroy', [:admin, instruction], :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Admin/Instruction", new_admin_instruction_path
