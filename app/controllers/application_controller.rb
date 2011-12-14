@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_for_browser_upgrade
   before_filter :log_user
   before_filter :mailer_set_url_options
+  before_filter :set_locale
   
   helper :all # include all helpers, all the time
   
@@ -99,5 +100,11 @@ class ApplicationController < ActionController::Base
     require 'pp'
     pp flash 
     url_for(:controller => :page, :action => "goodbye")
+  end
+
+  def set_locale
+    session[:locale] = params[:locale] if params[:locale]
+    session[:browser_locale] ||= request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    I18n.locale = :en
   end
 end
