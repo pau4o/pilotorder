@@ -2,8 +2,8 @@
 # configatron.site_name
 
 development: &local
-    site_name: ПоръчайПилот.БГ
-    site_namemobile: ПоръчайПилот.БГ
+    site_name: Пилотска Станция - Варна
+    site_namemobile: Пилотска станция - Варна
     site_url: pilotorder.bg
     
     company_name: Pilot Station Varna
