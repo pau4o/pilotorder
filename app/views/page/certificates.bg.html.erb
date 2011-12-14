@@ -1,0 +1,80 @@
+<section class="box" id="policy">
+<div id="slideshow"></div>
+<div class='copy'>
+  <hgroup>
+  <h1 style="text-align:center;">Сертификати</h1>
+  </hgroup>
+  <table>
+    <tr><td colspan="2"><a name="certificate_of_approval"></a>
+        <h2>Сертификат за одобрение</h2>
+      </td></tr>
+    <tr>
+      <td>
+        <%= link_to image_tag("approval_thumb.jpg"), 
+              image_path("certificate_of_approval.jpg"), 
+              :class => "ApprovalCert", :title => "Сертификат за одобрение"  %>
+      </td>
+      <td valign='top'>
+        <%= image_tag("loyds-quality-assurance.jpg", :width => "196px") %>
+        <br/>
+        издател: Lloid's Register Quality Assurance
+        <br/>
+        номер: SOF0207248
+        <br/>
+        дата на издаване: 05.05.2011
+        <br/>
+        дата на валидност: 04.05.2014
+        <br/>
+        място: Ротердам
+        <br/>
+        стандарти:
+        <ul>
+          <li>BS EN ISO 9001:2008</li>
+          <li>EN ISO 9001:2008</li>
+          <li>ISO 9001:2008</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <div class="hrule"> <hr> </div>
+  <table>
+    <tr><td colspan="2"><a name="ispo_certificate_of_compliance"></a>
+        <h2>ISPO Certificate of compliance</h2>
+      </td></tr>
+    <tr>
+      <td>
+        <%= link_to image_tag("ispo_thumb.jpg"), 
+              image_path("ispo_certificate_of_compliance.jpg"), 
+              :class => "ISPOCert", :title => "ISPO Certificate of compliance"  %>
+      </td>
+      <td valign='top'>
+        издател: Lloid's Register ЕМЕА
+        <br/>
+        дата на издаване: 15.06.2009
+        <br/>
+        дата на валидност: 29.04.2014
+        <br/>
+        място: Ротердам
+        <br/>
+        дейности:
+        <ul>
+          <li>Pilotage - river & inland waterways</li>
+          <li>Pilotage - harbour & docking</li>
+          <li>Logistical Transportation - tender (including high speed)</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <div class="hrule"> <hr> </div>
+</div>
+</section>
+
+<section id='sidebar'>
+<nav>
+<ul>
+  <li><%= link_to "Сертификат за одобрение", "#certificate_of_approval"  %></li>
+  <li><%= link_to "Lloyd's ISPO Certificate", "#ispo_certificate_of_compliance" %></li>
+</ul>
+</nav>
+</section>
+
