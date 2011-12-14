@@ -8,8 +8,8 @@ gem 'rails', '3.0.10'
 # github style
 gem 'css3buttons', '0.9.5'
 
-#gem 'sqlite3-ruby', :require => 'sqlite3'
-gem "mysql"
+gem 'sqlite3-ruby', :require => 'sqlite3'
+#gem "mysql", :group => :production
 
 # Use unicorn as the web server
 gem 'unicorn'

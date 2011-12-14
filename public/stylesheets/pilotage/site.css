@@ -1,54 +1,3 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-v2.0 | 20110126
-License: none (public domain)
- */
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-/* ************ */
-/* end of reset */
-/* ************ */
 html {
   height: 100%;
 }
@@ -115,6 +64,9 @@ header nav {
   float: right;
   clear: both;
 }
+header li {
+            list-style-type: none;
+            }
 header nav a {
   width: 42px;
   height: 32px;
@@ -168,55 +120,6 @@ header body.shipLocation a.shipLocation {
   padding-right: 1em;
   margin-bottom: 5px;
 }
-aside nav {
-  float: left;
-  background-image: url('aside-nav.png');
-  background-position: -192px 0;
-  background-repeat: repeat-y;
-}
-aside nav li a {
-  display: block;
-  width: 256px;
-  height: 64px;
-  text-indent: -9999em;
-  overflow: hidden;
-  background-image: url('aside-pages-nav.png');
-  background-position: -256px 0;
-  background-repeat: no-repeat;
-}
-aside nav li a.shipControl { background-position: -256px -128px; }
-body.shipControl aside nav li a.shipControl,
-aside nav li a.shipControl:hover { background-position: 0 -128px; }
-
-body.hyperCube aside nav li a.hyperCube,
-aside nav li a.hyperCube:hover { background-position: 0 0; }
-
-aside nav li a.accControl,
-aside nav li a.logControl,
-aside nav li a.forthMan { background-position: -256px -64px; }
-body.accControl aside nav li a.accControl,
-aside nav li a.accControl:hover,
-body.logControl aside nav li a.logControl,
-aside nav li a.logControl:hover,
-body.forthMan aside nav li a.forthMan,
-aside nav li a.forthMan:hover { background-position: 0 -64px; }
-
-aside nav li a.shipLocation { background-position: -256px -192px; }
-body.shipLocation aside nav li a.shipLocation,
-aside nav li a.shipLocation:hover { background-position: 0 -192px; }
-
-aside li .logoff,
-aside li .main {
-  width: 64px;
-  position: relative;
-  top: -2px;
-  background-image: url('aside-nav.png');
-  background-position: -64px 0;
-}
-aside li .logoff {
-  top: 2px;
-  background-position: 0 0;
-}
 section {
   margin: 3em auto;
   padding-bottom: 1em;
@@ -229,6 +132,33 @@ section {
   border-radius: 1em;
   min-height: 400px;
 }
+section nav {
+              width: 300px;
+              margin-left: 3em;
+              text-align: center;
+              background-image: url('aside-nav.png');
+              background-position: 0 0;
+              background-repeat: repeat-y;
+}
+section nav ul {
+                 position: relative;
+                 top: -3px;
+                 background-image: url('section-ul.png');
+                 background-position: 0 0;
+                 background-repeat: no-repeat;
+                 }
+section nav li {
+  display: block;
+                 padding-left: 75px;
+}
+section nav li:last-child {
+                            height: 25px;
+                            position: relative;
+                            bottom: -6px;
+                            background-image: url('section-li-last.png');
+                            background-position: 0 100%;
+                            background-repeat: no-repeat;
+                            }
 .narrow-box {
   width: 70%;
 }
@@ -275,7 +205,6 @@ section {
   border-color: #244676;
 }
 section li {
-  margin-left: 1em;
   padding: 1em;
   list-style-position: inside;
   list-style-type: none;
