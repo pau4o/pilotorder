@@ -1,22 +1,22 @@
   <footer>
-  <%= render :partial => "shared/annotated" %>
-  <div id='locations'>
-  <address>
-  <strong>Морска гара</strong>
-  <br>
-  Рейдова кула Варна 
-  <br>
-  Варна - 9001 п.к. 9
-  <br>
-  </address>
-  <address>
-  <strong>Диспечер</strong>
-  <br>
-  УКВ 14 Канал
-  <br>
-  <a href="tel:+359 52 602 448">(+359) 52 602 448</a>
-  <br>
-  <a href="tel:+359 52 602 448">факс: (+359) 52 602 445</a>
-  </address>
-  </div>
+    <%= render :partial => "shared/annotated" %>
+    <div id='locations'>
+      <address>
+        <strong><%= t("partial-footer-address01-strong") %></strong>
+        <br />
+        <%= t("partial-footer-address01-br01") %>
+        <br />
+        <%= t("partial-footer-address01-br02") %>
+        <br />
+      </address>
+      <address>
+        <strong><%= t("partial-footer-address02-strong") %></strong>
+        <br />
+        <%= t("partial-footer-address01-br01") %>
+        <br />
+        <a href="tel:+359 52 602 448">(+359) 52 602 448</a>
+        <br />
+        <a href="tel:+359 52 602 448">факс: (+359) 52 602 445</a>
+      </address>
+    </div>
   </footer>

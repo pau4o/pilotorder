@@ -1,16 +1,16 @@
 <% if logged_in? %>
   <address class='primary'>
     <%= link_to current_user.login, "#", :class => "plus" %>
-    <%= link_to "Изход", destroy_user_session_path, :class => "rule" %>
+    <%= link_to t("partial-annotated-logout"), destroy_user_session_path, :class => "rule" %>
   </address>
 <% else %>
   <address class='primary'>
 <%- if controller_name != 'user_sessions' %>
-    <%= link_to "Влез", new_session_path(:user), :class => "rule" %>
+    <%= link_to t("partial-annotated-login"), new_session_path(:user), :class => "rule" %>
 <%- end %>
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to "Регистрирай се", new_registration_path(:user), :class => "plus" %>
+    <%= link_to t("partial-annotated-register"), new_registration_path(:user), :class => "plus" %>
 <%- end  %>
-  <%= link_to "Свържи се с нас", contact_us_path, :class => "email" %>
+  <%= link_to t("partial-annotated-contactus"), contact_us_path, :class => "email" %>
   </address>
 <% end %>

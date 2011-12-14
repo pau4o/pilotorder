@@ -1,11 +1,13 @@
 <div id="main-welcome">
-  <h2>Здравейте и добре дошли,</h2>
+  <h2><%= t("page-welcome-h2") %></h2>
   <p>
-    Вие сте в помощната страницата на "Пилотска станция Варна-П". Тук може да заявите своята маневра в електронен вариант, но ако желаете да научите повече за фирмата, моля заповядайте на нашата официална страница: <a href="http://www.varnapilots.com">varnapilots.com</a>.
+    <%= t("page-welcome-p01") %>
+     <a href="http://www.varnapilots.com">varnapilots.com</a>.
   </p>
-  <br/>
+  <br />
   <p>
-    За да направите заявка за маневра трябва да се <%= link_to "РЕГИСТРИРАТЕ", new_registration_path(:user) %>, но ако вече сте го направили може да <%= link_to "ВЛЕЗЕТЕ", new_session_path(:user) %> с Вашето потребителско име.
+    <%= t("page-welcome-p02-chunk-01") %>
+     <%= link_to t("page-welcome-registration"), new_registration_path(:user) %>, <%= t("page-welcome-p02-chunk-02") %> <%= link_to t("page-welcome-login"), new_session_path(:user) %> <%= t("page-welcome-p02-chunk-03") %>
   </p>
 </div>
 

@@ -1,47 +1,40 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title><%= configatron.site_name %></title>
-
-	<%= stylesheet_link_merged :page %>
-	<%= stylesheet_link_tag 'mobile' if mobile_device? %>
-  <%= csrf_meta_tag %>
-  <%= javascript_include_merged :base %>
-
-</head>
-
-<body>
-  <header>
-  <h1><%= link_to "PilorOder.BG", root_path %></h1>
-  <nav>
-  <ul>
-  <li><%= tab_to "Дейност", [ activity_path ] %></li>
-  <li><%= tab_to "Политика", [ policy_path, pilot_code_path ] %></li>
-  <li><%= tab_to "Сертификати", [ certificates_path ] %></li>
-  <li><%= tab_to "Цени", [ prices_path , price_table_1_path, price_table_2_path ] %></li>
-  </ul>
-  </nav>
-  <%= render :partial => "shared/annotated" %>
-  </header>
-	  <%= flash_message.html_safe %>
-  <section id='content'>
-  <%- if @quote %>
+<!doctype html>
+<html lang="<%= t("layout-welcome-html-lang") %>">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><%= configatron.site_name %></title>
+    <%= stylesheet_link_merged :page %>
+    <%= stylesheet_link_tag 'mobile' if mobile_device? %>
+    <%= csrf_meta_tag %>
+    <%= javascript_include_merged :base %>
+  </head>
+  <body>
     <header>
-    <div class='box'>
-      <blockquote><p>&ldquo;<%= @quote.message %>&rdquo;</p></blockquote>
-      <p><%= @quote.author %></p>
-    </div>
+      <h1><%= link_to "PilotOder.BG", root_path %></h1>
+      <nav>
+        <ul>
+          <li><%= tab_to t("activity"),    [ activity_path ] %></li>
+          <li><%= tab_to t("policy"),    [ policy_path, pilot_code_path ] %></li>
+          <li><%= tab_to t("certificates"), [ certificates_path ] %></li>
+          <li><%= tab_to t("prices"),        [ prices_path , price_table_1_path, price_table_2_path ] %></li>
+        </ul>
+      </nav>
+      <%= render :partial => "shared/annotated" %>
     </header>
-  <%- end %>
-  <div id='main'>
-    <%= yield %>
-  </div>
-  
-  </section>
-
-  <%= render :partial => "shared/footer" %>
-</body>
+    <%= flash_message.html_safe %>
+    <section id='content'>
+      <%- if @quote %>
+      <header>
+        <div class='box'>
+          <blockquote><p>&ldquo;<%= @quote.message %>&rdquo;</p></blockquote>
+          <p><%= @quote.author %></p>
+        </div>
+      </header>
+      <%- end %>
+      <div id='main'>
+        <%= yield %>
+      </div>
+    </section>
+    <%= render :partial => "shared/footer" %>
+  </body>
 </html>
