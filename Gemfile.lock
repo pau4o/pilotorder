@@ -56,8 +56,12 @@ GEM
     diff-lcs (1.1.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    fast_gettext (0.6.4)
     formtastic (2.0.2)
       rails (~> 3.0)
+    gettext_i18n_rails (0.3.6)
+      fast_gettext
+      ruby_parser
     gmaps4rails (1.3.2)
       crack
     gravatar_image_tag (1.0.0)
@@ -146,6 +150,9 @@ GEM
       ruby-debug-base19 (>= 0.11.19)
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
+    ruby_parser (2.3.1)
+      sexp_processor (~> 3.0)
+    sexp_processor (3.0.9)
     sqlite3 (1.3.5)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
@@ -181,6 +188,7 @@ DEPENDENCIES
   declarative_authorization
   devise
   formtastic
+  gettext_i18n_rails
   gmaps4rails
   gravatar_image_tag
   haml-rails
