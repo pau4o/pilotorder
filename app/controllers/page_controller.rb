@@ -7,6 +7,10 @@ class PageController < ApplicationController
     @question = Question.new
   end
 
+  def change_lang
+    redirect_to(:back)
+  end
+
   private
 
   def preload_shared_variables

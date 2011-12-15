@@ -118,6 +118,7 @@ Rails3::Application.routes.draw do
         get :welcome
         get :contact_us
         put :new_question
+        get :change_lang
     end
   end
   resources :browser

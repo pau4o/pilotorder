@@ -23,6 +23,7 @@
         </ul>
       </nav>
       <%= render :partial => "shared/annotated" %>
+      <%= link_to t(locale), :controller => "page", :action => "change_lang",  %>
     </header>
     <%= flash_message.html_safe %>
     <section id='content'>

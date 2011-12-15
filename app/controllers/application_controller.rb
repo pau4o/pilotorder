@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ApplicationController < ActionController::Base
   
   before_filter :set_last_request # helper for devise
@@ -103,8 +104,14 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    session[:locale] = params[:locale] if params[:locale]
-    session[:browser_locale] ||= request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-    I18n.locale = :en
+    #session[:browser_locale] ||= request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    if action_name == "change_lang"
+      case I18n.locale
+      when :en
+        I18n.locale = :bg
+      when :bg
+        I18n.locale = :en
+      end
+    end
   end
 end
