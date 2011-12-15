@@ -1,8 +1,8 @@
-<h3>Детайли</h3>
+<h3><%= t("Детайли") %></h3>
 
 <table class="overview">
 	<% @profile.public_attributes.each do |column| -%>
 		<%= cell "#{column.humanize}", "#{@profile.send(column) || '-'}" %>
 	<% end -%>
 </table>
-<p><%= button_link_to "Промени детайлите", edit_profile_url(current_user) %></p>
+<p><%= button_link_to t("Промени детайлите"), edit_profile_url(current_user) %></p>

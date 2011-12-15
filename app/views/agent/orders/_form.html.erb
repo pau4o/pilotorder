@@ -1,12 +1,12 @@
 <%= form_for([:agent, @order]) do |f| %>
   <%= f.error_messages %>
       <fieldset>
-        <legend>Маневрена заявка</legend>
+        <legend><%= t("Маневрена заявка") %></legend>
         <fieldset>
-          <legend>Основни данни на кораба</legend>
+          <legend><%= t("Основни данни на кораба") %></legend>
           <ol>
             <li>
-              <label for="ship_name">Име на кораба</label>
+              <label for="ship_name"><%= t("Име на кораба") %></label>
               <input type="text" name="ship_name" id="ship_name" tabindex="1" />
             </li>
             <li>
@@ -19,7 +19,7 @@
             <%# f.text_field :category_name, data: {autocomplete_source: categories_path} %>
             
             <li>
-              <label for="flag">Флаг</label>
+              <label for="flag"><%= t("Флаг") %></label>
               <select name="flag" id="flag" tabindex="3">
                 <option value="moldova">Moldova</option>
                 <option value="ukraine">Ukraine</option>
@@ -30,7 +30,7 @@
             <li>
               <%= f.label :eta_varna %>
               <%= f.datetime_select :eta_varna %>
-              <label for="port_name">Пристанище</label>
+              <label for="port_name"><%= t("Пристанище") %></label>
               <select name="port_name" id="port_name" tabindex="5">
                 <option value="varna">Varna</option>
                 <option value="varna_west">Varna_West</option>
@@ -38,30 +38,30 @@
               </select>
             </li>
             <li>
-              <label for="operator">Оператор</label>
+              <label for="operator"><%= t("Оператор") %></label>
               <input type="text" name="operator" tabindex="6" />
             </li>
             <li>
               <%= f.label :country_receiver %>
               <%= f.text_field :country_receiver %>
-              <span class="comment">(държава на платеца (корабособственика/оператора) по фактура)</span>
+              <span class="comment">(<%= t("държава на платеца (корабособственика/оператора) по фактура") %>)</span>
             </li>
             <li>
-              <label for="ident_number">Идентификационен номер на получателя на услугата (платеца)</label>
+              <label for="ident_number"><%= t("Идентификационен номер на получателя на услугата (платеца)") %></label>
               <input type="text" name="ident_number" id="ident_number" tabindex="8" />
-              <span class="comment">(ако е от държава член на ЕС)</span>
+              <span class="comment">(<%= t("ако е от държава член на ЕС") %>)</span>
             </li>
           </ol>
         </fieldset>
         <fieldset>
-          <legend>Данни за рейса на кораба</legend>
+          <legend><%= t("Данни за рейса на кораба") %></legend>
           <ol>
             <li>
               <%= f.label :i18n_cruise_number %><br />
               <%= f.text_field :i18n_cruise_number %>
             </li>
             <li>
-              <label for="start_date">Дата на началото на рейса</label>
+              <label for="start_date"><%= t("Дата на началото на рейса") %></label>
               <input type="date" name="start_date" id="start_date" tabindex="10" />
             </li>
             <li>
@@ -74,28 +74,28 @@
           </ol>
         </fieldset>
         <fieldset>
-          <legend>Технически данни на кораба</legend>
+          <legend><%= t("Технически данни на кораба") %></legend>
           <ol>
             <li>
-              Дължина максимална
+              <%= t("Дължина максимална") %>
               <label>LOA
                 <input type="number" name="loa" id="loa" tabindex="13" />
               </label>
             </li>
             <li>
-              Ширина максимална
+              <%= t("Ширина максимална") %>
               <label>BOA
                 <input type="number" name="boa" id="boa" tabindex="14" />
               </label>
             </li>
             <li>
-              Бруто тонаж (ITC - 69)
+              <%= t("Бруто тонаж") %> (ITC - 69)
               <label>GT
                 <input type="text" name="gt" id="gt" tabindex="15" />
               </label>
             </li>
             <li>
-              Газене при маневрата
+              <%= t("Газене при маневрата") %>
               <label>dFore
                 <input type="number" name="dfore" id="dfore" tabindex="16" />
               </label>
@@ -104,78 +104,78 @@
               </label>
             </li>
             <li>
-              Еър драфт при маневрата
+              <%= t("Еър драфт при маневрата") %>
               <label>AirDr
                 <input type="number" name="airdr" id="airdr" tabindex="18" />
               </label>
             </li>
             <li>
-              Рулево устройство
-              <label>Брой
+              <%= t("Рулево устройство") %>
+              <label><%= t("Брой") %>
                 <input type="number" name="rul" id="rul" tabindex="19" />
               </label>
             </li>
             <li>
-              Задвижващо устройство
-              <label>Брой
+              <%= t("Задвижващо устройство") %>
+              <label><%= t("Брой") %>
                 <input type="number" name="engine" id="engine" tabindex="20"/>
               </label>
             </li>
             <li>
-              Подрулващо устройство
+              <%= t("Подрулващо устройство") %>
               <span class="form-row">
-                <label for="front">Носово</label>
+                <label for="front"><%= t("Носово") %></label>
                 <input type="checkbox" name="sub_rule" value="front" id="front" tabindex="21" />
-                Мощност
+                <%= t("Мощност") %>
                 <input type="text" name="front_power" id="front_power" tabindex="22" />
-                Брой
+                <%= t("Брой") %>
                 <input type="number" name="front_qty" id="front_qty" tabindex="23" />
               </span>
               <span class="form-row">
-                <label for="back">Кърмово</label>
+                <label for="back"><%= t("Кърмово") %></label>
                 <input type="checkbox" name="sub_rule" value="back" id="back" tabindex="24" />
-                Мощност
+                <%= t("Мощност") %>
                 <input type="text" name="back_power" id="back_power" tabindex="25" />
-                Брой
+                <%= t("Брой") %>
                 <input type="number" name="back_qty" id="back_qty" tabindex="26" />
               </span>
             </li>
-            <li>Състояние на маневрата<br />
-              <label classr="form-row">С пълен товар
+            <li><%= t("Състояние на маневрата") %><br />
+              <label classr="form-row"><%= t("С пълен товар") %>
                 <input type="radio" name="maneuver_state" value="full_load" id="full_load" tabindex="27" />
               </label>
-              <label class="form-row">Натоварен/Баластиран/
+              <label class="form-row"><%= t("Натоварен/Баластиран/") %>
                 <input type="radio" name="maneuver_state" value="loaded" id="loaded" tabindex="28" />
               </label>
-              <label class="form-row">Частично натоварен
+              <label class="form-row"><%= t("Частично натоварен") %>
                 <input type="radio" name="maneuver_state" value="half_load" id="half_load" tabindex="29" />
               </label>
             </li>
           </ol>
         </fieldset>
         <fieldset>
-          <legend>Данни за маневрата</legend>
+          <legend><%= t("Данни за маневрата") %></legend>
           <ol>
-            <li>Район
+            <li><%= t("Район") %>
               <input type="radio" name="region" value="custom_region" />
               <%= f.label :maneuver_from %>
               <%= f.text_field :maneuver_from %>
 
               <%= f.label :maneuver_to %>
               <%= f.text_field :maneuver_to %>
-              <label for="ruled_region">По указание на пристанището/завода</label>
+              <label for="ruled_region"><%= t("По указание на пристанището/завода") %></label>
               <input type="radio" name="region" value="ruled_region" />
             </li>
-            <li>Време<br />
-              <label for="with_end">С пристигане</label>
+            <li><%= t("Време") %><br />
+              <label for="with_end"><%= t("С пристигане") %></label>
               <input type="radio" name="maneuver_time" value="with_end"  id="with_end" />
-              <label for="stay_time">Заставане до/след</label>
+              <label for="stay_time"><%= t("Заставане до/след") %></label>
               <input type="radio" name="maneuver_time" value="stay_time_radio" />
               <input type="text" name="stay_time" id="stay_time" />
-              <label for="rule_based">По указание на п-ще/завод</label>
+              <label for="rule_based"><%= t("По указание на п-ще/завод") %></label>
               <input type="radio" name="maneuver_time" value="rule_based" id="rule_based"/>
             </li>
-            <li>Опасен товар на борда
+            <li><%= t("Опасен товар на борда") %>
               <%= f.label :danger_cargo %>
               <%= f.check_box :danger_cargo %>
               <%= f.label :danger_cargo_filename %>
@@ -192,25 +192,16 @@
           </ol>
         </fieldset>
         <fieldset>
-          <legend>Други</legend>
+          <legend><%= t("Други") %></legend>
           <%= f.label :payer %>
           <%= f.text_field :payer %>
-          <span class="form-row">За контакт:
-            <label for="agent">Агент</label>
+          <span class="form-row"><%= t("За контакт:") %>
+            <label for="agent"><%= t("Агент") %></label>
             <input type="text" name="agent" id="agent" />
-            <label for="phone">GSM/тел.</label>
+            <label for="phone"><%= t("GSM/тел.") %></label>
             <input type="text" name="phone" id="phone" />
           </span>
         </fieldset>
         <%= f.submit %>
       </fieldset>
-
-<!-- тези не разбрах на кои съответстват
-  <p>
-    <%= f.label :vessel_id %><br />
-    <%= f.text_field :vessel_id %>
-  </p>
-    <%= f.label :country_receiver_id %>
-    <%= f.text_field :country_receiver_id %>
--->
 <% end %>

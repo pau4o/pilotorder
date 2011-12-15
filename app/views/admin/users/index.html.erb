@@ -1,38 +1,38 @@
 <% content_for :header do -%>
-	Потребители // <%= url2name action_name %>
+	<%= t("Потребители") %> // <%= url2name action_name %>
 <% end -%>
 
 <% content_for :sidebar do -%>
-    <h2>Търсене на потребители</h2>
+    <h2><%= t("Търсене на потребители") %></h2>
 	<ul>
 	    <li>
 	        <% form_tag admin_users_search_path, :method => 'get' do %>
-            <%= text_field_tag :search, params[:search], :type => "" , :results => 5, :placeholder=>"прякор или емайл..."%>
-            <%= positive_button_submit_tag "Търси", :name => nil %>
+            <%= text_field_tag :search, params[:search], :type => "" , :results => 5, :placeholder=> t("прякор или емайл...")%>
+            <%= positive_button_submit_tag t("Търси"), :name => nil %>
             <% end %>
         </li>
     </ul>
-    <h2>Бърз филтър</h2>
+    <h2><%= t("Бърз филтър") %></h2>
     <ul>
-		<li><%= link_to "Всички потребители", admin_users_url %></li>
-		<li><%= link_to "Активните потребители", active_admin_users_url %></li>
-		<li><%= link_to "Временно спрени потребители", suspended_admin_users_url %></li>
-		<li><%= link_to "Очакващи одобрение", pending_admin_users_url %></li>
-		<li><%= link_to "Изтрити потребители", deleted_admin_users_url %></li>
+		<li><%= link_to t("Всички потребители"), admin_users_url %></li>
+		<li><%= link_to t("Активните потребители"), active_admin_users_url %></li>
+		<li><%= link_to t("Временно спрени потребители"), suspended_admin_users_url %></li>
+		<li><%= link_to t("Очакващи одобрение"), pending_admin_users_url %></li>
+		<li><%= link_to t("Изтрити потребители"), deleted_admin_users_url %></li>
 	</ul>
 <% end -%>
 
 <table class="index">
   <tr>
 	<th>ID</th>
-	<th>Прякор</th>
-	<th>Име</th>
-	<th>Състояние</th>
-	<th>Роли</th>
-	<th>Регистриран</th>
+	<th><%= t("Прякор") %></th>
+	<th><%= t("Име") %></th>
+	<th><%= t("Състояние") %></th>
+	<th><%= t("Роли") %></th>
+	<th><%= t("Регистриран") %></th>
   </tr>
   
-<p>Има <strong><%= @users.count %></strong> регистрирани потребители.</p>
+<p><%= t("Има") %> <strong><%= @users.count %></strong> <%= t("регистрирани потребители") %>.</p>
 
 <% for user in @users %>
 
@@ -49,23 +49,23 @@
   <td><%= f_ta user.created_at %></td>
     <td class="actions">
 		<% if user.pending? %>
-			<%= button_link_to 'активирай', activate_admin_user_url(user), :method => :put %>
-			<%= button_link_to 'блокирай', suspend_admin_user_url(user), :method => :put %>
-			<%= button_link_to 'изтрий', admin_user_url(user), :method => :delete, :confirm => "Сигурни ли сте?" %>
+			<%= button_link_to t('активирай'), activate_admin_user_url(user), :method => :put %>
+			<%= button_link_to t('блокирай'), suspend_admin_user_url(user), :method => :put %>
+			<%= button_link_to t('изтрий'), admin_user_url(user), :method => :delete, :confirm => t("Сигурни ли сте?") %>
 		<% elsif user.passive? %>
-			<%= button_link_to 'активирай', activate_admin_user_url(user), :method => :put %>
-			<%= button_link_to 'блокирай', suspend_admin_user_path(user), :method => :put %>
-			<%= button_link_to 'изтрий', admin_user_url(user), :method => :delete, :confirm => "Сигурни ли сте?" %>
+			<%= button_link_to t('активирай'), activate_admin_user_url(user), :method => :put %>
+			<%= button_link_to t('блокирай'), suspend_admin_user_path(user), :method => :put %>
+			<%= button_link_to t('изтрий'), admin_user_url(user), :method => :delete, :confirm => t("Сигурни ли сте?") %>
 		<% elsif user.active? %>
       <%= button_group do %>
-        <%= button_link_to 'блокирай', suspend_admin_user_path(user), :method => :put  %>
-        <%= negative_button_link_to 'изтрий', admin_user_url(user), :method => :delete, :confirm => "Сигурни ли сте?" %>
+        <%= button_link_to t('блокирай'), suspend_admin_user_path(user), :method => :put  %>
+        <%= negative_button_link_to t('изтрий'), admin_user_url(user), :method => :delete, :confirm => t("Сигурни ли сте?") %>
       <% end %>
 		<% elsif user.suspended? %>
-			<%= button_link_to 'отблокирай', unsuspend_admin_user_url(user), :method => :put %>
-			<%= negative_button_link_to 'изтрий', admin_user_url(user), :method => :delete, :confirm => "Сигурни ли сте?" %>		
+			<%= button_link_to t('отблокирай'), unsuspend_admin_user_url(user), :method => :put %>
+			<%= negative_button_link_to t('изтрий'), admin_user_url(user), :method => :delete, :confirm => t("Сигурни ли сте?") %>		
     <% elsif user.deleted? -%>
-		 <%= negative_button_link_to t("Purge"), purge_admin_user_url(user), :method => :delete, :confirm => "Сигурни ли сте че искате да премахнете този потребител и всичките данни към него?" %></li>
+		 <%= negative_button_link_to t("Премахване"), purge_admin_user_url(user), :method => :delete, :confirm => t("Сигурни ли сте че искате да премахнете този потребител и всичките данни към него?") %></li>
 		<% end %>
 	</td>
   </tr>

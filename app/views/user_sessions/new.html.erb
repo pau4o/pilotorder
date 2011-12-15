@@ -1,16 +1,16 @@
 <% content_for :header do -%>
-<%# configatron.site_name %> Login
+<%# configatron.site_name %> <%= t("Вход") %>
 <% end -%>
 
 <%= form_for resource, :url => session_path(resource_name) do |f| -%>
 	<fieldset>	  
-    <h1>Вход</h1>
+    <h1><%= t("Вход") %></h1>
 
     <%= devise_error_messages! %>
 	  <%= flash_message.html_safe %>
 
 		<div class="field session_username clearfix">
-    <label for="login">Потребител или електронен адрес</label><br/>
+    <label for="login"><%= t("Потребител или електронен адрес") %></label><br/>
     <%= f.text_field 'login', :class => "larger widest" %>
 		</div>
 
@@ -25,8 +25,8 @@
     </div>
   <% end -%>
 
-  <p><%= f.submit "Влез" %></p>
+  <p><%= f.submit t("Влез") %></p>
 <% end -%>
 <div class="field clearfix" style="clear:both; padding-top: 1em; clear">
-  <%= link_to "Забравихте си паролата?", new_password_path(resource_name) %>
+  <%= link_to t("Забравихте си паролата?"), new_password_path(resource_name) %>
 </div>

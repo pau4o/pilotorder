@@ -1,18 +1,18 @@
 <% content_for :sidebar do -%>
-<h2>Моят акаунт</h2>
+<h2><%= t("Моят акаунт") %></h2>
 
 <div id="gravatar">
 	<%= gravatar_image_tag( @user.email, :size => 128) %>
 </div>
 
 <ul>
-	<li><%= link_to "Промяна на профила", edit_profile_url(current_user) %></li>
+	<li><%= link_to t("Промяна на профила"), edit_profile_url(current_user) %></li>
 </ul>
 
 <% if @user.not_using_openid? %>
 <ul>
-	<li><%= link_to "Смяна на емайл адрес", edit_email_user_url(@user) %></li>
-	<li><%= link_to "Смяна на парола", edit_password_user_url(@user) %></li>
+	<li><%= link_to t("Смяна на емайл адрес"), edit_email_user_url(@user) %></li>
+	<li><%= link_to t("Смяна на парола"), edit_password_user_url(@user) %></li>
 </ul>
 <% end %>
 
@@ -23,12 +23,12 @@
 <% end -%>
 
 <p>
-	<strong>Как мога да сменя моят аватар?</strong>
+	<strong><%= t("Как мога да сменя моят аватар?") %></strong>
 </p>
 
 <p>
-	<%= configatron.site_name %> използва <%= link_to "Gravatar", "http://gravatar.com" %> за да показва потребителските аватари, те са базирани на емайл адресите.
+	<%= configatron.site_name %> <%= t("използва") %> <%= link_to "Gravatar", "http://gravatar.com" %> <%= t("за да показва потребителските аватари, те са базирани на емайл адресите.") %>
 	<br />
-	<%= link_to "Gravatar", "http://gravatar.com" %> е безплатен за ползване. <%= link_to "Регистрирайте се", "http://gravatar.com/signup" %> ако все още нямате регистрация в <%= link_to "Gravatar", "http://gravatar.com" %>.
+	<%= link_to "Gravatar", "http://gravatar.com" %> <%= t("е безплатен за ползване") %>. <%= link_to t("Регистрирайте се"), "http://gravatar.com/signup" %> <%= t("ако все още нямате регистрация в") %> <%= link_to "Gravatar", "http://gravatar.com" %>.
 </p>
 <% end -%>

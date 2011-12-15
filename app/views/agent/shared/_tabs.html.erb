@@ -1,13 +1,12 @@
 <ul>
 
-	<li style="float: right;"><%# tab_to "Настройки", [{:controller => "agent/settings"}] %></li>
+	<li style="float: right;"><%# tab_to t("Настройки"), [{:controller => "agent/settings"}] %></li>
 
 	
-	<li><%= tab_to "Табло", [{:controller => "agent/dashboard"}] %></li>
-	<li><%= tab_to "Заявки", [ agent_orders_path ] %></li>
+	<li><%= tab_to t("Работен плот"), [{:controller => "agent/dashboard"}] %></li>
+	<li><%= tab_to t("Заявки"), [ agent_orders_path ] %></li>
   <!--
-	<li><%= tab_to "Announcements", [{:controller => "admin/announcements" }] %></li>
-  <li><%= tab_to "Post-Commits", [{:controller => "admin/commits" }] %></li>
+	<li><%= tab_to t("Анонси"), [{:controller => "admin/announcements" }] %></li>
   -->
 </ul>
 

@@ -1,19 +1,19 @@
 <% if @profile.nil? -%>
 	<% content_for :header do -%>
-    Информацията не беше намерена
+    <%= t("Информацията не беше намерена") %>
 	<% end -%>
 	
-	<p>Информацията за потребителя, която търсите, не съществува.</p>
+	<p><%= t("Информацията за потребителя, която търсите, не съществува.") %></p>
 <% else -%>
 	<% content_for :header do -%>
-    Редактиране на профила
+    <%= t("Редактиране на профила") %>
 	<% end -%>
 
 	<%= render :partial => 'profiles/my_account' if current_user == @user %>
 
 	<% unless @profile.user.not_using_openid? %>
 	<p>
-		Това е вашият <%= configatron.site_name %> профиле. Той не е свързан с OpenID Identity.
+		<%= t("Това е вашият") %> <%= configatron.site_name %> <%= t("профил. Той не е свързан с OpenID Identity.") %>
 	</p>
 	<% end %>
 	
@@ -25,7 +25,7 @@
 		</p>
 	<% end -%>
 	
-	<%= submit_tag "Запази промените" %>
+	<%= submit_tag t("Запази промените") %>
 	
 	<% end %>
 <% end -%>
