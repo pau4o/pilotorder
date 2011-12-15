@@ -59,6 +59,8 @@ GEM
     fast_gettext (0.6.4)
     formtastic (2.0.2)
       rails (~> 3.0)
+    gettext (2.1.0)
+      locale (>= 2.0.5)
     gettext_i18n_rails (0.3.6)
       fast_gettext
       ruby_parser
@@ -80,6 +82,7 @@ GEM
     kgio (2.6.0)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
+    locale (2.0.5)
     mail (2.2.19)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
@@ -187,7 +190,9 @@ DEPENDENCIES
   css3buttons (= 0.9.5)
   declarative_authorization
   devise
+  fast_gettext (>= 0.4.8)
   formtastic
+  gettext (>= 1.9.3)
   gettext_i18n_rails
   gmaps4rails
   gravatar_image_tag
