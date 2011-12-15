@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :log_user
   before_filter :mailer_set_url_options
   before_filter :set_locale
+  before_filter :set_gettext_locale
   
   helper :all # include all helpers, all the time
   
