@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :log_user
   before_filter :mailer_set_url_options
   before_filter :set_locale
-  before_filter :set_gettext_locale
+  before_filter :set_gettext_locale # in case of problems it is better of overwrite this gettext method 
   
   helper :all # include all helpers, all the time
   
@@ -113,6 +113,7 @@ class ApplicationController < ActionController::Base
       when :bg
         I18n.locale = :en
       end
+      session[:locale] = locale # this is needed to set locale in :set_gettext_locale
     end
   end
 end

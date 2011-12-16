@@ -163,15 +163,23 @@ gem 'gettext_i18n_rails'
 
 
 editor config/initializers/fast_gettext.rb
-FastGettext.add_text_domain 'pilotage', :path => 'locale', :type => :po
+FastGettext.add_text_domain 'pilotorder', :path => 'locale', :type => :po
 FastGettext.default_available_locales = ['en','bg'] #all you want to allow
-FastGettext.default_text_domain = 'pilotage'
+FastGettext.default_text_domain = 'pilotorder'
+
 
 editor app/controllers/application_controller.rb
 class ApplicationController < ...
   before_filter :set_gettext_locale
 
-mkdir locale
+
+mkdir -p locale/en
+mkdir -p locale/bg
+
+
+touch locale/en/pilotorder.po
+touch locale/bg/pilotorder.po
+
 
 generate pot
 rake gettext:find
