@@ -2,8 +2,8 @@
 module Admin::UsersHelper
   def url2name(url)
     names = {
-      'active' => 'активни потребители',
-      'suspended' => 'временно спрени'
+      'active' => t('активни потребители'),
+      'suspended' => t('временно спрени')
     }
     names[url]
   end
@@ -11,10 +11,10 @@ module Admin::UsersHelper
   # format time ago
   def f_ta(time)
     if time.nil?
-      "никога"
+      t("никога")
     else
       # time_ago_in_words time
-      "преди "+ distance_of_time_in_words(Time.now, time)
+      t("преди ") + distance_of_time_in_words(Time.now, time)
     end
   end
 
