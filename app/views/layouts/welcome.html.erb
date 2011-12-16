@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="<%= t("layout-welcome-html-lang") %>">
+<html lang="<%= locale %>">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><%= configatron.site_name %></title>
@@ -7,19 +7,23 @@
     <%= stylesheet_link_tag 'mobile' if mobile_device? %>
     <%= csrf_meta_tag %>
     <%= javascript_include_merged :base %>
+    <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
     <header>
-      <h1><%= link_to "PilotOder.BG", root_path %></h1>
+      <h1><%= link_to t("PilotOder.BG"), root_path %></h1>
       <nav>
         <ul>
-          <li><%= tab_to t("activity"),    [ activity_path ] %></li>
-          <li><%= tab_to t("policy"),    [ policy_path, pilot_code_path ] %></li>
-          <li><%= tab_to t("certificates"), [ certificates_path ] %></li>
-          <li><%= tab_to t("prices"),        [ prices_path , price_table_1_path, price_table_2_path ] %></li>
+          <li><%= tab_to t("Дейност"), [ activity_path ] %></li>
+          <li><%= tab_to t("Политика"), [ policy_path, pilot_code_path ] %></li>
+          <li><%= tab_to t("Сертификати"), [ certificates_path ] %></li>
+          <li><%= tab_to t("Цени"), [ prices_path , price_table_1_path, price_table_2_path ] %></li>
         </ul>
       </nav>
       <%= render :partial => "shared/annotated" %>
+      <%= link_to t(locale), :controller => "page", :action => "change_lang",  %>
     </header>
     <%= flash_message.html_safe %>
     <section id='content'>

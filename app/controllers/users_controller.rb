@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   
   def edit_password
     if ! @user.not_using_openid?
-      flash[:notice] = "Не може да променяте електронния си адрес. Вие ползвате OpenID!"
+      flash[:notice] = t("Не може да променяте електронния си адрес. Вие ползвате OpenID!")
       redirect_to :back
     end
     
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   
   def update_password    
     if ! @user.not_using_openid?
-      flash[:notice] = "Не може да променяте електронния си адрес. Вие ползвате OpenID!"
+      flash[:notice] = t("Не може да променяте електронния си адрес. Вие ползвате OpenID!")
       redirect_to :back
     end
     
@@ -42,32 +42,32 @@ class UsersController < ApplicationController
       if @user.encrypt(current_password) == @user.crypted_password
         if new_password == new_password_confirmation
           if new_password.blank? || new_password_confirmation.blank?
-            flash[:error] = "Не може да използвате празна парола."
+            flash[:error] = t("Не може да използвате празна парола.")
             redirect_to edit_password_user_url(@user)
           else
             @user.password = new_password
             @user.password_confirmation = new_password_confirmation
             @user.save
-            flash[:notice] = "Паролата беше променена."
+            flash[:notice] = t("Паролата беше променена.")
             redirect_to profile_url(@user)
           end
         else
-          flash[:error] = "Паролата и нейното потвърждение не съвпадат."
+          flash[:error] = t("Паролата и нейното потвърждение не съвпадат.")
           redirect_to edit_password_user_url(@user)
         end
       else
-        flash[:error] = "Текущата парола е грешна. Вашата парола не е променена."
+        flash[:error] = t("Текущата парола е грешна. Вашата парола не е променена.")
         redirect_to edit_password_user_url(@user)
       end
     else
-      flash[:error] = "Не може да променяте пароли на други потребители!"
+      flash[:error] = t("Не може да променяте пароли на други потребители!")
       redirect_to edit_password_user_url(@user)
     end
   end
   
   def edit_email
     if ! @user.not_using_openid?
-      flash[:notice] = "Не може да променяте електронния си адрес. Вие ползвате OpenID!"
+      flash[:notice] = t("Не може да променяте електронния си адрес. Вие ползвате OpenID!")
       redirect_to :back
     end
     
@@ -76,20 +76,20 @@ class UsersController < ApplicationController
   
   def update_email
     if ! @user.not_using_openid?
-      flash[:notice] = "Не може да променяте електронния си адрес. Вие ползвате OpenID!"
+      flash[:notice] = t("Не може да променяте електронния си адрес. Вие ползвате OpenID!")
       redirect_to :back
     end
     
     if current_user == @user
       if @user.update_attributes(:email => params[:email])
-        flash[:notice] = "Вашият електронен адрес беше променен."
+        flash[:notice] = t("Вашият електронен адрес беше променен.")
         redirect_to profile_url(@user)
       else
-        flash[:error] = "Вашият електронен адрес не може да бъде променен."
+        flash[:error] = t("Вашият електронен адрес не може да бъде променен.")
         redirect_to edit_email_user_url(@user)
       end
     else
-      flash[:error] = "Не може да променяте адреси на други потребители!"
+      flash[:error] = t("Не може да променяте адреси на други потребители!")
       redirect_to edit_email_user_url(@user)
     end
   end  
@@ -101,7 +101,7 @@ class UsersController < ApplicationController
     
     logout_killing_session!
     
-    flash[:notice] = "Вашият акаунт беше премахнат."
+    flash[:notice] = t("Вашият акаунт беше премахнат.")
     redirect_back_or_default(root_path)
   end  
   

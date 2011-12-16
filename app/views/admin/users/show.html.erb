@@ -1,50 +1,50 @@
 <% content_for :header do -%>
- 	Информация за потребител: <em><%=h @user.login %></em>
+ 	<%= t("Информация за потребител") %>: <em><%=h @user.login %></em>
 <% end -%>
 
 <% content_for :sidebar do -%>
 
-<h2>Състояние: <%= t(@user.state) %></h2>	
+<h2><%= t("Състояние") %>: <%= t(@user.state) %></h2>	
 
 <ul>
 	<% if @user.pending? -%>
-		<li><%= link_to t("Activate"), activate_admin_user_url(@user), :method => :put %></li>
-		<li><%= link_to t("Suspend"), suspend_admin_user_url(@user), :method => :put %></li>
-		<li><%= link_to t("Delete"), admin_user_url(@user), :method => :delete %></li>
+		<li><%= link_to t("Активиране"), activate_admin_user_url(@user), :method => :put %></li>
+		<li><%= link_to t("Блокирай"), suspend_admin_user_url(@user), :method => :put %></li>
+		<li><%= link_to t("Изтриване"), admin_user_url(@user), :method => :delete %></li>
 	<% end -%>
 	
 	<% if @user.suspended? -%>
-		<li><%= link_to t("Unsuspend"), unsuspend_admin_user_url(@user), :method => :put %></li>
+		<li><%= link_to t("Отблокирай"), unsuspend_admin_user_url(@user), :method => :put %></li>
 	<% end -%>
 
 	<% if @user.active? -%>
-		<li><%= link_to t("Suspend"), suspend_admin_user_url(@user), :method => :put %></li>
-		<li><%= link_to t("Delete"), admin_user_url(@user), :method => :delete, :confirm => "Изтриване на този потребител?" %></li>
+		<li><%= link_to t("Блокирай"), suspend_admin_user_url(@user), :method => :put %></li>
+		<li><%= link_to t("Изтриване"), admin_user_url(@user), :method => :delete, :confirm => t("Изтриване на този потребител?") %></li>
 	<% end -%>
 	
 	<% # TODO: Uncomment to enable user purging by the administrator %>
 	<% if @user.deleted? -%>
-		<li><%= link_to t("Purge"), purge_admin_user_url(@user), :method => :delete, :confirm => "Сигурни ли сте че искате да премахнете този потребител и всичките данни към него?" %></li>
+		<li><%= link_to t("Премахване"), purge_admin_user_url(@user), :method => :delete, :confirm => t("Сигурни ли сте че искате да премахнете този потребител и всичките данни към него?") %></li>
 	<% end -%>
 </ul>	
 <% end -%>
 
 <table class="overview">
-	<%= cell "Потребителско име", "#{in_place_editor_field :user, 'login'}" %>
-	<%= cell "Име Фамилия", [@user.title, @user.name].join(" ") %>
-	<%= cell "Роли", @user.role_names %>
-	<%= cell "Състояние", @user.status %>
+	<%= cell t("Потребителско име"), "#{in_place_editor_field :user, 'login'}" %>
+	<%= cell t("Име Фамилия"), [@user.title, @user.name].join(" ") %>
+	<%= cell t("Роли"), @user.role_names %>
+	<%= cell t("Състояние"), @user.status %>
 
 	<%= cell_separator %>
 	
 	<%= cell t("Email"), "#{in_place_editor_field :user, 'email'}" %>
-	<%= cell t("Password"), "#{"*"*8} <small>#{link_to_if !@user.deleted?, "изпрати нова парола", reset_password_admin_user_url(@user), :method => :put}</small>" %>
+	<%= cell t("Парола"), "#{"*"*8} <small>#{link_to_if !@user.deleted?, t("изпрати нова парола"), reset_password_admin_user_url(@user), :method => :put}</small>" %>
 	
 	<%= cell_separator %>
 	
-  <%= cell "Дата на създаване", "преди " + time_ago_in_words(@user.created_at) +" (" + @user.created_at.strftime("%Y/%m/%d %H:%M:%S") + ")" %>
-	<%= cell "Последна промяна", time_ago_in_words(@user.updated_at) +" (" + @user.updated_at.strftime("%Y/%m/%d %H:%M:%S") + ")"%>
+  <%= cell t("Дата на създаване"), t("преди ") + time_ago_in_words(@user.created_at) +" (" + @user.created_at.strftime("%Y/%m/%d %H:%M:%S") + ")" %>
+	<%= cell t("Последна промяна"), time_ago_in_words(@user.updated_at) +" (" + @user.updated_at.strftime("%Y/%m/%d %H:%M:%S") + ")"%>
 </table>
 
-<%= link_to 'Промени', edit_admin_user_path(@user) %> |
-<%= link_to 'Назад', admin_users_path %>
+<%= link_to t('Промени'), edit_admin_user_path(@user) %> |
+<%= link_to t('Назад'), admin_users_path %>

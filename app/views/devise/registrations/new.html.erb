@@ -2,34 +2,34 @@
 Create a new <%= configatron.site_name %> account
 <% end -%>
 
-<h1>Регистрация</h1>
+<h1><%= t("Регистрация") %></h1>
 
 <%= form_for resource, :as => resource_name , :url => registration_path(resource_name) do |f| -%>
   <%= devise_error_messages! %>
 	<fieldset id="oldfashioned_form">	
     <div class="field session_username clearfix">
-      <label for="login">Потребителско име</label><br/>
+      <label for="login"><%= t("Потребителско име") %></label><br/>
       <%= f.text_field :login, :class => "larger widest" %>
     </div>
 
     <div class="field session_username clearfix">
-      <label for="email">електронна поща</label> на която ще получите код за активация</i><br/>
+      <label for="email"><%= t("електронна поща") %></label> <%= t("на която ще получите код за активация") %><br/>
       <%= f.text_field :email, :class => "larger widest" %>
     </div>
 
     <div class="field session_username clearfix">
-      <label for="password">парола</label><br/>
+      <label for="password"><%= t("парола") %></label><br/>
       <%= f.password_field :password, :class => "larger widest" %>
     </div>
 
     <div class="field session_username clearfix">
-      <label for="password_confirmation">парола - потвръждение</label><br/>
+      <label for="password_confirmation"><%= t("парола - потвръждение") %></label><br/>
       <%= f.password_field :password_confirmation, :class => "larger widest" %>
     </div>
 	</fieldset>
 
 	<div id="submitbutton">
-		<p><%= submit_tag 'Регистрирай!' %></p>
+		<p><%= submit_tag t('Регистрирай!') %></p>
 	</div>
 
 <% end -%>

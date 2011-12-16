@@ -74,6 +74,8 @@ bg:
 
 
 
+  en: "Български"
+  bg: "English"
   "Send me instructions via email": "Изпрати ми инструкции за смяна"
   "Manage agents": "Агенти"
   "Manage user accounts": "Потребители"

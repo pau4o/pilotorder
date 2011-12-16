@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ApplicationController < ActionController::Base
   
   before_filter :set_last_request # helper for devise
@@ -5,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_for_browser_upgrade
   before_filter :log_user
   before_filter :mailer_set_url_options
+  before_filter :set_locale
+  before_filter :set_gettext_locale # in case of problems it is better of overwrite this gettext method 
   
   helper :all # include all helpers, all the time
   
@@ -99,5 +102,18 @@ class ApplicationController < ActionController::Base
     require 'pp'
     pp flash 
     url_for(:controller => :page, :action => "goodbye")
+  end
+
+  def set_locale
+    #session[:browser_locale] ||= request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    if action_name == "change_lang"
+      case I18n.locale
+      when :en
+        I18n.locale = :bg
+      when :bg
+        I18n.locale = :en
+      end
+      session[:locale] = locale # this is needed to set locale in :set_gettext_locale
+    end
   end
 end
