@@ -156,7 +156,7 @@ It’s still possible to store user changeable settings in the database model Se
 
 Note: As long as there are no Settings in the database, the ‘Settings’ tab for the administrator is hidden. Once you add a Setting to the database through a migration (or otherwise), the Settings tab will show up.
 
-h2. FastGettext configuration
+h2. FastGettext configuration (we don't use gettext)
 
 editor Gemfile
 gem 'gettext_i18n_rails'

@@ -34,11 +34,6 @@ gem 'haml-rails'
 gem "breadcrumbs_on_rails"
 gem "gmaps4rails"
 
-# gettext support
-gem 'gettext', '>=1.9.3', :require => false, :group => :development
-gem 'fast_gettext', '>=0.4.8'
-gem 'gettext_i18n_rails'
-
 # https://github.com/marten/has_details
 # gem "has_details" # , :git => 'git://github.com/marten/has_details.git'
 
